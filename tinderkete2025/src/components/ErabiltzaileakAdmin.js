@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../../../../TINDERKETE/src/components/Footer.js";
+import Footer from "./Footer.js";
 import { useNavigate } from "react-router-dom";
-import NavbarAdmin from "../../../../TINDERKETE/src/components/NavbarAdmin.js";
+import NavbarAdmin from "./NavbarAdmin.js";
 
 const ErabiltzaileakAdmin = () => {
   const [users, setUsers] = useState([]);

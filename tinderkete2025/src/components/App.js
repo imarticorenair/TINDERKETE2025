@@ -18,9 +18,10 @@ import NavbarAdmin from './NavbarAdmin';
 import HasieraAdmin from './HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
 import ProduktuakSortu from './ProduktuakSortu';
-import ErabiltzaileakAdmin from '../../../TINDERKETE2025/tinderkete2025/src/components/ErabiltzaileakAdmin';
 import ErabiltzaileakEditatu from './ErabiltzaileakEditatu';
 import Txapelketakkudeatu from './TxapelketakKudeatu';
+import ErabiltzaileakAdmin from './ErabiltzaileakAdmin';
+
 
 
 function App() {

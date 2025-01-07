@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { useTranslation } from "react-i18next";
+import axios from 'axios'; // Necesitarás axios para hacer las solicitudes HTTP
 
 function Login() {
   const { t } = useTranslation();
@@ -10,10 +11,9 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(''); // Para almacenar el error del correo
+  const [passwordError, setPasswordError] = useState(''); // Para almacenar el error de la contraseña
 
-  const predefinedEmail = '';
-  const predefinedPassword = '';
-
+  // Validación del correo electrónico
   const handleEmailValidation = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex básico para validar correos
     if (!value) {
@@ -25,35 +25,41 @@ function Login() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     handleEmailValidation(email); // Validar el correo antes de continuar
-
-    if (emailError) {
+  
+    if (emailError || !password) {
+      setPasswordError(t('login.passwordRequired')); // Error si la contraseña está vacía
       return; // Si hay errores, detener el envío
     }
-
-    const oihanEmail = 'oihanaginaga@gmail.com';
-    const oihanPassword = '1234';
-    const adminEmail = 'admin@gmail.com';
-    const adminPassword = 'admin123';
-
-    // Limpiar el localStorage al intentar iniciar sesión
-    localStorage.removeItem('isAdmin');
-    localStorage.removeItem('email');
-
-    if (email === predefinedEmail && password === predefinedPassword) {
-      localStorage.setItem('isAdmin', 'false');
-      localStorage.setItem('email', '');
-      navigate('/');
-    } else if (email === adminEmail && password === adminPassword) {
-      localStorage.setItem('isAdmin', 'true');
-      localStorage.setItem('email', email);
-      navigate('/hasieraadmin');
-    } else if (email === oihanEmail && password === oihanPassword) {
-      localStorage.setItem('isAdmin', 'false');
-      localStorage.setItem('email', 'oihanaginaga@gmail.com');
-      navigate('/');
+  
+    try {
+      // Hacer la solicitud POST para validar las credenciales del usuario
+      const response = await axios.post('http://localhost:8000/api/login', {
+        email,
+        password,
+      });
+  
+      const { user, token } = response.data;
+  
+      // Almacenar el token y el estado del usuario en localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));  // Almacenar los datos del usuario
+  
+      // Redirigir según el valor de 'admin' en la respuesta
+      if (user.admin === 1) {
+        navigate('/hasieraadmin'); // Redirige a la ruta de administrador
+      } else {
+        navigate('/'); // Redirige a la ruta de usuario regular
+      }
+    } catch (error) {
+      // Manejar errores de la solicitud, como credenciales incorrectas
+      if (error.response && error.response.data.errors) {
+        setPasswordError(t('login.invalidCredentials')); // Mostrar mensaje de error
+      } else {
+        setPasswordError(t('login.somethingWentWrong'));
+      }
     }
   };
 
@@ -71,7 +77,7 @@ function Login() {
             <img src={logo} alt="Logo" className="h-24 w-24" />
           </div>
 
-          <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+          <h2 className="text-2xl font-semibold text-center mb-6">{t('login.loginTitle')}</h2>
 
           <form onSubmit={handleSubmit}>
             {/* Campo de correo electrónico */}
@@ -86,9 +92,7 @@ function Login() {
                   handleEmailValidation(e.target.value); // Validar en tiempo real
                 }}
                 placeholder={t('login.emailHolder')}
-                className={`border p-2 rounded-md focus:outline-none focus:ring-2 ${
-                  emailError ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-400'
-                }`}
+                className={`border p-2 rounded-md focus:outline-none focus:ring-2 ${emailError ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-400'}`}
               />
               {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
             </div>
@@ -102,8 +106,9 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={t('login.passHolder')}
-                className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className={`border p-2 rounded-md focus:outline-none focus:ring-2 ${passwordError ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-400'}`}
               />
+              {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
             </div>
 
             {/* Botón de enviar */}
@@ -112,7 +117,7 @@ function Login() {
                 type="submit"
                 className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition"
               >
-                Login
+                {t('login.loginButton')}
               </button>
             </div>
 
