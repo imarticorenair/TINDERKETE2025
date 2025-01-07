@@ -18,6 +18,10 @@ import NavbarAdmin from './NavbarAdmin';
 import HasieraAdmin from './HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
 import ProduktuakSortu from './ProduktuakSortu';
+import ErabiltzaileakAdmin from '../../../TINDERKETE2025/tinderkete2025/src/components/ErabiltzaileakAdmin';
+import ErabiltzaileakEditatu from './ErabiltzaileakEditatu';
+import Txapelketakkudeatu from './TxapelketakKudeatu';
+
 
 function App() {
   // Verifica si es la primera vez que se abre la página
@@ -48,6 +52,9 @@ function App() {
         <Route path="/hasieraadmin" element={<HasieraAdmin />} />  
         <Route path="/mapalistasortu" element={<MapaListaSortu />} />  
         <Route path="/produktuaksortu" element={<ProduktuakSortu />} />  
+        <Route path="/erabiltzaileakAdmin" element={<ErabiltzaileakAdmin />} />  
+        <Route path="/erabiltzaileakEditatu/:id" element={<ErabiltzaileakEditatu />} />  
+        <Route path="/txapelketakkudeatu" element={<Txapelketakkudeatu />} /> 
       </Routes>
     </Router>
   );
