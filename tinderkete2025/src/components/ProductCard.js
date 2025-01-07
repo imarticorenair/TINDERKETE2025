@@ -1,5 +1,4 @@
 import React from 'react';
-import './produktu.css';
 import { useTranslation } from "react-i18next";
 
 function ProductCard({ name, price, image, onClick }) { // Agregamos onClick como prop

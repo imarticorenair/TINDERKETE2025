@@ -8,7 +8,6 @@ import '../components/navar.css';
 import logotxuri from '../images/perfiltxuri.png';
 import logout from '../images/logout.png';
 import { useTranslation } from "react-i18next";
-import ane from '../images/ane.jpg';
 import '../i18n'; // i18n konfigurazioa
 
 function Navbar() {
@@ -246,7 +245,7 @@ function Navbar() {
           </div>
 
           {/* Hanburguesa menua pantaila txikitan */}
-  
+
           <div
             className={`lg:hidden ${menuOpen ? 'block' : 'hidden'} relative flex-row text-center text-white p-4 top-full mt-2 w-[100%] rounded-lg active:transition active:duration-700 active:ease-in-out`}>
             <ul className="flex flex-col space-y-4">
@@ -334,7 +333,7 @@ function Navbar() {
               alt="1361728"
               className="w-auto max-w-12 h-auto max-h-12 rounded-full bg-amber-500 p-1 object-contain"
             />
-          </button> 
+          </button>
         </div>
       </nav>
 

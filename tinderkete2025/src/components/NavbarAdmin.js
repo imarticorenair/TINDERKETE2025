@@ -17,7 +17,7 @@ function Navbar() {
   const location = useLocation(); // Para saber la ruta activa
   const navigate = useNavigate(); // Para redirigir al hacer logout
 
-    
+
 
   const getActiveClass = (path) => {
     return location.pathname === path ? 'bg-amber-500 rounded-md text-white' : 'text-gray-300'; //Dagoen orrialdeko itxura
@@ -41,7 +41,7 @@ function Navbar() {
     e.preventDefault();
     localStorage.removeItem('email');
     localStorage.removeItem('isAdmin');
-    navigate('/login'); // Hasierako horria
+    navigate('/'); // Hasierako horria
   };
 
   return (
