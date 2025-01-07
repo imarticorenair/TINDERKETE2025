@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 import logo from '../images/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 function Register() {
   const navigate = useNavigate();
@@ -16,43 +16,48 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (password !== passwordConfirmation) {
       alert('Pasahitzak ez dira bat etorri');
       return;
     }
-
+  
     const userData = {
-      izena: name,
-      abizenak: lastName,
+      name: name,
+      surname: lastName,
       email: email,
-      pasahitza: password,
-      pasahitza_confirmation: passwordConfirmation,
-      jaiotzeData: birthdate,
+      password: password,
+      password_confirmation: passwordConfirmation,
+      birth_date: birthdate,
     };
-
+  
     try {
-      const response = await fetch('http://localhost:8000/api/users', {
+      console.log("bodu: "+JSON.stringify(userData));
+  
+      const response = await fetch('http://localhost:8000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
-
-      const data = await response.json();
-
+  
+      const data = await response.json(); // Leer la respuesta solo una vez
+  
       if (response.ok) {
+        // Si la respuesta es exitosa
         alert('Erabiltzailea ongi sortu da.');
         navigate('/login');
       } else {
-        alert('Errorea: ' + JSON.stringify(data.Errorea));
+        // Si hubo un error
+        alert('Errorea: ' + (data?.message || 'Daturenbat gaizki sartu da'));
       }
     } catch (error) {
       console.error('Error:', error);
       alert('Errorea gertatu da');
     }
   };
+  
 
   const { t } = useTranslation();
 
@@ -87,6 +92,19 @@ function Register() {
             </div>
 
             <div className="flex flex-col mb-4">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">{t('register.abizena')}</label>
+              <input
+                type="text"
+                className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                id="name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder={t('register.abizenap')}
+                required
+              />
+            </div>
+
+            <div className="flex flex-col mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('register.email')}</label>
               <input
                 type="email"
@@ -99,30 +117,32 @@ function Register() {
               />
             </div>
 
-            <div className="flex flex-col mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">{t('register.pasahitza')}</label>
-              <input
-                type="password"
-                className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={t('register.pasahitzap')}
-                required
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">{t('register.pasahitzaBaieztatu2')}</label>
-              <input
-                type="password"
-                className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={t('register.pasahitzaBaieztatu1')}
-                required
-              />
-            </div>
+                      <div className="flex flex-col mb-4">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">{t('register.pasahitza')}</label>
+            <input
+              type="password"
+              className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}  // Vinculado al estado de password
+              placeholder={t('register.pasahitzap')}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col mb-4">
+            <label htmlFor="passwordc" className="block text-sm font-medium text-gray-700">{t('register.pasahitzaBaieztatu2')}</label>
+            <input
+              type="password"
+              className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              id="passwordc"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}  // Vinculado al estado de passwordConfirmation
+              placeholder={t('register.pasahitzaBaieztatu1')}
+              required
+            />
+          </div>
+
 
             <div className="flex flex-col mb-6">
               <label htmlFor="birthdate" className="block text-sm font-medium text-gray-700">{t('register.jaitozedata')}</label>
