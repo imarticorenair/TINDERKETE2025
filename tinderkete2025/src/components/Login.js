@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { useTranslation } from "react-i18next";
-import axios from 'axios'; // Necesitarás axios para hacer las solicitudes HTTP
+import axios from 'axios';
 
 function Login() {
   const { t } = useTranslation();
@@ -10,53 +10,57 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(''); // Para almacenar el error del correo
-  const [passwordError, setPasswordError] = useState(''); // Para almacenar el error de la contraseña
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [accountError, setAccountError] = useState(''); // Para manejar el error de cuenta no activada
 
-  // Validación del correo electrónico
   const handleEmailValidation = (value) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex básico para validar correos
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!value) {
-      setEmailError(t('login.emailRequired')); // Mensaje cuando el campo está vacío
+      setEmailError(t('login.emailRequired'));
     } else if (!emailRegex.test(value)) {
-      setEmailError(t('login.emailInvalid')); // Mensaje para formato incorrecto
+      setEmailError(t('login.emailInvalid'));
     } else {
-      setEmailError(''); // Sin errores si el correo es válido
+      setEmailError('');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleEmailValidation(email); // Validar el correo antes de continuar
-  
+    
     if (emailError || !password) {
-      setPasswordError(t('login.passwordRequired')); // Error si la contraseña está vacía
-      return; // Si hay errores, detener el envío
+      setPasswordError(t('login.passwordRequired'));
+      return;
     }
-  
+
     try {
-      // Hacer la solicitud POST para validar las credenciales del usuario
       const response = await axios.post('http://localhost:8000/api/login', {
         email,
         password,
       });
-  
+
       const { user, token } = response.data;
-  
-      // Almacenar el token y el estado del usuario en localStorage
+
+      // Verificar si el usuario está activado
+      if (user.aktibatua === 0) {
+        alert(t('login.accountNotActivated')); // Mensaje si la cuenta no está activada
+        return; // Detener el proceso de inicio de sesión
+      }
+
+      // Si todo está bien, almacenar el token y los datos del usuario
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));  // Almacenar los datos del usuario
-  
-      // Redirigir según el valor de 'admin' en la respuesta
+      localStorage.setItem('user', JSON.stringify(user));
+
+      // Redirigir dependiendo del rol del usuario
       if (user.admin === 1) {
-        navigate('/hasieraadmin'); // Redirige a la ruta de administrador
+        navigate('/hasieraadmin');
       } else {
-        navigate('/'); // Redirige a la ruta de usuario regular
+        navigate('/');
       }
     } catch (error) {
-      // Manejar errores de la solicitud, como credenciales incorrectas
       if (error.response && error.response.data.errors) {
-        setPasswordError(t('login.invalidCredentials')); // Mostrar mensaje de error
+        setPasswordError(t('login.invalidCredentials'));
       } else {
         setPasswordError(t('login.somethingWentWrong'));
       }
@@ -65,22 +69,14 @@ function Login() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Header vacío para diseño */}
       <header className="bg-gray-800 py-4"></header>
-
-      {/* Contenido principal */}
       <div className="flex flex-1 justify-center items-center">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
-
-          {/* Logo */}
           <div className="flex justify-center -mt-20 mb-6">
             <img src={logo} alt="Logo" className="h-24 w-24" />
           </div>
-
           <h2 className="text-2xl font-semibold text-center mb-6">{t('login.loginTitle')}</h2>
-
           <form onSubmit={handleSubmit}>
-            {/* Campo de correo electrónico */}
             <div className="flex flex-col mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('login.email')}</label>
               <input
@@ -89,7 +85,7 @@ function Login() {
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  handleEmailValidation(e.target.value); // Validar en tiempo real
+                  handleEmailValidation(e.target.value);
                 }}
                 placeholder={t('login.emailHolder')}
                 className={`border p-2 rounded-md focus:outline-none focus:ring-2 ${emailError ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-blue-400'}`}
@@ -97,7 +93,6 @@ function Login() {
               {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
             </div>
 
-            {/* Campo de contraseña */}
             <div className="flex flex-col mb-6">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">{t('login.password')}</label>
               <input
@@ -111,7 +106,9 @@ function Login() {
               {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
             </div>
 
-            {/* Botón de enviar */}
+            {/* Mostrar mensaje de error si la cuenta no está activada */}
+            {accountError && <p className="text-red-500 text-sm mt-1">{accountError}</p>}
+
             <div className="mb-4">
               <button
                 type="submit"
@@ -121,7 +118,6 @@ function Login() {
               </button>
             </div>
 
-            {/* Enlace de registro */}
             <div className="flex justify-center items-center mt-10">
               <p className="mr-2 text-sm text-gray-600">{t('login.noAccount')}</p>
               <button
