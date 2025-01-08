@@ -43,7 +43,8 @@ i18n
               "emailRequired" : "You mast enter an email.",
               "emailInvalid" : "You must enter an '@' sign at the email address.",
               "loginTitle": "Login",
-              "loginButton": "Enter"
+              "loginButton": "Enter",
+              "accountNotActivated": "The user does not exist"
               
             },
             "footer":{
@@ -226,7 +227,9 @@ i18n
               "emailRequired" : "Posta elektroniko bat sartu behar duzu.",
               "emailInvalid" : "Posta elektronikoaren helbidean '@' zeinu bat sartu behar duzu.",
               "loginTitle": "Login",
-              "loginButton": "Sartu"
+              "loginButton": "Sartu",
+              "accountNotActivated": "Erabiltzailea ez da existitzen",
+              
             },
             "footer":{
               "ref" : "KONTAKTUA",
