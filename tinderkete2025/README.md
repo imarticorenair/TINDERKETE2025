@@ -1,3 +1,6 @@
+# fnm start
+fnm env | Out-String | Invoke-Expression
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +71,34 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# TINDERKETE
+
+- Garatu beharreko proiektuaren ideia zehaztea -->
+  
+  Gazteek kirolak egitearen ohitura sustatzea da gure helburua, gainera batzueta zaila izan daiteke trinketean, frontoiean, padel pistetan.. etab. jolastea, jende asko egoten baita. 
+  Aplikazio honi esker, erreserbak eta "partida taldeak" sortu ahal izango dira, bai talde irikiak eta bai talde itxiak. Horri esker,🔥🔥 jende berria ezagutzeko 🔥🔥 aukera eta tokiak erreserbatzeko modu errazago bat lortu nahi da. 
+  
+- Proiektu-arkitektura, osagaien eta haien arteko elkarreraginen aurretiazko diseinua sortzea
+
+  
+- Negozio-geruzaren goi-mailako jarduera-diagramak definitzea (business layer)
+
+  
+- Datu-baseak. Diseinua eta harremanak
+
+  
+- Azken proiektua non zabalduko den eta zer elementu beharko diren definitzea.
+  Adibideak: Tour turistikoa, Musika-bandak, Landareen ureztatze kudeatzailea, Escape room, Paketeria armairuak, Instagram argazkiak
+>>>>>>> 86aff1c8a4ca231181618c745b08b35df9da0866
+
+
+
+
+
+
+
+
+React:
+Leire: NavFooter, txapelketak, produktuak, Menu
+Oihan: Erreserbak, partidoak, profila, txata,
+Iñigo: Gutaz, mapa
