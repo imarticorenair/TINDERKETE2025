@@ -16,7 +16,7 @@ function ErabiltzaileaEditatu() {
     argazkia: "",
     herria: "",
     telephone: "",
-    jaiotze_data: "",
+    jaiotze_data: "", 
     admin: false,
   });
   const [error, setError] = useState(""); // Para manejar errores
