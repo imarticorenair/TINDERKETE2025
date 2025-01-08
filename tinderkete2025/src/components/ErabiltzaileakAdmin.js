@@ -32,6 +32,32 @@ const ErabiltzaileakAdmin = () => {
     navigate(`/erabiltzaileakEditatu/${id}`);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      // Llama al backend para actualizar user.aktibatua a 0
+      const response = await fetch(`http://localhost:8000/api/deleteUser/${id}`, {
+        method: "PATCH", // Usa el método adecuado según tu API (PATCH, PUT, POST)
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ aktibatua: 0 }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Errorea al desactivar el usuario.");
+      }
+
+      // Actualizar el estado en el frontend
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === id ? { ...user, aktibatua: 0 } : user
+        )
+      );
+    } catch (err) {
+      alert(`Errorea al desactivar el usuario: ${err.message}`);
+    }
+  };
+
   if (loading) {
     return <p className="text-center text-xl font-semibold">Loading users...</p>;
   }
@@ -39,6 +65,9 @@ const ErabiltzaileakAdmin = () => {
   if (error) {
     return <p className="text-center text-red-500 font-semibold">Error: {error}</p>;
   }
+
+  // Filtrar solo los usuarios que tienen aktibatua = 1
+  const filteredUsers = users.filter((user) => user.aktibatua === 1);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -49,7 +78,8 @@ const ErabiltzaileakAdmin = () => {
           <table className="min-w-full bg-white table-auto border-collapse">
             <thead>
               <tr className="bg-blue-500 text-white">
-                <th className="px-4 py-2">Actions</th>
+                <th className="px-4 py-2">Editatu</th>
+                <th className="px-4 py-2">Ezabatu</th>
                 <th className="px-4 py-2">ID</th>
                 <th className="px-4 py-2">Izena</th>
                 <th className="px-4 py-2">Abizena</th>
@@ -62,12 +92,12 @@ const ErabiltzaileakAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {users.length === 0 ? (
+              {filteredUsers.length === 0 ? (
                 <tr>
                   <td colSpan="10" className="text-center py-4 text-gray-600">No users found.</td>
                 </tr>
               ) : (
-                users.map((user) => (
+                filteredUsers.map((user) => (
                   <tr key={user.id} className="border-b hover:bg-gray-100">
                     <td className="px-4 py-2">
                       <button
@@ -75,6 +105,14 @@ const ErabiltzaileakAdmin = () => {
                         className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                       >
                         Edit
+                      </button>
+                    </td>
+                    <td className="px-4 py-2">
+                      <button
+                        onClick={() => handleDelete(user.id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                      >
+                        Ezabatu
                       </button>
                     </td>
                     <td className="px-4 py-2 text-center">{user.id}</td>
