@@ -9,33 +9,115 @@ import trinkete from "../images/trinkete.jpg";
 import comingsoon from "../images/comingsoon.jpg";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import AOS from 'aos';
+import "aos/dist/aos.css";
+
+import bikotetenis from '../images/bikotetenis.png';
+import bikote from '../images/bikotea.png';
+import palaikono from '../images/palaikono.png';
+import bikoteikono from '../images/bikoteikono.png';
+import tenispelota from '../images/tenispelota.png';
+import raketatenis from '../images/raketatenis.png';
+import jaialaipala from '../images/jaialaipala.png';
+import bikoteaproba from '../images/bikoteaproba.png';
+import bikoteaproba2 from '../images/bikoteaproba2.png';
 
 function Hasiera() {
   const navigate = useNavigate();
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
+
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // Animazioaren iraupena (milisegundutan)
+      once: true, // Behin bakarrik egin scroll egiterakoan
+    });
+  }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Navbar */}
+    <div className="bg-gray-100">
+
+    {/* Navbar */}
       <Nav />
 
       {/* Main */}
+      <div className="relative">
+        <header className="relative flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-indigo-800 min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] lg:min-h-[65vh] xl:min-h-[70vh]">
+          {/* Contenedor principal */}
+          <div className="absolute inset-0 flex flex-col sm:flex-row justify-between items-center w-full h-full">
+            {/* Imagen izquierda (oculta en móvil) */}
+            <div className="relative w-full sm:w-1/3 h-full flex justify-center items-center hidden sm:block">
+              <img
+                className="w-full h-full object-cover animate-fade-right"
+                src={bikotetenis}
+                alt="Teniseko Bikotea"
+                fetchpriority="high"
+              />
+            </div>
 
-      <section className="w-full relative bg-gradient-to-r from-blue-400 to-indigo-800 text-white py-16">
-        <div className="container mx-auto px-6 text-center animate-wiggle">
-          <h1 className="text-6xl font-extrabold mb-6">MATCH, CHAT, WIN!</h1>
-          <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-            {t('gutaz.main')}
-          </p>
+            {/* Título y Subtítulo */}
+            <div className="relative z-20 text-center px-4 sm:px-0 flex flex-col justify-center items-center sm:mt-15 h-full">
+              <h1 className="font-boxing text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white animate-jump-in">
+                <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-gray-300 to-white">
+                  MATCH, CHAT, WIN!
+                </span>
+              </h1>
+              <p className="text-sm sm:text-lg max-w-md sm:max-w-3xl mx-auto leading-relaxed text-white animate-jump-in mt-3">
+                {t('gutaz.main')}
+              </p>
+            </div>
+
+            {/* Imagen derecha (oculta en móvil) */}
+            <div className="relative block w-full sm:w-1/3 h-full flex justify-center items-center hidden sm:block">
+              <img
+                className="w-full h-full object-cover animate-fade-left"
+                src={bikoteaproba2}
+                alt="Bikotea"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </header>
+
+
+
+      </div>
+
+      {/* header azpian dauden ikonoak */}
+      <section className="flex w-full relative bg-white text-white py-3 justify-around">
+        {/* Imagen 1 */}
+        <div className="bg-blue-200 rounded-full p-4 w-[15%] sm:w-[15%] lg:w-[8%] animate-fade-right">
+          <img className="w-full h-auto object-contain" src={jaialaipala} alt="Jaialai Pala" />
+        </div>
+
+        {/* Imagen 2 */}
+        <div className="bg-blue-400 rounded-full p-4 w-[15%] sm:w-[15%] lg:w-[8%] animate-fade-right animate-delay-300">
+          <img className="w-full h-auto object-contain" src={palaikono} alt="Pala Ikono" />
+        </div>
+
+        {/* Imagen 3 */}
+        <div className="bg-blue-600 rounded-full p-4 w-[15%] sm:w-[15%] lg:w-[8%] animate-fade animate-delay-500">
+          <img className="rounded-full w-full h-auto object-contain" src={bikoteikono} alt="Bikote Ikono" />
+        </div>
+
+        {/* Imagen 4 */}
+        <div className="bg-blue-400 rounded-full p-4 w-[15%] sm:w-[15%] lg:w-[8%] animate-fade-left animate-delay-300">
+          <img className="w-full h-auto object-contain" src={tenispelota} alt="Tenis Pelota" />
+        </div>
+
+        {/* Imagen 5 */}
+        <div className="bg-blue-200 rounded-full p-4 w-[15%] sm:w-[15%] lg:w-[8%] animate-fade-left">
+          <img className="w-full h-auto object-contain" src={raketatenis} alt="Raketa Tenis" />
         </div>
       </section>
 
 
       {/* Section izenburu */}
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-6 py-16" data-aos="fade-up">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 animate-fade-right">{t('gutaz.section')}</h2>
-          <p className="text-gray-600 mt-4 animate-fade-up">
+          <h2 className="text-4xl font-bold text-gray-800">{t('gutaz.section')}</h2>
+          <p className="text-gray-600 mt-4">
             {t('gutaz.section2')}
           </p>
         </div>
@@ -43,7 +125,7 @@ function Hasiera() {
         {/* Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Frontoia */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden animate-fade-up">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up">
             <img
               src={bat}
               alt="Lezo Frontoia"
@@ -58,7 +140,7 @@ function Hasiera() {
           </div>
 
           {/* Tinder */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden animate-fade-up">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
             <div className="flex justify-center items-center bg-gradient-to-r from-pink-500 to-red-500 h-48">
               <img
                 src={bi}
@@ -75,7 +157,7 @@ function Hasiera() {
           </div>
 
           {/* Trinketeak */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden animate-fade-up">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="400">
             <img
               src={trinkete}
               alt="Urnieta Frontoia"
@@ -91,7 +173,7 @@ function Hasiera() {
 
           {/* PRODUKTUAK */}
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden animate-fade-up">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="500">
             <img
               src={eskupilota}
               alt="Urnieta Frontoia"
@@ -100,14 +182,14 @@ function Hasiera() {
             <div className="p-6 text-center">
               <h3 className="text-xl font-bold text-gray-800 mb-2">{t('gutaz.grid5')}</h3>
               <p className="text-gray-600">
-              {t('gutaz.grid5-5')}
+                {t('gutaz.grid5-5')}
               </p>
             </div>
           </div>
 
           {/* URNIETAKO FRONTOIA */}
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="700">
             <img
               src={hiru}
               alt="Urnieta Frontoia"
@@ -123,17 +205,16 @@ function Hasiera() {
 
           {/* COMING SOON */}
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="900">
             <img
               src={comingsoon}
               alt="Urnieta Frontoia"
               className="w-full h-full object-cover"
             />
           </div>
-
         </div>
       </section>
-      
+
 
       {/* Komunitatea */}
       <section className="bg-gradient-to-r from-indigo-800 to-blue-400 text-white py-16">
@@ -143,10 +224,15 @@ function Hasiera() {
             {t('gutaz.komunitatea2')}
           </p>
           <button
-            className="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium shadow hover:bg-gray-100 transition"
-            onClick={() => navigate("/register")}
+            className="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium shadow hover:bg-gray-100 transition active:animate-jump-out focus:animate-jump-out"
+            onClick={() => {
+              // Segundu erdia itxaron
+              setTimeout(() => {
+                navigate("/register");
+              }, 500);
+            }}
           >
-            {t('gutaz.register')}
+            {t("gutaz.register")}
           </button>
         </div>
       </section>
@@ -158,3 +244,6 @@ function Hasiera() {
 }
 
 export default Hasiera;
+
+
+

@@ -6,15 +6,15 @@ i18n
   .use(LanguageDetector) // Nabegatzailearen hizkuntza deteketatzen du
   .use(initReactI18next) // React-ekin bateratu
   .init({
-    fallbackLng: 'eu', // Idioma por defecto
-    lng: localStorage.getItem('language') || 'eu', // Idioma inicial desde localStorage o 'en'
+    fallbackLng: 'eu',
+    lng: localStorage.getItem('language') || 'eu',
     debug: true,
     interpolation: {
-      escapeValue: false, // React ya maneja esto
+      escapeValue: false,
     },
     detection: {
       order: ['cookie', 'localStorage', 'navigator'],
-      caches: ['cookie'], // Cookietan gordeko du hizkuntza
+      caches: ['cookie'],
     },
     resources: {
         en: {
@@ -31,17 +31,21 @@ i18n
               "yourReservations": "Your Reservations",
               "public": "Public",
               "private": "Private",
+              "notLoggedInMessage" : "Not logged in? Check in now!",
             },
             "login":{
-              "password" : "password",
+              "password" : "Password",
               "noAccount" : "Don't have an account?",
               "emailHolder" : "Enter email",
               "passHolder" : "Enter password",
-              "register" : "Register"
+              "register" : "Register",
+              "email": "Email",
+              "emailRequired" : "You mast enter an email.",
+              "emailInvalid" : "You must enter an '@' sign at the email address."
               
             },
             "footer":{
-              "ref" : "Contact",
+              "ref" : "CONTACT",
               "esaldi" : '"More than sport, real ties!"',
               "esaldi2" : "In Tinderkete, we combine passion and tradition. Are you ready for the next challenge?",
             },
@@ -61,7 +65,10 @@ i18n
               "nav6": "Products",
               "nav7": "Contact",
               "sidebar1" : "Profile",
-              "sidebar2" : "Chat",        
+              "sidebar2" : "Chat",
+              "navadmin1" : "Create Tournaments",
+              "navadmin3" : "Config Products",
+              "navadmin2" : "Create New Map"        
             },
             "partidak": {
               "header": "Public and private matches",
@@ -72,6 +79,8 @@ i18n
               "trinketea":"Trinquets",
               "minutu":"minutes",
               "apuntatu": "Sign up",
+              "popupHeader" : "Sign up for the game!",
+              "itxi" : "Close"
             },    
             "gutaz": {
               "main" : "Our aim is to encourage the practice of Basque sports by young people. Play on the fronton and trinquets easily, creating open or closed groups and booking places. Meet the big fans and start participating!",
@@ -136,7 +145,9 @@ i18n
               "pasahitzap" : "Write your password",
               "jaitozedata" : "Birth Date",
               "bidali" : "Register",
-              "kontua" : "Have an account?"
+              "kontua" : "Have an account?",
+              "pasahitzaBaieztatu1": "Confirm password",
+              "pasahitzaBaieztatu2": "Confirm password"
             },
             "txapelketa1": {
               "title" : "Fronton tournament!",
@@ -168,6 +179,18 @@ i18n
               "jaioterria" : "Place of birth",
               "telefonoa" : "Phone number",
               "gorde" : "Save"
+            },
+            "hasieraAdmin": {
+              "header" : "Application Management Control Panel",
+            },
+            "mapakSortu": {
+              "header" : "Map Creation Area",
+              "subHeader" : "In this area you can create maps of frontons and Trinquets.",
+              "izena" : "Name",
+              "mota" : "Type",
+              "iframe" : "Iframe",
+              "url" : "URL",
+              "bidali" : "Submit"
             }
           }
         },
@@ -178,23 +201,28 @@ i18n
               "description": "Erreserbak egiteko gunean partida pribatuak edo publikoak egin ditzakezu!",
               "sportType": "Zelai mota",
               "playerCount": "Jokalari kopurua",
-              "location": "Lokalekua",
+              "location": "Kokalekua",
               "time": "Ordua",
               "isPublic": "Publikoa egin",
               "submit": "Sartu",
               "yourReservations": "Zure Erreserbak",
               "public": "Publikoa",
-              "private": "Pribatua"
+              "private": "Pribatua",
+              "notLoggedInMessage" : "Ez zaude logeatuta? Logeatu orain!",
             },
             "login":{
+              "email" : "Emaila",
               "password" : "Pasahitza",
               "noAccount" : "Konturik ez?",
               "emailHolder" : "Sartu emaila",
               "passHolder" : "Sartu pasahitza",
-              "register" : "Erregistratu"
+              "register" : "Erregistratu",
+              "email" : "Emaila",
+              "emailRequired" : "Posta elektroniko bat sartu behar duzu.",
+              "emailInvalid" : "Posta elektronikoaren helbidean '@' zeinu bat sartu behar duzu."
             },
             "footer":{
-              "ref" : "Kontaktua",
+              "ref" : "KONTAKTUA",
               "esaldi" : '"Kirola baino gehiago, benetako loturak!"',
               "esaldi2" : "Tinderketen, pasioa eta tradizioa batzen ditugu. Prest zaude hurrengo erronkarako?",
             },
@@ -214,7 +242,10 @@ i18n
               "nav6": "Produktuak",
               "nav7": "Kontaktua",
               "sidebar1" : "Profila",
-              "sidebar2" : "Txat-a"
+              "sidebar2" : "Txat-a",
+              "navadmin1" : "Txapelketak Sortu",
+              "navadmin3" : "Produktuak Kudeatu",
+              "navadmin2" : "Mapa Berria Sortu"   
             },
             "partidak": {
               "header": "Partida publiko eta pribatuak",
@@ -225,7 +256,9 @@ i18n
               "trinketea":"Trinketea",
               "minutu":"minutu",
               "apuntatu": "Apuntatu",
-              "trinketeak":"Trinketeak",        
+              "trinketeak":"Trinketeak",  
+              "popupHeader" : "Partidan izena eman dezu!",
+              "itxi" : "Itxi"      
             },
             "gutaz": {
               "main" : "Gazteek euskal kirolak praktikatzearen ohitura sustatzea da gure helburua. Jolastu frontoian eta trinketean erraz, talde irekiak edo itxiak sortuz eta tokiak erreserbatuz. Ezagutu zale amorratuak eta hasi parte hartzen!",
@@ -268,7 +301,7 @@ i18n
               "iritziak" : "Bezeroen iritziak",
               "entrenatzaile" : "Oihan entrenatzailea",
               "pala" : "Pala",
-              "pelotak" : "Fronteniseko pelotak"
+              "pelotak" : "Fronteniseko pelotak",
             },
             "txapelketa":{
               "header" : "Frontoiak eta Trinketeak",
@@ -290,7 +323,9 @@ i18n
               "pasahitzap" : "Sartu pasahitza",
               "jaitozedata" : "Jaiotze Data",
               "bidali" : "Erregistratu",
-              "kontua" : "Kontu bat baduzu?"
+              "kontua" : "Kontu bat baduzu?",
+              "pasahitzaBaieztatu1": "Sartu berriro pasahitza",
+              "pasahitzaBaieztatu2": "Baieztatu pasahitza"
             },
             "txapelketa1": {
               "title" : "Frontoi Txapelketa!",
@@ -312,14 +347,26 @@ i18n
             },
             "profila": {
               "header" : "Profila",
-              "header2" : "Ikusi eta editatu zure erabiltzailearen inforamzioa.",
+              "header2" : "Ikusi eta editatu zure erabiltzailearen informazioa.",
               "izena" : "Izena",
               "abizena" : "Abizenak",
               "email" : "Email",
               "jaiotzedata" : "Jaiotze Data",
               "jaioterria" : "Jaioterria",
               "telefonoa" : "Telefonoa",
-              "gorde" : "Gorder"
+              "gorde" : "Gorde"
+            },
+            "hasieraAdmin": {
+              "header" : "Aplikazioa Kudeatzeko Kontrol Panela",
+            },
+            "mapakSortu": {
+              "header" : "Mapak sortzeko gunea",
+              "subHeader" : "Gune honetan Frontoi eta Trinketeen mapak sor ditzakezu.",
+              "izena" : "Izena",
+              "mota" : "Mota",
+              "iframe" : "Iframe",
+              "url" : "URL",
+              "bidali" : "Bidali"
             }
           }
         }

@@ -1,5 +1,4 @@
 import React from 'react';
-import './produktu.css';
 
 function PerfilaCard({ image, onImageChange }) {
   const handleImageUpload = (e) => {

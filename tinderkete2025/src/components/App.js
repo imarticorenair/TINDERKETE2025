@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Register from './Erregistratu';
@@ -15,12 +16,20 @@ import MapaLista from './MapaLista';
 import TxapelketaSortu from './TxapelketaSortu';
 import TxapelketakAdmin from './TxapelketakAdmin';
 import TxapelketaEditatu from './TxapelketaEditatu';
-
 import React, { useState } from "react";
-
+import NavbarAdmin from './NavbarAdmin';
+import HasieraAdmin from './HasieraAdmin';
+import MapaListaSortu from './MapaListaSortu';
 
 function App() {
-  
+  // Verifica si es la primera vez que se abre la página
+  if (!localStorage.getItem('firstVisit')) {
+    // Elimina los ítems y marca que ya se abrió
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('email');
+    localStorage.setItem('firstVisit', 'true');
+  }
+
   return (
     <Router>
       {/* Rutas */}
@@ -36,9 +45,12 @@ function App() {
         <Route path="/kontaktua" element={<Kontaktu />} />
         <Route path="/mapalista" element={<MapaLista />} />
         <Route path="/txapelketasortu" element={<TxapelketaSortu />} />  
-        <Route path="/perfila" element={<PerfilaIkusi />} /> 
         <Route path="/txapelketakAdmin" element={<TxapelketakAdmin />} /> 
         <Route path="/txapelketakAdmin/edit/:id" element={<TxapelketaEditatu />} />
+        <Route path="/perfila" element={<PerfilaIkusi />} />  
+        <Route path="/navbaradmin" element={<NavbarAdmin />} />  
+        <Route path="/hasieraadmin" element={<HasieraAdmin />} />  
+        <Route path="/mapalistasortu" element={<MapaListaSortu />} />  
       </Routes>
     </Router>
   );

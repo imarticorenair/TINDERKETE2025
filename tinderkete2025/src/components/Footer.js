@@ -41,7 +41,7 @@ function Footer() {
                         </div>
 
                         {/* Burua eskubi */}
-                        <div className="flex grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-6 sm:flex justify-between">
                             <div>
                                 <h2 className="mb-6 text-sm font-semibold text-white">
                                     {t('footer.ref')}
@@ -87,7 +87,6 @@ function Footer() {
 
                 {/* Divider */}
                 <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
- {/* dark:border-gray-700 */}
                 {/* Esaldia */}
                 <div className="text-center my-8">
                     <h3 className="text-2xl font-bold text-white">
@@ -99,24 +98,8 @@ function Footer() {
                 </div>
 
                 {/* Sare sozialak */}
-                <div className="sm:flex sm:items-center sm:justify-between">
-                    <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                        © {new Date().getFullYear()} Tinderkete. All Rights Reserved.
-                    </span>
-
-                    {/* Hizkuntza selecta */}
-                    <div className="text-center my-4">
-                        <select
-                            id="language-select"
-                            value={activeLanguage}
-                            onChange={changeLanguage}
-                            className="p-2 bg-blue-200 rounded-lg"
-                        >
-                            <option value="en">English</option>
-                            <option value="eu">Euskera</option>
-                        </select>
-                    </div>
-                    <div className="flex sm:justify-center sm:mt-0 gap-2">
+                <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 sm:gap-6 lg:justify-between text-center lg:text-left sm:flex justify-between">
+                    <div className="flex justify-center lg:justify-start gap-2">
                         <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                             <img
                                 src={img1}
@@ -139,7 +122,11 @@ function Footer() {
                             />
                         </a>
                     </div>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 justify-center lg:justify-end">
+                        © {new Date().getFullYear()} Tinderkete. All Rights Reserved.
+                    </span>
                 </div>
+
             </div>
         </footer>
     );
