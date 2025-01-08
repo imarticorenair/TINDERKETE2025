@@ -1,27 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PerfilaCard from './PerfilaCard.js';
-import image1 from '../images/agi.png';
+import perfiltxuri from '../images/perfiltxuri.png';
 import Nav from './Navbar.js';
 import Footer from './Footer.js';
 import UserProfileTable from './UserProfileTable';
 import { useTranslation } from "react-i18next";
 
-
 const Perfila = () => {
   const { t } = useTranslation(); 
 
   const [user, setUser] = useState({
-    image: image1,
-    izena: 'Oihan',
-    abizenak: 'Aginaga',
-    email: 'Oaginaga@tinderkete.eus',
-    jaiotzeData: '1995-07-20',
-    jaioterria: 'Oiartzun',
-    telefonoa: '654936542',
-    created_at: '2023-01-01T12:34:56',
+    image: perfiltxuri,
+    izena: '',
+    abizenak: '',
+    email: '',
+    jaiotzeData: '',
+    jaioterria: '',
+    telefonoa: '',
   });
 
   const [isEditing, setIsEditing] = useState(false);
+
+  // Recuperar datos del localStorage al montar el componente
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+
+      setUser({
+        image: parsedUser.image || perfiltxuri, // Usa una imagen predeterminada si no existe
+        izena: parsedUser.name || '',
+        abizenak: parsedUser.surname || '',
+        email: parsedUser.email || '',
+        jaiotzeData: parsedUser.birth_date || '',
+        jaioterria: parsedUser.hometown || '',
+        telefonoa: parsedUser.telephone || '',
+      });
+    }
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -35,9 +51,46 @@ const Perfila = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEditing(false);
+
+    const updatedUser = {
+      name: user.izena,
+      surname: user.abizenak,
+      email: user.email,
+      hometown: user.jaioterria,
+      image: user.image,
+      birth_date: user.jaiotzeData,
+      telephone: user.telefonoa,
+    };
+
+    // Obtener el ID del usuario desde el localStorage (o desde un estado si lo tienes)
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+
+    // Hacer la solicitud al servidor para actualizar los datos
+    try {
+      const response = await fetch(`http://localhost:8000/api/user/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          // Si tu API usa autenticación (Sanctum o JWT), agrega el token aquí
+          //'Authorization': `Bearer ${localStorage.getItem('authToken')}`,  // Reemplaza con tu token real
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (response.ok) {
+        const updatedUserData = await response.json();
+        localStorage.setItem('user', JSON.stringify(updatedUserData.data)); // Guarda los datos actualizados en localStorage
+        alert('Perfil actualizado con éxito');
+      } else {
+        throw new Error('No se pudo actualizar el perfil');
+      }
+    } catch (error) {
+      console.error('Error al actualizar los datos:', error);
+      alert('Hubo un error al actualizar el perfil');
+    }
   };
 
   const handleImageChange = (newImage) => {
@@ -58,7 +111,7 @@ const Perfila = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
           <div className="w-full sm:w-3/4">
-            <PerfilaCard image={user.image} onImageChange={handleImageChange} />
+            <PerfilaCard image={perfiltxuri} onImageChange={handleImageChange} />
           </div>
 
           <div className="w-full sm:w-3/4">
@@ -101,18 +154,6 @@ const Perfila = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="jaiotzeData" className="block font-bold text-gray-700">{t('profila.jaiotzedata')}</label>
-                  <input
-                    type="date"
-                    id="jaiotzeData"
-                    name="jaiotzeData"
-                    value={user.jaiotzeData}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                  />
-                </div>
-
-                <div>
                   <label htmlFor="jaioterria" className="block font-bold text-gray-700">{t('profila.jaioterria')}</label>
                   <input
                     type="text"
@@ -138,7 +179,7 @@ const Perfila = () => {
 
                 <div className="flex justify-end">
                   <button type="submit" className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                  {t('profila.gorde')}
+                    {t('profila.gorde')}
                   </button>
                 </div>
               </form>

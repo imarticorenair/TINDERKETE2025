@@ -25,10 +25,6 @@ const UserProfileTable = ({ user, onEditClick }) => {
             <td className="px-6 py-4 text-lg text-gray-700 font-bold whitespace-nowrap">Telefonoa</td>
             <td className="px-6 py-4 text-lg text-gray-600">{user?.telefonoa}</td>
           </tr>
-          <tr className="border-b">
-            <td className="px-6 py-4 text-lg text-gray-700 font-bold whitespace-nowrap">Sortze-data</td>
-            <td className="px-6 py-4 text-lg text-gray-600">{new Date(user?.created_at).toLocaleDateString()}</td>
-          </tr>
         </tbody>
       </table>
       <button className="btn btn-primary w-full mt-4" onClick={onEditClick}>
