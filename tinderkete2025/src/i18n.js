@@ -41,7 +41,9 @@ i18n
               "register" : "Register",
               "email": "Email",
               "emailRequired" : "You mast enter an email.",
-              "emailInvalid" : "You must enter an '@' sign at the email address."
+              "emailInvalid" : "You must enter an '@' sign at the email address.",
+              "loginTitle": "Login",
+              "loginButton": "Enter"
               
             },
             "footer":{
@@ -67,7 +69,7 @@ i18n
               "sidebar1" : "Profile",
               "sidebar2" : "Chat",
               "navadmin1" : "Create Tournaments",
-              "navadmin3" : "Config Products",
+              "navadmin3" : "Users",
               "navadmin2" : "Create New Map"        
             },
             "partidak": {
@@ -103,8 +105,9 @@ i18n
             "kontaktua": {
               "header" : "Contact with us.",
               "header2" : "Don't stop thinking!",
-              "izena" : "First and last name",
+              "izena" : " Put your first name",
               "izenap" : "Put yout first and last name",
+              "abizena" : "Put yout last name",
               "email" : "Email",
               "emailp" : "Write your email",
               "telefonoa" : "Phone number",
@@ -137,8 +140,10 @@ i18n
             },
             "register": {
               "header" : "Register",
-              "izena" : "First and last name",
-              "izenap" : "Put yout first and last name",
+              "izena" : " First name",
+              "izenap" : "Put yout first name",
+              "abizena" : "Last name",
+              "abizenap" : "Put yout last name",
               "email" : "Email",
               "emailp" : "Write your email",
               "pasahitza" : "Password",
@@ -219,7 +224,9 @@ i18n
               "register" : "Erregistratu",
               "email" : "Emaila",
               "emailRequired" : "Posta elektroniko bat sartu behar duzu.",
-              "emailInvalid" : "Posta elektronikoaren helbidean '@' zeinu bat sartu behar duzu."
+              "emailInvalid" : "Posta elektronikoaren helbidean '@' zeinu bat sartu behar duzu.",
+              "loginTitle": "Login",
+              "loginButton": "Sartu"
             },
             "footer":{
               "ref" : "KONTAKTUA",
@@ -244,7 +251,7 @@ i18n
               "sidebar1" : "Profila",
               "sidebar2" : "Txat-a",
               "navadmin1" : "Txapelketak Sortu",
-              "navadmin3" : "Produktuak Kudeatu",
+              "navadmin3" : "Erabiltzaileak",
               "navadmin2" : "Mapa Berria Sortu"   
             },
             "partidak": {
@@ -315,8 +322,10 @@ i18n
             },
             "register": {
               "header" : "Erregistratu",
-              "izena" : "Izen abizenak",
-              "izenap" : "Sartu izen abizenak",
+              "izena" : "Izena",
+              "izenap" : "Sartu izena",
+              "abizena" : "Abizenak",
+              "abizenap" : "Sartu abizenak",
               "email" : "Email-a",
               "emailp" : "Idatzi email-a",
               "pasahitza" : "Pasahitza",

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
-import agi from '../images/agi.png';
-import tinder from '../images/Tinder-Emblem.png';
 import logoImage from '../images/1361728.png';
 import '../components/navar.css';
 import logotxuri from '../images/perfiltxuri.png';
@@ -54,54 +52,6 @@ function Navbar() {
       ></div>
       <div className={`fixed z-50 top-0 left-0 w-64 bg-gray-800 text-white h-full transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform`}>
         <div className="p-4">
-
-          {/* Verificar si es Oihan */}
-          {email === 'oihanaginaga@gmail.com' ? (
-            <>
-              <p className="text-center mb-4">
-                <img src={agi} alt="logo" className="mx-auto mb-2 w-18 h-18 object-contain rounded-full" />
-                <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">Oaginaga23</h3>
-              </p>
-
-              <hr />
-              <Link
-                to="/perfila"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={toggleSidebar}
-              >
-                <div className="flex justify-start items-center">
-                  <img src={logotxuri} className="w-8 h-8 mr-2" />
-                  <h4 className="mt-2">{t('nav.sidebar1')}</h4>
-                </div>
-              </Link>
-              <hr />
-
-              {/* Mostrar Txata solo si es Oihan */}
-              <Link
-                to="/contact"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={toggleSidebar}
-              >
-                <div className="flex justify-start items-center">
-                  <img src={tinder} className="w-18 h-8 mr-2" />
-                  <h4 className="mt-2">{t('nav.sidebar2')}</h4>
-                </div>
-              </Link>
-              <hr />
-
-              {/* Logout */}
-              <Link
-                to="/login"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={handleLogout}
-              >
-                <div className="flex justify-start items-center"><img src={logout} className="w-8 h-7 mr-2" /><h4 className="mt-2">Logout</h4></div>
-              </Link>
-
-            </>
-          ) : isAdmin ? (
-            <>
-              {/* Si es admin */}
               <p className="text-center mb-4">
                 <img src={ane} alt="logo" className="mx-auto mb-2 w-18 h-18 object-contain rounded-full" />
                 <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">Admin</h3>
@@ -117,40 +67,25 @@ function Navbar() {
               >
                 <div className="flex justify-start items-center"><img src={logout} className="w-8 h-7 mr-2" /><h4 className="mt-2">Logout</h4></div>
               </Link>
-
-            </>
-          ) : (
-            <>
-              {/* Si no es Oihan ni Admin */}
-              <p className="text-center mb-4">
-                <img src={logotxuri} alt="logo" className="mx-auto mb-2 w-18 h-18 object-contain rounded-full" />
-              </p>
-
-              <hr />
-              <Link
-                to="/login"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={toggleSidebar}
-              >
-                <div className="flex justify-start items-center"><img src={logotxuri} className="w-8 h-8 mr-2" /><h4 className="mt-2">Login</h4></div>
-              </Link>
-            </>
-          )}
-        </div>
       </div>
-
+      </div>
       {/* Navbar */}
       <nav className="bg-gray-800 text-white shadow-lg">
-        <div className="container mx-auto flex flex-wrap justify-between items-center p-4">
+        <div className="container mx-auto flex flex-wrap lg:justify-between sm:justify-center items-center p-4">
           {/* Logo */}
-          <Link className="flex items-center" to="/hasieraadmin">
+          <div className="flex items-center">
+            <Link className="flex items-center" to="/hasieraadmin">
             <img
               src={logo}
               alt="logo"
               className="w-auto max-w-16 h-auto max-h-16 mr-2 flame-effect rounded-full object-contain"
             />
-          </Link>
-          <h1 className="text-white font-bold text-3xl no-underline">Tinderkete</h1>
+            
+            </Link>
+            <h1 className="text-white font-bold text-3xl no-underline">Tinderkete</h1>
+          </div>
+          
+          
 
           {/* Hanburguesa menua txikia */}
           <div className="lg:hidden">
@@ -172,7 +107,7 @@ function Navbar() {
               <li className={`nav-item ${getActiveClass('/txapelketasortu')}`}>
                 <Link
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                  to="/txapelketasortu"
+                  to="/txapelketakkudeatu"
                   onClick={closeMenu}
                 >
                   {t('nav.navadmin1')}
@@ -187,10 +122,10 @@ function Navbar() {
                   {t('nav.navadmin2')}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass('/produktuak')}`}>
+              <li className={`nav-item ${getActiveClass('/ErabiltzaileakAdmin')}`}>
                 <Link
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                  to="/produktuaksortu"
+                  to="/erabiltzaileakAdmin"
                   onClick={closeMenu}
                 >
                   {t('nav.navadmin3')}
@@ -222,15 +157,7 @@ function Navbar() {
                   {t('nav.navadmin2')}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass('/produktuak')}`}>
-                <Link
-                  className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                  to="/produktuaksortu"
-                  onClick={closeMenu}
-                >
-                  {t('nav.navadmin3')}
-                </Link>
-              </li>
+              
               <li>
                 <button className="" onClick={toggleSidebar}>
                   <img

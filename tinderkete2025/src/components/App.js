@@ -19,6 +19,11 @@ import React, { useState } from "react";
 import NavbarAdmin from './NavbarAdmin';
 import HasieraAdmin from './HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
+import ErabiltzaileakEditatu from './ErabiltzaileakEditatu';
+import Txapelketakkudeatu from './TxapelketakKudeatu';
+import ErabiltzaileakAdmin from './ErabiltzaileakAdmin';
+
+
 
 function App() {
   // Verifica si es la primera vez que se abre la página
@@ -50,6 +55,9 @@ function App() {
         <Route path="/navbaradmin" element={<NavbarAdmin />} />  
         <Route path="/hasieraadmin" element={<HasieraAdmin />} />  
         <Route path="/mapalistasortu" element={<MapaListaSortu />} />  
+        <Route path="/erabiltzaileakAdmin" element={<ErabiltzaileakAdmin />} />  
+        <Route path="/erabiltzaileakEditatu/:id" element={<ErabiltzaileakEditatu />} />  
+        <Route path="/txapelketakkudeatu" element={<Txapelketakkudeatu />} /> 
       </Routes>
     </Router>
   );
