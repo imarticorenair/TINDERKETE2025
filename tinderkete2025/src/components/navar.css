@@ -1,0 +1,20 @@
+/* navar.css */
+
+/* Animación de fuego */
+@keyframes flame {
+    0% {
+        box-shadow: 0 0 5px 3px rgba(255, 90, 95, 0.8), 0 0 10px 3px rgba(255, 120, 120, 0.5); 
+    }
+    50% {
+        box-shadow: 0 0 10px 5px rgba(255, 100, 95, 0.9), 0 0 15px 8px rgba(255, 150, 130, 0.6); 
+    }
+    100% {
+        box-shadow: 0 0 15px 8px rgba(255, 95, 95, 0.9), 0 0 20px 10px rgba(255, 65, 60, 0.5);
+    }
+}
+
+/* Clase que aplica la animación flame */
+.flame-effect {
+    animation: flame 1.5s infinite alternate;
+}
+

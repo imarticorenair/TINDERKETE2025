@@ -1,0 +1,90 @@
+header {
+  background-color: #005C53;
+  /*background-color: #81B2A0;*/
+  height: 90px;
+  width: 100%;
+}
+
+.login-container {
+  padding: 30px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  background-color: rgb(252, 252, 252);
+  margin-top: -50px;
+
+}
+
+.login-container h2 {
+  margin-top: 30px;
+}
+
+.login-container .btn-primary {
+  background-color: rgb(70, 114, 26);
+  border-color: #1e7e34;
+  width: 100%;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  margin-bottom: -150px;
+}
+
+
+
+.login-wrapper {
+  padding: 20px;
+  text-align: center;
+}
+
+.register-wrapper {
+  margin-top: 70px;
+}
+
+.login-wrapper {
+  margin-top: 70px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+}
+
+.card-title {
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #005C53;
+  border-color: #1e7e34;
+}
+
+.btn-primary:hover {
+  background-color: rgb(130, 192, 69);
+}
+
+.btn-login {
+  background-color: transparent !important;
+  color: #007bff !important;
+  border: none !important;
+}
+
+.btn-login:hover {
+  background-color: transparent !important;
+}
+
+
+.kontaktu-container {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+  margin-top: 50px;
+  max-width: 1000px !important;
+  width: 100% !important;
+  margin: 0 auto;
+  padding: 40px !important;
+  box-sizing: border-box;
+}
