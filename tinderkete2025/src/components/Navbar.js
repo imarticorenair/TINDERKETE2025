@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import agi from "../images/agi.png";
-import tinder from "../images/Tinder-Emblem.png";
-import logoImage from "../images/1361728.png";
-import "../components/navar.css";
 import logotxuri from "../images/perfiltxuri.png";
 import logout from "../images/logout.png";
 import { useTranslation } from "react-i18next";
-import ane from "../images/ane.jpg";
 import "../i18n"; // i18n konfigurazioa
+import agi from "../images/agi.png";
+import logoImage from "../images/1361728.png";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // hanburgesa menuaren egoera
@@ -22,8 +19,13 @@ function Navbar() {
       ? "bg-amber-500 rounded-md text-white"
       : "text-gray-300"; //Dagoen orrialdeko itxura
   };
-  const isAdmin = localStorage.getItem("isAdmin") === "true"; // Erabiltzailea admin baldin bada funtzionalitate bat geihago dago
-  const email = localStorage.getItem("email"); // Emaila berifikatzen du
+
+  // Obtener datos del usuario desde localStorage
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = localStorage.getItem("isAdmin") === "true"; // Verificar si es admin
+  const email = userData ? userData.email : ""; // Obtener el email desde el localStorage
+  const nombre = userData ? userData.name : "";
+  const apellido = userData ? userData.surname : "";
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen); // Hanburguesa menua ireki itxi
@@ -41,8 +43,10 @@ function Navbar() {
     e.preventDefault();
     localStorage.removeItem("email");
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("user"); // Eliminar el usuario del localStorage
     navigate("/"); // Hasierako horria
   };
+
   const { t, i18n } = useTranslation(); // useTranslationen hooka erabiltzen du t eta i18n-ra konektatzeko
 
   // Hizkuntzaren estatu ofiziala, localStorage-etik hartzen du
@@ -76,17 +80,18 @@ function Navbar() {
         } transition-transform`}
       >
         <div className="p-4">
-          {/* Verificar si es Oihan */}
-          {email === "oihanaginaga@gmail.com" ? (
+          {/* Verificar si el usuario no es Oihan ni Admin */}
+          {userData && email !== !isAdmin ? (
             <>
+              {/* Mostrar nombre y apellido del usuario */}
               <p className="text-center mb-4">
                 <img
-                  src={agi}
+                  src={logotxuri}
                   alt="logo"
                   className="mx-auto mb-2 w-18 h-18 object-contain rounded-full"
                 />
                 <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">
-                  Oaginaga23
+                  {`${nombre} ${apellido}`} {/* Mostrar nombre y apellido */}
                 </h3>
               </p>
 
@@ -102,20 +107,6 @@ function Navbar() {
                 </div>
               </Link>
               <hr />
-
-              {/* Mostrar Txata solo si es Oihan */}
-              <Link
-                to="/contact"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={toggleSidebar}
-              >
-                <div className="flex justify-start items-center">
-                  <img src={tinder} className="w-18 h-8 mr-2" />
-                  <h4 className="mt-2">{t("nav.sidebar2")}</h4>
-                </div>
-              </Link>
-              <hr />
-
               {/* Logout */}
               <Link
                 to="/login"
@@ -129,37 +120,17 @@ function Navbar() {
               </Link>
             </>
           ) : (
-            <>
-              {/* Si no es Oihan ni Admin */}
-              <p className="text-center mb-4">
-                <img
-                  src={logotxuri}
-                  alt="logo"
-                  className="mx-auto mb-2 w-18 h-18 object-contain rounded-full"
-                />
-              </p>
-
-              <hr />
-              <Link
-                to="/login"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={(e) => {
-                  e.preventDefault(); // Prevenir el comportamiento por defecto del enlace
-                  localStorage.removeItem('firstVisit');  // Eliminar 'firstVisit'
-                  localStorage.removeItem('language');    // Eliminar 'language'
-                  localStorage.removeItem('token');       // Eliminar 'token'
-                  localStorage.removeItem('user');        // Eliminar 'user'
-                  toggleSidebar(); // Alternar el estado del sidebar
-                  navigate("/login");
-                  
-                }}
-              >
-                <div className="flex justify-start items-center">
-                  <img src={logotxuri} className="w-8 h-8 mr-2" />
-                  <h4 className="mt-2">Login</h4>
-                </div>
-              </Link>
-            </>
+            // Mostrar botón de Login cuando no haya usuario autenticado
+            <Link
+              to="/login"
+              className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
+              onClick={toggleSidebar}
+            >
+              <div className="flex justify-start items-center">
+                <img src={logout} className="w-8 h-7 mr-2" />
+                <h4 className="mt-2">Login</h4>
+              </div>
+            </Link>
           )}
         </div>
       </div>
@@ -281,7 +252,6 @@ function Navbar() {
           </div>
 
           {/* Hanburguesa menua pantaila txikitan */}
-
           <div
             className={`lg:hidden ${
               menuOpen ? "block" : "hidden"
@@ -297,19 +267,19 @@ function Navbar() {
                   {t("nav.nav1")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/erreserbak")}`}>
+              <li className={`nav-item ${getActiveClass("/perfila")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/erreserbak"
+                  to="/perfila"
                   onClick={closeMenu}
                 >
                   {t("nav.nav2")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/txapelketak")}`}>
+              <li className={`nav-item ${getActiveClass("/chat")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/txapelketak"
+                  to="/chat"
                   onClick={closeMenu}
                 >
                   {t("nav.nav3")}
@@ -365,6 +335,7 @@ function Navbar() {
               </li>
             </ul>
           </div>
+
           {/* Sidebar toggle */}
           <button className="lg:block hidden ml-5" onClick={toggleSidebar}>
             <img
