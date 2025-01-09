@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Nav from "./Navbar.js";
+import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import { useNavigate } from "react-router-dom";
 
@@ -41,55 +41,57 @@ const TxapelketakAdmin = () => {
     }
 
     return (
-        <div>
-            <Nav />
-            <h1>Tournaments</h1>
-            <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Price</th>
-                        <th>Max Participants</th>
-                        <th>Location ID</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tournaments.length === 0 ? (
-                        <tr>
-                            <td colSpan="11" style={{ textAlign: "center" }}>
-                                No tournaments found.
-                            </td>
-                        </tr>
-                    ) : (
-                        tournaments.map((tournament) => (
-                            <tr key={tournament.id}>
-                                <td>
-                                    <button onClick={() => handleEdit(tournament.id)}>
-                                        Edit
-                                    </button>
-                                </td>
-                                <td>{tournament.id}</td>
-                                <td>{tournament.title}</td>
-                                <td>{tournament.description}</td>
-                                <td>{tournament.date}</td>
-                                <td>{tournament.time}</td>
-                                <td>{tournament.price}</td>
-                                <td>{tournament.max_participants}</td>
-                                <td>{tournament.location_id}</td>
-                                <td>{new Date(tournament.created_at).toLocaleString()}</td>
-                                <td>{new Date(tournament.updated_at).toLocaleString()}</td>
+        <div className="bg-gray-100 min-h-screen">
+            <NavbarAdmin />
+            <div className="container mx-auto px-4 py-8">
+                <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Erabiltzaileak</h1>
+                <div className="overflow-x-auto shadow-md rounded-lg">
+                    <table className="min-w-full bg-white table-auto border-collapse">
+                        <thead>
+                            <tr className="bg-blue-500 text-white">
+                                <th className="px-4 py-2"></th>
+                                <th className="px-4 py-2">ID</th>
+                                <th className="px-4 py-2">Title</th>
+                                <th className="px-4 py-2">Description</th>
+                                <th className="px-4 py-2">Date</th>
+                                <th className="px-4 py-2">Time</th>
+                                <th className="px-4 py-2">Price</th>
+                                <th className="px-4 py-2">Max Participants</th>
+                                <th className="px-4 py-2">Location ID</th>
                             </tr>
-                        ))
-                    )}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {tournaments.length === 0 ? (
+                                <tr>
+                                    <td colSpan="11" style={{ textAlign: "center" }}>
+                                        No tournaments found.
+                                    </td>
+                                </tr>
+                            ) : (
+                                tournaments.map((tournament) => (
+                                    <tr key={tournament.id}>
+                                        <td>
+                                            <button onClick={() => handleEdit(tournament.id)}>
+                                                Edit
+                                            </button>
+                                        </td>
+                                        <td className="px-4 py-2 text-center">{tournament.id}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.title}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.description}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.date}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.time}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.price}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.max_participants}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.location_id}</td>
+                                        <td className="px-4 py-2 text-center">{new Date(tournament.created_at).toLocaleString()}</td>
+                                        <td className="px-4 py-2 text-center">{new Date(tournament.updated_at).toLocaleString()}</td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <Footer />
         </div>
     );
