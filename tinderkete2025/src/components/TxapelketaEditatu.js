@@ -1,7 +1,7 @@
 // Resto de las importaciones
 import React, { useState, useEffect } from "react";
 import EventCard from "./EventCard";
-import Nav from "./Navbar.js";
+import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -89,7 +89,7 @@ function TxapelketaEditatu() {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Nav />
+            <NavbarAdmin  />
             <div className="container mx-auto flex-grow px-8 py-8">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-blue-600">Txapelketa Editatu</h1>
