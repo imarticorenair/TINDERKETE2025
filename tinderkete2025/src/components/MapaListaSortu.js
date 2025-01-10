@@ -1,37 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarAdmin from './NavbarAdmin.js';
 import Footer from './Footer.js';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
+import axios from 'axios';
 
 function MapaSortu() {
+
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    name: '',
-    type: 'frontoiak', // Default type
-    iframe: '',
-    url: '',
-  });
-  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [iframe, setIframe] = useState('');
+  const [url, setUrl] = useState('');
+  const [img, setImg] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Mostrar un mensaje de éxito
-    setSuccessMessage(t('mapak.success'));
-
-    // Reiniciar el formulario
-    setFormData({
-      name: '',
-      type: 'frontoiak',
-      iframe: '',
-      url: '',
-    });
+  
+    const mapaData = {
+      name: name,
+      type: type,
+      iframe: iframe,
+      url: url,
+      img: img,
+    };
+  
+    console.log(mapaData);
+  
+    try {
+      const response = await axios.post("http://localhost:8000/api/lokalekuak", mapaData);
+  
+      if (response.status >= 200 && response.status < 300) {
+        alert("Mapa ongi sortu da.");
+  
+        // Aquí reseteamos los campos del formulario
+        setName("");
+        setType("");
+        setIframe("");
+        setUrl("");
+        setImg("");
+      } else {
+        alert("Errorea: " + (response.data?.message || "Daturenbat gaizki sartu da"));
+      }
+    } catch (error) {
+      console.error("Errorea:", error);
+      alert("Errorea gertatu da: " + (error.response?.data?.message || error.message));
+    }
   };
+  
+  
+  
+
 
   return (
     <div>
@@ -42,23 +63,17 @@ function MapaSortu() {
           <p className="text-xl mt-2 text-gray-600">{t('mapakSortu.subHeader')}</p>
         </div>
 
-        {successMessage && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6" role="alert">
-            {successMessage}
-          </div>
-        )}
-
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
-              {t('mapakSortu.izena')}
+              Izena
             </label>
             <input
               type="text"
               id="name"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
               required
             />
@@ -66,16 +81,17 @@ function MapaSortu() {
 
           <div className="mb-4">
             <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
-              {t('mapakSortu.mota')}
+              Mota
             </label>
             <select
               id="type"
               name="type"
-              value={formData.type}
-              onChange={handleChange}
+              value={type}
+              onChange={(e) => setType(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
               required
             >
+              <option value=" "> </option>
               <option value="frontoiak">{t('mapak.frontoiak')}</option>
               <option value="trinketeak">{t('mapak.trinketeak')}</option>
             </select>
@@ -83,13 +99,13 @@ function MapaSortu() {
 
           <div className="mb-4">
             <label htmlFor="iframe" className="block text-gray-700 font-bold mb-2">
-              {t('mapakSortu.iframe')}
+              Iframe
             </label>
             <textarea
               id="iframe"
               name="iframe"
-              value={formData.iframe}
-              onChange={handleChange}
+              value={iframe}
+              onChange={(e) => setIframe(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
               rows="4"
               required
@@ -98,14 +114,28 @@ function MapaSortu() {
 
           <div className="mb-4">
             <label htmlFor="url" className="block text-gray-700 font-bold mb-2">
-              {t('mapakSortu.url')}
+              URL
             </label>
             <input
               type="text"
               id="url"
               name="url"
-              value={formData.url}
-              onChange={handleChange}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="img" className="block text-gray-700 font-bold mb-2">
+              IRUDIA
+            </label>
+            <input
+              type="file"
+              id="img"
+              name="img"
+              value={img}
+              onChange={(e) => setImg(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             />
           </div>
@@ -115,7 +145,7 @@ function MapaSortu() {
               type="submit"
               className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
             >
-              {t('mapakSortu.bidali')}
+              Sortu
             </button>
           </div>
         </form>

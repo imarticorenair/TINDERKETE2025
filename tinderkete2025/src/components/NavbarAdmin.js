@@ -71,9 +71,9 @@ function Navbar() {
       </div>
       {/* Navbar */}
       <nav className="bg-gray-800 text-white shadow-lg">
-        <div className="container mx-auto flex flex-wrap lg:justify-between sm:justify-center items-center p-4">
+        <div className="container mx-auto flex flex-wrap lg:justify-between justify-center items-center p-4">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-center">
             <Link className="flex items-center" to="/hasieraadmin">
             <img
               src={logo}
@@ -135,7 +135,7 @@ function Navbar() {
           <div
             className={`lg:hidden ${menuOpen ? 'block' : 'hidden'} relative flex-row text-center text-white p-4 top-full mt-2 w-[100%] rounded-lg active:transition active:duration-700 active:ease-in-out`}
           >
-            <ul className="flex flex-col space-y-4">
+            <ul className="flex flex-col space-y-4 mx-auto">
               <li className={`nav-item ${getActiveClass('/txapelketak')}`}>
                 <Link
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
@@ -154,7 +154,15 @@ function Navbar() {
                   {t('nav.navadmin2')}
                 </Link>
               </li>
-              
+              <li className={`nav-item ${getActiveClass('/MapaLista')}`}>
+                <Link
+                  className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
+                  to="/erabiltzaileakAdmin"
+                  onClick={closeMenu}
+                >
+                  {t('nav.navadmin3')}
+                </Link>
+              </li>
               <li>
                 <button className="" onClick={toggleSidebar}>
                   <img
