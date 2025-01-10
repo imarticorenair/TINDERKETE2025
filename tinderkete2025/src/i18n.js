@@ -250,9 +250,9 @@ i18n
               "nav7": "Kontaktua",
               "sidebar1" : "Profila",
               "sidebar2" : "Txat-a",
-              "navadmin1" : "Txapelketak Sortu",
-              "navadmin3" : "Erabiltzaileak",
-              "navadmin2" : "Mapa Berria Sortu"   
+              "navadmin1" : "Txapelketak Kudeatu",
+              "navadmin3" : "Erabiltzaileak Kudeatu",
+              "navadmin2" : "Mapak kudeatu"   
             },
             "partidak": {
               "header": "Partida publiko eta pribatuak",
@@ -369,8 +369,8 @@ i18n
               "header" : "Aplikazioa Kudeatzeko Kontrol Panela",
             },
             "mapakSortu": {
-              "header" : "Mapak sortzeko gunea",
-              "subHeader" : "Gune honetan Frontoi eta Trinketeen mapak sor ditzakezu.",
+              "header" : "Mapak kudeatzeko gunea",
+              "subHeader" : "Gune honetan Frontoi eta Trinketeen mapak sor eta kudeatu ditzakezu.",
               "izena" : "Izena",
               "mota" : "Mota",
               "iframe" : "Iframe",
