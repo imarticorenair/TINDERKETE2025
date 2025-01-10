@@ -104,13 +104,12 @@ function Navbar() {
           <div className="hidden lg:flex space-x-6 mt-3">
             <ul className="flex space-x-4">
 
-              <li className={`nav-item ${getActiveClass('/txapelketasortu')}`}>
+              <li className={`nav-item ${getActiveClass('/TxapelketaSortu')}`}>
                 <Link
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                  to="/txapelketakkudeatu"
+                  to="/TxapelketakAdmin"
                   onClick={closeMenu}
-                >
-                  {t('nav.navadmin1')}
+                >Txapelketak
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass('/MapaLista')}`}>
@@ -118,8 +117,7 @@ function Navbar() {
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
                   to="/mapalistasortu"
                   onClick={closeMenu}
-                >
-                  {t('nav.navadmin2')}
+                >Mapak
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass('/ErabiltzaileakAdmin')}`}>
@@ -127,8 +125,7 @@ function Navbar() {
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
                   to="/erabiltzaileakAdmin"
                   onClick={closeMenu}
-                >
-                  {t('nav.navadmin3')}
+                >Erabiltzaileak
                 </Link>
               </li>
             </ul>

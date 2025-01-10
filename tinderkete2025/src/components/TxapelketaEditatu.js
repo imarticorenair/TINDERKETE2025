@@ -85,6 +85,7 @@ function TxapelketaEditatu() {
             console.error("Error updating tournament:", err);
             setError(err.response?.data?.message || "Error al actualizar el torneo.");
         }
+        navigate('/TxapelketakAdmin');
     };
 
     return (
