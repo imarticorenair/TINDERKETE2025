@@ -27,7 +27,9 @@ const ErabiltzaileakAdmin = () => {
 
     fetchUsers();
   }, []);
-
+  const handleSortu = () => {
+    navigate('/txapelketasortu');
+};
   const handleEdit = (id) => {
     navigate(`/erabiltzaileakEditatu/${id}`);
   };
@@ -74,6 +76,14 @@ const ErabiltzaileakAdmin = () => {
       <NavbarAdmin />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Erabiltzaileak</h1>
+        <div>
+          <button
+            onClick={() => handleSortu()}
+            className="mx-auto bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+          >
+            Sortu
+          </button>
+        </div>
         <div className="overflow-x-auto shadow-md rounded-lg">
           <table className="min-w-full bg-white table-auto border-collapse">
             <thead>

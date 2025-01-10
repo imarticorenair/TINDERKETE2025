@@ -1,6 +1,10 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Register from './Erregistratu';
+import ErabiltzaileakAdmin from './ErabiltzaileakAdmin';
+import ErabiltzaileaSortu from './ErabiltzaileaSortu';
+import ErabiltzaileakEditatu from './ErabiltzaileakEditatu';
 import ErreserbakForm from './ErreserbakForm';
 import TestPage from './TestPage'; 
 import Txapelketak from './Txapelketak'; 
@@ -15,13 +19,10 @@ import MapaLista from './MapaLista';
 import TxapelketaSortu from './TxapelketaSortu';
 import TxapelketakAdmin from './TxapelketakAdmin';
 import TxapelketaEditatu from './TxapelketaEditatu';
-import React, { useState } from "react";
+import Txapelketakkudeatu from './TxapelketakKudeatu';
 import NavbarAdmin from './NavbarAdmin';
 import HasieraAdmin from './HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
-import ErabiltzaileakEditatu from './ErabiltzaileakEditatu';
-import Txapelketakkudeatu from './TxapelketakKudeatu';
-import ErabiltzaileakAdmin from './ErabiltzaileakAdmin';
 
 
 
@@ -40,6 +41,9 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/erabiltzaileakAdmin" element={<ErabiltzaileakAdmin />} />  
+        <Route path="/erabiltzaileaSortu" element={<ErabiltzaileaSortu />} />  
+        <Route path="/erabiltzaileakEditatu/:id" element={<ErabiltzaileakEditatu />} />  
         <Route path="/erreserbak" element={<ErreserbakForm />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/txapelketak" element={<Txapelketak />} /> 
@@ -55,8 +59,6 @@ function App() {
         <Route path="/navbaradmin" element={<NavbarAdmin />} />  
         <Route path="/hasieraadmin" element={<HasieraAdmin />} />  
         <Route path="/mapalistasortu" element={<MapaListaSortu />} />  
-        <Route path="/erabiltzaileakAdmin" element={<ErabiltzaileakAdmin />} />  
-        <Route path="/erabiltzaileakEditatu/:id" element={<ErabiltzaileakEditatu />} />  
         <Route path="/txapelketakkudeatu" element={<Txapelketakkudeatu />} /> 
       </Routes>
     </Router>

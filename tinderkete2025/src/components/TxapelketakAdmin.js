@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Nav from "./Navbar.js";
+import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import { useNavigate } from "react-router-dom";
 
@@ -27,9 +27,33 @@ const TxapelketakAdmin = () => {
 
         fetchTournaments();
     }, []);
-
+    const handleSortu = () => {
+        navigate('/txapelketasortu');
+    }
     const handleEdit = (id) => {
         navigate(`/txapelketakAdmin/edit/${id}`);
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/txapelketak/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Errorea deia egiteko garaian.");
+            }
+
+            // Remove the tournament from the state after successful deletion
+            setTournaments(tournaments.filter((tournament) => tournament.id !== id));
+            alert("Txapelketa egoki ezabatu da.");
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Errorea txapelketa ezabatzerako garaian.");
+        }
     };
 
     if (loading) {
@@ -41,55 +65,75 @@ const TxapelketakAdmin = () => {
     }
 
     return (
-        <div>
-            <Nav />
-            <h1>Tournaments</h1>
-            <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Price</th>
-                        <th>Max Participants</th>
-                        <th>Location ID</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tournaments.length === 0 ? (
-                        <tr>
-                            <td colSpan="11" style={{ textAlign: "center" }}>
-                                No tournaments found.
-                            </td>
-                        </tr>
-                    ) : (
-                        tournaments.map((tournament) => (
-                            <tr key={tournament.id}>
-                                <td>
-                                    <button onClick={() => handleEdit(tournament.id)}>
-                                        Edit
-                                    </button>
-                                </td>
-                                <td>{tournament.id}</td>
-                                <td>{tournament.title}</td>
-                                <td>{tournament.description}</td>
-                                <td>{tournament.date}</td>
-                                <td>{tournament.time}</td>
-                                <td>{tournament.price}</td>
-                                <td>{tournament.max_participants}</td>
-                                <td>{tournament.location_id}</td>
-                                <td>{new Date(tournament.created_at).toLocaleString()}</td>
-                                <td>{new Date(tournament.updated_at).toLocaleString()}</td>
+        <div className="bg-gray-100 min-h-screen">
+            <NavbarAdmin />
+            <div className="container mx-auto px-4 py-8">
+                <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Txapelketak</h1>
+                <div>
+                    <button
+                        onClick={() => handleSortu()}
+                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    >
+                        Sortu
+                    </button>
+                </div>
+                <div className="overflow-x-auto shadow-md rounded-lg">
+                    <table className="min-w-full bg-white table-auto border-collapse">
+                        <thead>
+                            <tr className="bg-blue-500 text-white">
+                                <th className="px-4 py-2"></th>
+                                <th className="px-4 py-2"></th>
+                                <th className="px-4 py-2">ID</th>
+                                <th className="px-4 py-2">Title</th>
+                                <th className="px-4 py-2">Description</th>
+                                <th className="px-4 py-2">Date</th>
+                                <th className="px-4 py-2">Time</th>
+                                <th className="px-4 py-2">Price</th>
+                                <th className="px-4 py-2">Max Participants</th>
+                                <th className="px-4 py-2">Location ID</th>
                             </tr>
-                        ))
-                    )}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {tournaments.length === 0 ? (
+                                <tr>
+                                    <td colSpan="11" style={{ textAlign: "center" }}>
+                                        Ez dago txapelketarik.
+                                    </td>
+                                </tr>
+                            ) : (
+                                tournaments.map((tournament) => (
+                                    <tr key={tournament.id}>
+                                        <td className="px-4 py-2">
+                                            <button
+                                                onClick={() => handleEdit(tournament.id)}
+                                                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                                            >
+                                                Edit
+                                            </button>
+                                        </td>
+                                        <td className="px-4 py-2">
+                                            <button
+                                                onClick={() => handleDelete(tournament.id)}
+                                                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                                            >
+                                                Ezabatu
+                                            </button>
+                                        </td>
+                                        <td className="px-4 py-2 text-center">{tournament.id}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.title}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.description}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.date}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.time}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.price}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.max_participants}</td>
+                                        <td className="px-4 py-2 text-center">{tournament.location_id}</td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <Footer />
         </div>
     );
