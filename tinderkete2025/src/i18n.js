@@ -136,7 +136,8 @@ i18n
               "prezioa" : "Price:",
               "jokalariak" : "Players:",
               "partaideak" : "Participants: ",
-              "apuntatu" : "Book in"
+              "apuntatu" : "Book in",
+              "noParticipants" : "No participants"
             },
             "register": {
               "header" : "Register",
@@ -318,7 +319,8 @@ i18n
               "prezioa" : "Prezioa:",
               "jokalariak" : "Jokalariak:",
               "partaideak" : "Partaideak: ",
-              "apuntatu" : "Izena eman"
+              "apuntatu" : "Izena eman",
+              "noParticipants" : "Ez dago parte-hartzailerik"
             },
             "register": {
               "header" : "Erregistratu",

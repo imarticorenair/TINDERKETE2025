@@ -54,7 +54,7 @@ function EventCard({
                 />
               ))
             ) : (
-              <p className="text-gray-600">{t('eventcard.sinParticipantes')}</p>
+              <p className="text-gray-600">{t('eventcard.noParticipants')}</p>
             )}
           </div>
         </div>
