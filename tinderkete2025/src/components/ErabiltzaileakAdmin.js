@@ -74,7 +74,7 @@ const ErabiltzaileakAdmin = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <NavbarAdmin />
-      <div className="container mx-auto px-4 py-8">
+      <div className="w-full mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Erabiltzaileak</h1>
         <div>
           <button
@@ -84,12 +84,12 @@ const ErabiltzaileakAdmin = () => {
             Sortu
           </button>
         </div>
-        <div className="overflow-x-auto shadow-md rounded-lg">
+        <div className="overflow-x-auto shadow-md rounded-lg w-full">
           <table className="min-w-full bg-white table-auto border-collapse">
             <thead>
               <tr className="bg-blue-500 text-white">
-                <th className="px-4 py-2">Editatu</th>
-                <th className="px-4 py-2">Ezabatu</th>
+                <th className="px-4 py-2"></th>
+                <th className="px-4 py-2"></th>
                 <th className="px-4 py-2">ID</th>
                 <th className="px-4 py-2">Izena</th>
                 <th className="px-4 py-2">Abizena</th>

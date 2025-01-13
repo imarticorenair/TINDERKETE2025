@@ -29,38 +29,40 @@ function ErabiltzaileaSortu() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log(formData);
-    }
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault(); 
-
-    //     const userData = {
-    //         name: formData.name,
-    //         surname: formData.surname,
-    //         email: formData.email,
-    //         password: formData.password,
-    //         hometown: formData.hometown,
-    //         telephone: formData.telephone,
-    //         birth_date: formData.birth_date,
-    //         admin: formData.admin,
-    //         img: formData.img,
-    //         aktibatua: formData.aktibatua,
-
-    //     };
-
-    //     console.log(userData);
-    //     try {
-    //         const response = await axios.post("http://localhost:8000/api/user", userData);
-
-    //         console.log("Response:", response.data);
-    //         setUserCreated(response.data.data);
-    //         setError(""); 
-    //     } catch (error) {
-    //         setError(error.response?.data?.message || "Error al enviar los datos a la API");
-    //         console.error("Error:", error.response?.data || error.message);
-    //     }
-    // };
+    
+        const formDataToSend = new FormData();
+    
+        // Añadir todos los campos al FormData
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("surname", formData.surname);
+        formDataToSend.append("email", formData.email);
+        formDataToSend.append("password", formData.password);
+        formDataToSend.append("hometown", formData.hometown);
+        formDataToSend.append("telephone", formData.telephone);
+        formDataToSend.append("birth_date", formData.birth_date);
+        formDataToSend.append("admin", formData.admin ? 1 : 0);
+        formDataToSend.append("aktibatua", formData.aktibatua ? 1 : 0);
+    
+        // Solo añadir el archivo si existe
+        if (formData.img) {
+            formDataToSend.append("img", formData.img);
+        }
+        try {
+            const response = await axios.post("http://localhost:8000/api/userStore", formDataToSend, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+    
+            console.log("Response:", response.data);
+            setUserCreated(response.data.data);
+            setError("");
+        } catch (error) {
+            setError(error.response?.data?.message || "Error al enviar los datos a la API");
+            console.error("Error:", error.response?.data || error.message);
+        }
+    };
+    
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -158,8 +160,9 @@ function ErabiltzaileaSortu() {
                                         name="admin"
                                         checked={formData.admin}
                                         onChange={(e) =>
-                                            setFormData({ ...formData, aktibatua: e.target.checked })
-                                        } className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                            setFormData({ ...formData, admin: e.target.checked })
+                                        }
+                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                                     />
                                 </div>
                                 <div className="col-span-2 md:col-span-1">
