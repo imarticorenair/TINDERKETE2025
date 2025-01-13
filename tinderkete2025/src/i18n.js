@@ -115,7 +115,8 @@ i18n
               "telefonoap" : "Write your phone number",
               "mezua" : "Message",
               "mezuap" : "Write your message",
-              "bidali" : "Send"
+              "bidali" : "Send",
+              "ongiBidali": "Your message has been successfully sent"
             },
             "produktCard": {
               "prezioa" : "Prize:",
@@ -300,7 +301,8 @@ i18n
               "telefonoap" : "Idatzi telefonoa",
               "mezua" : "Mezua",
               "mezuap" : "Idatzi mezu bat",
-              "bidali" : "Bidali"
+              "bidali" : "Bidali",
+              "ongiBidali": "Zure mezua ongi bidali da"
             },
             "produktCard": {
               "prezioa" : "Prezioa:",
