@@ -20,7 +20,7 @@ function Navbar() {
   const getActiveClass = (path) => {
     return location.pathname === path ? 'bg-amber-500 rounded-md text-white' : 'text-gray-300'; //Dagoen orrialdeko itxura
   };
-  const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Erabiltzailea admin baldin bada funtzionalitate bat geihago dago
+  //const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Erabiltzailea admin baldin bada funtzionalitate bat geihago dago
   const email = localStorage.getItem('email'); // Emaila berifikatzen du
 
   const toggleMenu = () => {
@@ -38,8 +38,9 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem('email');
-    localStorage.removeItem('isAdmin');
-    navigate('/'); // Hasierako horria
+    //localStorage.removeItem('isAdmin');
+    localStorage.removeItem("user");
+    navigate('/login'); // Hasierako horria
   };
 
   return (

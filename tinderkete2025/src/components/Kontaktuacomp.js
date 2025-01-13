@@ -4,24 +4,63 @@ import Footer from './Footer.js';
 import { useTranslation } from "react-i18next";
 
 function Kontaktu() {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
+  // Estado para los valores de los campos del formulario
   const [izen, setIzen] = useState('');
   const [email, setEmail] = useState('');
   const [telefonoa, setTelefonoa] = useState('');
   const [mezua, setMezua] = useState('');
 
-  const handleSubmit = (e) => {
+  // handleSubmit donde enviamos los datos al backend
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:', { izen, email, telefonoa, mezua });
+  
+    // Obtener el usuario del localStorage (si existe)
+    const user = JSON.parse(localStorage.getItem('user'));
+  
+    // Crear el payload con los datos del formulario
+    const payload = {
+      name: izen,       // Nombre del formulario
+      email,            // Correo del formulario
+      phone: telefonoa, // Teléfono del formulario
+      message: mezua,   // Mensaje del formulario
+    };
+  
+    // Si hay un usuario logueado, añadir el id al payload
+    if (user && user.id) {
+      payload.user_id = user.id;  // Solo añadir el id si el usuario está logueado
+    }
+  
+    console.log('Enviando datos:', payload); // Verifica los datos enviados
+  
+    try {
+      const response = await fetch('http://localhost:8000/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (response.ok) {
+        alert(t('kontaktua.ongiBidali'));
+      } else {
+        alert('Error al enviar el correo');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al enviar el correo');
+    }
   };
+  
 
   return (
     <div className="flex flex-col min-h-screen">
       <Nav />
 
       <div className="container mx-auto flex-grow px-4 py-8"> {/* Se asegura que el contenido crezca y el footer quede abajo */}
-      <div className="text-center mb-8">
+        <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-blue-600">{t('kontaktua.header')}</h1>
           <p className="text-xl mt-2 text-gray-600">{t('kontaktua.header2')}</p>
         </div>

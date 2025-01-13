@@ -43,7 +43,8 @@ i18n
               "emailRequired" : "You mast enter an email.",
               "emailInvalid" : "You must enter an '@' sign at the email address.",
               "loginTitle": "Login",
-              "loginButton": "Enter"
+              "loginButton": "Enter",
+              "accountNotActivated": "The user does not exist"
               
             },
             "footer":{
@@ -114,7 +115,8 @@ i18n
               "telefonoap" : "Write your phone number",
               "mezua" : "Message",
               "mezuap" : "Write your message",
-              "bidali" : "Send"
+              "bidali" : "Send",
+              "ongiBidali": "Your message has been successfully sent"
             },
             "produktCard": {
               "prezioa" : "Prize:",
@@ -227,7 +229,9 @@ i18n
               "emailRequired" : "Posta elektroniko bat sartu behar duzu.",
               "emailInvalid" : "Posta elektronikoaren helbidean '@' zeinu bat sartu behar duzu.",
               "loginTitle": "Login",
-              "loginButton": "Sartu"
+              "loginButton": "Sartu",
+              "accountNotActivated": "Erabiltzailea ez da existitzen",
+              
             },
             "footer":{
               "ref" : "KONTAKTUA",
@@ -297,7 +301,8 @@ i18n
               "telefonoap" : "Idatzi telefonoa",
               "mezua" : "Mezua",
               "mezuap" : "Idatzi mezu bat",
-              "bidali" : "Bidali"
+              "bidali" : "Bidali",
+              "ongiBidali": "Zure mezua ongi bidali da"
             },
             "produktCard": {
               "prezioa" : "Prezioa:",
