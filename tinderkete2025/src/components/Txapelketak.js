@@ -37,6 +37,7 @@ const Txapelketak = () => {
         }
         const result = await response.json(); // Convierte la respuesta a JSON
         const formattedEvents = result.data.map(tournament => ({
+          id: tournament.id,
           title: tournament.title, // Ajustar según la API
           location: tournament.location.name,
           date: tournament.date,
@@ -45,8 +46,8 @@ const Txapelketak = () => {
           participants: tournament.participants_count || 0,
           maxParticipants: tournament.max_participants || 0,
           price: tournament.price || 0,
-          image: getImagePath(tournament.location.img || "comingsoon.png"),
-          participantImages: tournament.users.map(user => getImagePath(user.img)), // Si tienes imágenes de participantes
+          image: tournament.location.img || "comingsoon.png",
+          participantImages: tournament.users.map(user => user.img), // Si tienes imágenes de participantes
         }));
         setEvents(formattedEvents); // Actualiza el estado con los eventos
         setLoading(false);
