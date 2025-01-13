@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 
 function EventCard({
+  id,
   title,
   location,
   date,
@@ -13,9 +14,37 @@ function EventCard({
   maxParticipants,
   image,
   participantImages,
-  onButtonClick, // Nueva prop para manejar clics en el botón
 }) {
   const { t } = useTranslation();
+  const handleButtonClick = async (tournamentId) => {
+    console.log(tournamentId);
+    try {
+      const token = localStorage.getItem("token"); // Obtén el token del almacenamiento
+      if (!token) {
+        throw new Error("Usuario no autenticado");
+      }
+
+      const response = await fetch(`http://localhost:8000/api/tournaments/${tournamentId}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Agrega el token al encabezado
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error al registrarse");
+      }
+
+      const data = await response.json();
+      alert(`Registro exitoso: ${data.message}`);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error al registrarse:", error);
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="card shadow-lg rounded-lg overflow-hidden">
@@ -62,7 +91,7 @@ function EventCard({
         {/* Botón de inscripción */}
         <button
           className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
-          onClick={onButtonClick} // Llamamos a la función pasada como prop
+          onClick={() => handleButtonClick(id)} // Llamamos a la función pasada como prop
         >
           {t('eventcard.apuntatu')}
         </button>
