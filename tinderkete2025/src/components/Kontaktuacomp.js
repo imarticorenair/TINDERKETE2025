@@ -11,9 +11,44 @@ function Kontaktu() {
   const [telefonoa, setTelefonoa] = useState('');
   const [mezua, setMezua] = useState('');
 
-  const handleSubmit = (e) => {
+  // handleSubmit donde enviamos los datos al backend
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:', { izen, email, telefonoa, mezua });
+
+    // Obtener el usuario del localStorage
+    const user = JSON.parse(localStorage.getItem('user')); // Asegúrate de que la clave sea correcta
+
+    if (!user || !user.id) {
+      alert('No se pudo obtener el usuario del localStorage');
+      return;
+    }
+
+    const payload = {
+      id: user.id, // Extraer el ID del usuario
+      name: izen,  // Otros campos del formulario
+      email,
+      message: mezua,
+    };
+
+    try {
+      const response = await fetch('http://localhost:8000/api/send-email', { // Asegúrate de que la URL es correcta
+        //http://localhost:8000/api/getUser/${id}`
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        alert('Correo enviado correctamente');
+      } else {
+        alert('Error al enviar el correo');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al enviar el correo');
+    }
   };
 
   return (
