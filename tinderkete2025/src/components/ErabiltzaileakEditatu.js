@@ -1,28 +1,25 @@
-// Resto de las importaciones
 import React, { useState, useEffect } from "react";
-import EventCard from "./EventCard";
-import NavbarAdmin from "./NavbarAdmin.js";
-import Footer from "./Footer.js";
+import NavbarAdmin from "./NavbarAdmin";
+import Footer from "./Footer";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 function ErabiltzaileaEditatu() {
-  const { id } = useParams(); // Obtener el ID del torneo desde la URL
-  const navigate = useNavigate(); // Para redirigir después de actualizar
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
-    argazkia: "",
-    herria: "",
+    img: null,
+    hometown: "",
     telephone: "",
-    jaiotze_data: "",
+    birth_date: "",
     admin: false,
   });
-  const [error, setError] = useState(""); // Para manejar errores
-  const [locations, setLocations] = useState([]); // Lista de ubicaciones
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  // Obtener los datos iniciales del torneo
   useEffect(() => {
     const fetchErabiltzaile = async () => {
       try {
@@ -30,14 +27,20 @@ function ErabiltzaileaEditatu() {
           `http://localhost:8000/api/getUser/${id}`
         );
         const Erabiltzaile = response.data.data;
+
+        // Format the birth_date to "yyyy-MM-dd"
+        const formattedBirthDate = Erabiltzaile.birth_date
+          ? new Date(Erabiltzaile.birth_date).toISOString().split("T")[0]
+          : "";
+
         setFormData({
           name: Erabiltzaile.name,
           surname: Erabiltzaile.surname,
           email: Erabiltzaile.email,
-          argazkia: Erabiltzaile.img,
+          img: Erabiltzaile.img,
           hometown: Erabiltzaile.hometown,
           telephone: Erabiltzaile.telephone,
-          birth_date: Erabiltzaile.birth_date,
+          birth_date: formattedBirthDate, // Use the formatted date here
           admin: Erabiltzaile.admin,
         });
       } catch (err) {
@@ -50,37 +53,38 @@ function ErabiltzaileaEditatu() {
   }, [id]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, img: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedErabiltzaile = {
-        name: formData.name,
-        surname: formData.surname,
-        email: formData.email,
-        argazkia: formData.argazkia,
-        hometown: formData.hometown,
-        telephone: formData.telephone,
-        birth_date: formData.birth_date,
-        admin: formData.admin,
-      };
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null) {
+        formDataToSend.append(key, value);
+      }
+    });
 
     try {
-      await axios.put(
-        `http://localhost:8000/api/user/${id}`,
-        formData
-        
-      );
-      alert("Erabiltzailea ongi eguneratu da!")
+      await axios.post(`http://localhost:8000/api/user/${id}`, formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      setSuccessMessage("Erabiltzailea eguneratu da!");
+      setError("");
+      setTimeout(() => navigate("/erabiltzaileakAdmin"), 2000); // Redirigir después de 2 segundos
     } catch (err) {
-      console.error("Error updating Erabiltzaile:", err);
-      setError(err.response?.data?.message || "Error al actualizar el torneo.");
+      console.error("Error updating user:", err);
+      setError(err.response?.data?.message || "Errorea erabiltzailea eguneratzerakoan.");
     }
   };
 
@@ -89,12 +93,9 @@ function ErabiltzaileaEditatu() {
       <NavbarAdmin />
       <div className="container mx-auto flex-grow px-8 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600">
-            Erabiltzailea Editatu
-          </h1>
+          <h1 className="text-3xl font-bold text-blue-600">Erabiltzailea Editatu</h1>
         </div>
         <div className="flex flex-wrap lg:flex-nowrap -mx-4">
-          {/* Formulario */}
           <div className="w-full lg:w-2/3 px-4 mb-8">
             <div className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden p-6 h-full">
               <form
@@ -108,7 +109,6 @@ function ErabiltzaileaEditatu() {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Aldatu name"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
@@ -119,29 +119,25 @@ function ErabiltzaileaEditatu() {
                     name="surname"
                     value={formData.surname}
                     onChange={handleInputChange}
-                    placeholder="Aldatu abizena"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
                 <div className="col-span-2 md:col-span-1">
                   <label className="block mb-1 text-gray-700">Email</label>
                   <input
-                    type="text"
+                    type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Aldatu email-a"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
                 <div className="col-span-2 md:col-span-1">
-                  <label className="block mb-1 text-gray-700">Argazkia</label>
+                  <label className="block mb-1 text-gray-700">Irudia</label>
                   <input
-                    type="text"
-                    name="argazkia"
-                    value={formData.argazkia}
-                    onChange={handleInputChange}
-                    placeholder="Aldatu argazkia"
+                    type="file"
+                    name="img"
+                    onChange={handleFileChange}
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
@@ -152,7 +148,6 @@ function ErabiltzaileaEditatu() {
                     name="hometown"
                     value={formData.hometown}
                     onChange={handleInputChange}
-                    placeholder="Aldatu herria"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
@@ -163,33 +158,28 @@ function ErabiltzaileaEditatu() {
                     name="telephone"
                     value={formData.telephone}
                     onChange={handleInputChange}
-                    placeholder="Aldatu Telefonoa"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
                 <div className="col-span-2 md:col-span-1">
-                  <label className="block mb-1 text-gray-700">
-                    Jaiotze data
-                  </label>
+                  <label className="block mb-1 text-gray-700">Jaiotze-data</label>
                   <input
-                    type="text"
+                    type="date"
                     name="birth_date"
                     value={formData.birth_date}
                     onChange={handleInputChange}
-                    placeholder="Aldatu jaiotza-data"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
                 <div className="col-span-2 md:col-span-1">
-                  <label className="block mb-1 text-gray-700">
-                    Admin
-                  </label>
+                  <label className="block mb-1 text-gray-700">Admin</label>
                   <input
-                    type="text"
+                    type="checkbox"
                     name="admin"
-                    value={formData.admin}
-                    onChange={handleInputChange}
-                    placeholder="Aldatu admin"
+                    checked={formData.admin}
+                    onChange={(e) =>
+                      setFormData({ ...formData, admin: e.target.checked })
+                    }
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
@@ -200,7 +190,8 @@ function ErabiltzaileaEditatu() {
                   Eguneratu
                 </button>
               </form>
-              {error && (<div className="mt-4 text-center text-red-500">{error}</div>)}
+              {successMessage && <div className="mt-4 text-center text-green-500">{successMessage}</div>}
+              {error && <div className="mt-4 text-center text-red-500">{error}</div>}
             </div>
           </div>
         </div>
