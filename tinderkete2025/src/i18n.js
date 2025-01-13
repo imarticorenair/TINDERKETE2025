@@ -199,6 +199,9 @@ i18n
               "iframe" : "Iframe",
               "url" : "URL",
               "bidali" : "Submit"
+            },
+            "perfila": {
+              "errorea" : "Error editing profile data"
             }
           }
         },
@@ -383,6 +386,9 @@ i18n
               "iframe" : "Iframe",
               "url" : "URL",
               "bidali" : "Bidali"
+            },
+            "perfila": {
+              "errorea" : "Errore bat gertatu da profilaren datuak editatzean"
             }
           }
         }

@@ -89,7 +89,7 @@ const Perfila = () => {
       }
     } catch (error) {
       console.error('Error al actualizar los datos:', error);
-      alert('Hubo un error al actualizar el perfil');
+      alert(t('perfila.errorea'));
     }
   };
 
