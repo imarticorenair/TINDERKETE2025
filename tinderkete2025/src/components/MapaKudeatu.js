@@ -43,7 +43,7 @@ function MapaKudeatu() {
     };
 
     const handleEdit = (id) => {
-        navigate(`/mapaEditatu/${id}`);
+        navigate(`/mapaeditatu/${id}`);
     };
 
     const handleDelete = async (id) => {

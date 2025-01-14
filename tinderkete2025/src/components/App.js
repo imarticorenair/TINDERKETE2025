@@ -64,7 +64,7 @@ function App() {
         <Route path="/mapalistasortu" element={<MapaListaSortu />} />  
         <Route path="/txapelketakkudeatu" element={<Txapelketakkudeatu />} /> 
         <Route path="/mapakudeatu" element={<MapaKudeatu />} /> 
-        <Route path="/mapaeditatu" element={<MapaEditatu />} /> 
+        <Route path="/mapaeditatu/:id" element={<MapaEditatu />} /> 
       </Routes>
     </Router>
   );
