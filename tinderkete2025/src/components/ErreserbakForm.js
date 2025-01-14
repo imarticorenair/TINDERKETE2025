@@ -3,20 +3,28 @@ import { useTranslation } from "react-i18next";
 import Nav from './Navbar.js';
 import Footer from './Footer.js';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Erreserbak() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showLoginMessage, setShowLoginMessage] = useState(false);
   const [locations, setLocations] = useState([]);
-  const [formData, setFormData] = useState({ location: "", date: "", time: "" });
+  const [formData, setFormData] = useState({
+    date: "",
+    time: "", // Mantener solo la hora sin los minutos
+    location_id: "",
+  });
+  const [reservationCreated, setReservationCreated] = useState(null);
+  const [error, setError] = useState("");
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
 
   useEffect(() => {
-    // Check user login status
-    const userEmail = localStorage.getItem("email");
-    setIsLoggedIn(!!userEmail);
+    // Verificar si el usuario está autenticado
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setShowLoginMessage(true);
+    }
 
     // Fetch locations
     const fetchLocations = async () => {
@@ -37,17 +45,46 @@ function Erreserbak() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "time") {
+      // Asegurarse de que los minutos sean siempre 00
+      const timeWithZeroMinutes = value.slice(0, 2) + ":00"; // Ajustar minutos a 00
+      setFormData((prev) => ({ ...prev, [name]: timeWithZeroMinutes }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isLoggedIn) {
-      setShowLoginMessage(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
       return;
     }
-    // TODO: Submit form logic
-    console.log('Submitting form:', formData);
+
+    if (!formData.date || !formData.time || !formData.location_id) {
+      setError("Por favor, complete todos los campos.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/reservations", formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Si la reserva es creada correctamente
+      setReservationCreated(response.data.data);
+      setFormData({ date: "", time: "", location_id: "" });
+      setError(""); // Limpiar errores
+    } catch (error) {
+      // Manejo de errores
+      setError(error.response?.data?.message || "Error al enviar los datos a la API");
+      console.error("Error:", error.response?.data || error.message);
+    }
   };
 
   const handleLoginRedirect = () => navigate("/login");
@@ -61,27 +98,26 @@ function Erreserbak() {
           <p className="text-xl mt-2 text-gray-600">{t('erreserbak.description')}</p>
         </div>
         <div className="flex flex-wrap -mx-4">
-          {/* Form */}
+          {/* Formulario */}
           <div className="w-full md:w-1/3 px-4 mb-8">
             <div className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden p-6">
               <h5 className="text-xl font-bold mb-6 text-center">{t('erreserbak.header')}</h5>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block mb-1 text-gray-700">{t('erreserbak.location')}</label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
+                  <select
+                    name="location_id"
+                    value={formData.location_id}
                     onChange={handleInputChange}
-                    placeholder="Sartu kokalekua"
-                    list="locations-list"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  />
-                  <datalist id="locations-list">
+                  >
+                    <option value="" disabled>---</option>
                     {locations.map((location) => (
-                      <option key={location.id} value={location.name} />
+                      <option key={location.id} value={location.id}>
+                        {location.name}
+                      </option>
                     ))}
-                  </datalist>
+                  </select>
                 </div>
                 <div>
                   <label className="block mb-1 text-gray-700">{t('erreserbak.date')}</label>
@@ -110,6 +146,8 @@ function Erreserbak() {
                   {t('erreserbak.submit')}
                 </button>
               </form>
+              {error && <p style={{ color: "red" }}>Error: {error}</p>}
+
               {showLoginMessage && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
                   <div className="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -118,18 +156,18 @@ function Erreserbak() {
                       onClick={handleLoginRedirect}
                       className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700"
                     >
-                      Login
+                      {t('erreserbak.login')}
                     </button>
                   </div>
                 </div>
               )}
             </div>
           </div>
-          {/* Reservations */}
+          {/* Reservas */}
           <div className="w-full md:w-2/3 px-4">
             <div className="bg-white shadow-md rounded-lg overflow-hidden p-6 border border-gray-200">
               <h5 className="text-xl font-bold mb-6 text-center">{t('erreserbak.yourReservations')}</h5>
-              {/* TODO: Render user reservations here */}
+              {/* Aquí puedes renderizar las reservas del usuario */}
             </div>
           </div>
         </div>
