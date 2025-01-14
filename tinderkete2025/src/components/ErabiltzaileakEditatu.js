@@ -75,7 +75,7 @@ function ErabiltzaileaEditatu() {
     });
 
     try {
-      await axios.post(`http://localhost:8000/api/user/${id}`, formDataToSend, {
+      await axios.put(`http://localhost:8000/api/user/${id}`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
