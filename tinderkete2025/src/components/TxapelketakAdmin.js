@@ -70,14 +70,14 @@ const TxapelketakAdmin = () => {
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Txapelketak</h1>
                 <div>
-                    <button
+                <button
                         onClick={() => handleSortu()}
-                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                        className="flex justify-center mx-auto bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                     >
                         Sortu
                     </button>
                 </div>
-                <div className="overflow-x-auto shadow-md rounded-lg">
+                <div className="overflow-x-auto shadow-md rounded-lg my-4">
                     <table className="min-w-full bg-white table-auto border-collapse">
                         <thead>
                             <tr className="bg-blue-500 text-white">

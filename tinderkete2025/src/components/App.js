@@ -24,6 +24,8 @@ import Txapelketakkudeatu from './TxapelketakKudeatu';
 import NavbarAdmin from './NavbarAdmin';
 import HasieraAdmin from './HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
+import MapaKudeatu from "./MapaKudeatu";
+import MapaEditatu from "./MapaEditatu";
 
 
 
@@ -61,6 +63,8 @@ function App() {
         <Route path="/hasieraadmin" element={<HasieraAdmin />} />  
         <Route path="/mapalistasortu" element={<MapaListaSortu />} />  
         <Route path="/txapelketakkudeatu" element={<Txapelketakkudeatu />} /> 
+        <Route path="/mapakudeatu" element={<MapaKudeatu />} /> 
+        <Route path="/mapaeditatu" element={<MapaEditatu />} /> 
       </Routes>
     </Router>
   );

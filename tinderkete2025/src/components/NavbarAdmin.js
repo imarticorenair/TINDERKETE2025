@@ -110,15 +110,15 @@ function Navbar() {
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
                   to="/TxapelketakAdmin"
                   onClick={closeMenu}
-                >Txapelketak
+                >Txapelketak Kudeatu
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass('/MapaLista')}`}>
                 <Link
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                  to="/mapalistasortu"
+                  to="/mapakudeatu"
                   onClick={closeMenu}
-                >Mapak
+                >Mapak Kudeatu
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass('/ErabiltzaileakAdmin')}`}>
@@ -126,7 +126,7 @@ function Navbar() {
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
                   to="/erabiltzaileakAdmin"
                   onClick={closeMenu}
-                >Erabiltzaileak
+                >Erabiltzaileak Kudeatu
                 </Link>
               </li>
             </ul>
@@ -143,7 +143,7 @@ function Navbar() {
                   to="/txapelketasortu"
                   onClick={closeMenu}
                 >
-                  {t('nav.navadmin1')}
+                  Txapelketak Kudeatu
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass('/MapaLista')}`}>
@@ -152,7 +152,7 @@ function Navbar() {
                   to="/mapalistasortu"
                   onClick={closeMenu}
                 >
-                  {t('nav.navadmin2')}
+                  Mapak Kudeatu
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass('/MapaLista')}`}>
@@ -161,7 +161,7 @@ function Navbar() {
                   to="/erabiltzaileakAdmin"
                   onClick={closeMenu}
                 >
-                  {t('nav.navadmin3')}
+                  Erabiltzaileak Kudeatu
                 </Link>
               </li>
               <li>
