@@ -40,7 +40,7 @@ function Navbar() {
     localStorage.removeItem('email');
     //localStorage.removeItem('isAdmin');
     localStorage.removeItem("user");
-    navigate('/login'); // Hasierako horria
+    navigate('/'); // Hasierako horria
   };
 
   return (
