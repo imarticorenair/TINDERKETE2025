@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PerfilaCard({ image, onImageChange }) {
+function PerfilaCard({ img, onImageChange }) {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -14,7 +14,7 @@ function PerfilaCard({ image, onImageChange }) {
 
   return (
     <div className="card shadow-sm">
-      <img src={image} className="card-img-top product-img" alt="Perfil" />
+      <img src={img} className="card-img-top product-img" alt="Perfil" />
       <div className="card-body">
         <label htmlFor="image-upload" className="btn btn-primary w-full">
           Argazkia aldatu
