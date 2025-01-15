@@ -35,22 +35,26 @@ function PartidoakCard() {
 
   const handleJoinClick = (reservation) => {
     const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    axios.post(
-      `http://localhost:8000/api/reservations/${reservation.id}`,
-      { user_id: userId }, // Enviar el user_id en el cuerpo de la solicitud
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    if (!token) {
+      navigate("/login"); // Redirigir al login si no hay token
+      return;
+    }
+    {
+      axios.post(
+        `http://localhost:8000/api/reservation/${reservation.id}/addUser`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
         }
-      }
-    )
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error("Error al unirse a la reserva:", error.response?.data || error.message);
-      });
+      )
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error("Error al unirse a la reserva:", error.response?.data || error.message);
+        });
+    }
   };
 
 
