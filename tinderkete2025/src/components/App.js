@@ -26,6 +26,7 @@ import HasieraAdmin from './HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
 import MapaKudeatu from "./MapaKudeatu";
 import MapaEditatu from "./MapaEditatu";
+import AirearenKalitatea from "./AirearenKalitatea";
 
 
 
@@ -65,6 +66,7 @@ function App() {
         <Route path="/txapelketakkudeatu" element={<Txapelketakkudeatu />} /> 
         <Route path="/mapakudeatu" element={<MapaKudeatu />} /> 
         <Route path="/mapaeditatu/:id" element={<MapaEditatu />} /> 
+        <Route path="/airearenKalitatea" element={<AirearenKalitatea />} /> 
       </Routes>
     </Router>
   );

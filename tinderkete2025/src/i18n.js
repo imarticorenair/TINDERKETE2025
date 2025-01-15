@@ -67,11 +67,24 @@ i18n
               "nav5": "Maps",
               "nav6": "Products",
               "nav7": "Contact",
+              "nav8": "Air quality",
               "sidebar1" : "Profile",
               "sidebar2" : "Chat",
               "navadmin1" : "Create Tournaments",
               "navadmin3" : "Users",
               "navadmin2" : "Create New Map"        
+            },
+            "airearenKalitatea": {
+                "titulua" : "Air quality by province",
+                "county" : "County",
+                "start_date": "Start Date",
+                "end_date" : "End date",
+                "language": "Language",
+                "parametroa": "Parameter",
+                "balorea": "Value",
+                "unitatea": "Unit",
+                "aire_kalitatea": "Air quality",
+                "fetch_data" : "Send"      
             },
             "partidak": {
               "header": "Public and private matches",
@@ -256,11 +269,25 @@ i18n
               "nav5": "Mapa",
               "nav6": "Produktuak",
               "nav7": "Kontaktua",
+              "nav8": "Airearen kalitatea",
               "sidebar1" : "Profila",
               "sidebar2" : "Txat-a",
               "navadmin1" : "Txapelketak Kudeatu",
               "navadmin3" : "Erabiltzaileak Kudeatu",
               "navadmin2" : "Mapak kudeatu"   
+            },
+            "airearenKalitatea": {
+                "titulua" : "Airearen kalitatea probintziko",
+                "county" : "Probintzia",
+                "start_date": "Hasiera data",
+                "end_date" : "Bukaera data",
+                "language": "Hizkuntza",
+                "parametroa": "Parametroa",
+                "balorea": "Balorea",
+                "unitatea": "Unitatea",
+                "aire_kalitatea": "Aire kalitatea",
+                "fetch_data" : "Bidali"
+                  
             },
             "partidak": {
               "header": "Partida publiko eta pribatuak",
