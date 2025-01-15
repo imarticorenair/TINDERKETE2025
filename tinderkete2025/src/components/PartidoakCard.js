@@ -10,20 +10,17 @@ function PartidoakCard() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario está logueado
-  const [showLoginMessage, setShowLoginMessage] = useState(false); // Estado para mostrar el mensaje de login
-  const [showPopup, setShowPopup] = useState(false); // Estado para mostrar el pop-up
-  const [reservations, setReservations] = useState([]); // Estado para las reservas
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [reservations, setReservations] = useState([]);
+  const [responseMessage, setResponseMessage] = useState(''); // Nuevo estado para el mensaje
 
   useEffect(() => {
-    // Verificar si el usuario está logueado
     const userEmail = localStorage.getItem("email");
     if (userEmail) {
       setIsLoggedIn(true);
     }
 
-    // Obtener reservas desde la API
-    axios.get('http://localhost:8000/api/reservations') // Reemplaza con tu endpoint
+    axios.get('http://localhost:8000/api/reservations')
       .then(response => {
         setReservations(response.data);
         console.log(response.data);
@@ -36,12 +33,10 @@ function PartidoakCard() {
   const handleJoinClick = (reservation) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login"); // Redirigir al login si no hay token
+      navigate("/login");
       return;
-    }
-    {
-      axios.post(
-        `http://localhost:8000/api/reservation/${reservation.id}/addUser`,
+    } else {
+      axios.post(`http://localhost:8000/api/matches/${reservation.id}/users`, {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,25 +45,15 @@ function PartidoakCard() {
       )
         .then(response => {
           console.log(response.data);
+          setResponseMessage(response.data.message || t('partidak.success')); // Actualizar con el mensaje de éxito
+          navigate("/erreserbak");
         })
         .catch(error => {
           console.error("Error al unirse a la reserva:", error.response?.data || error.message);
+          setResponseMessage(error.response?.data?.message || t('partidak.error')); // Mensaje de error
+          alert(error.response.data.message);
         });
     }
-  };
-
-
-  const handleLoginRedirect = () => {
-    navigate("/login"); // Redirigir al login
-  };
-
-  const closePopup = () => {
-    setShowPopup(false); // Cerrar el pop-up
-  };
-
-  const handleCloseAndNavigate = () => {
-    closePopup(); // Cierra el pop-up
-    navigate("/erreserbak"); // Redirige a la página de registro
   };
 
   return (
@@ -102,7 +87,6 @@ function PartidoakCard() {
 
               <hr className="my-2 border-gray-300 mx-auto" />
 
-              {/* Jugadores y espacios libres */}
               <div className="flex items-center">
                 {reservation.players.map((player, idx) => (
                   <div
@@ -110,9 +94,9 @@ function PartidoakCard() {
                     className="flex flex-col items-center mr-2 text-center mx-auto"
                   >
                     <img
-                      src={`http://localhost:8000/${player.image || libre}`} // Ruta completa para la imagen
+                      src={`http://localhost:8000/${player.image || libre}`}
                       alt={player.name || "Libre"}
-                      className="w-16 h-16 rounded-full mb-1 object-cover" // Ajustar tamaño en pantallas pequeñas y medianas
+                      className="w-16 h-16 rounded-full mb-1 object-cover"
                     />
                     <span className="text-xs text-gray-700">{player.name || "LIBRE"}</span>
                   </div>
@@ -141,7 +125,6 @@ function PartidoakCard() {
                   </p>
                 </div>
               </div>
-
               <button
                 onClick={() => handleJoinClick(reservation)}
                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"

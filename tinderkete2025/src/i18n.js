@@ -34,6 +34,7 @@ i18n
               "private": "Private",
               "notLoggedInMessage" : "Not logged in? Check in now!",
               "price": "Price",
+              "noReservations": "No reservations",
             },
             "login":{
               "password" : "Password",
@@ -220,6 +221,8 @@ i18n
               "private": "Pribatua",
               "notLoggedInMessage" : "Ez zaude logeatuta? Logeatu orain!",
               "price": "Prezioa",
+              "noReservations": "Ez duzu erreserbarik",
+
             },
             "login":{
               "email" : "Emaila",
