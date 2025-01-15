@@ -16,6 +16,7 @@ function ErabiltzaileaEditatu() {
     telephone: "",
     birth_date: "",
     admin: false,
+    aktibatua: false,
   });
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -42,6 +43,7 @@ function ErabiltzaileaEditatu() {
           telephone: Erabiltzaile.telephone,
           birth_date: formattedBirthDate, // Use the formatted date here
           admin: Erabiltzaile.admin,
+          aktibatua: Erabiltzaile.aktibatua,
         });
       } catch (err) {
         console.error("Error fetching Erabiltzaile:", err);
@@ -182,6 +184,18 @@ function ErabiltzaileaEditatu() {
                     }
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
+                  <div className="col-span-2 md:col-span-1">
+                    <label className="block mb-1 text-gray-700">Aktibatuta</label>
+                    <input
+                      type="checkbox"
+                      name="aktibatua"
+                      checked={formData.aktibatua}
+                      onChange={(e) =>
+                        setFormData({ ...formData, aktibatua: e.target.checked })
+                      }
+                      className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                  </div>
                 </div>
                 <button
                   type="submit"
