@@ -33,6 +33,7 @@ i18n
               "public": "Public",
               "private": "Private",
               "notLoggedInMessage" : "Not logged in? Check in now!",
+              "price": "Price",
             },
             "login":{
               "password" : "Password",
@@ -83,7 +84,8 @@ i18n
               "minutu":"minutes",
               "apuntatu": "Sign up",
               "popupHeader" : "Sign up for the game!",
-              "itxi" : "Close"
+              "itxi" : "Close",
+              "libre" : "Free",
             },    
             "gutaz": {
               "main" : "Our aim is to encourage the practice of Basque sports by young people. Play on the fronton and trinquets easily, creating open or closed groups and booking places. Meet the big fans and start participating!",
@@ -217,6 +219,7 @@ i18n
               "public": "Publikoa",
               "private": "Pribatua",
               "notLoggedInMessage" : "Ez zaude logeatuta? Logeatu orain!",
+              "price": "Prezioa",
             },
             "login":{
               "email" : "Emaila",
@@ -268,7 +271,8 @@ i18n
               "apuntatu": "Apuntatu",
               "trinketeak":"Trinketeak",  
               "popupHeader" : "Partidan izena eman dezu!",
-              "itxi" : "Itxi"      
+              "itxi" : "Itxi",
+              "libre" : "Libre",
             },
             "gutaz": {
               "main" : "Gazteek euskal kirolak praktikatzearen ohitura sustatzea da gure helburua. Jolastu frontoian eta trinketean erraz, talde irekiak edo itxiak sortuz eta tokiak erreserbatuz. Ezagutu zale amorratuak eta hasi parte hartzen!",

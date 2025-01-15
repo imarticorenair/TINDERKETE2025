@@ -18,6 +18,7 @@ function Erreserbak() {
   const [reservationCreated, setReservationCreated] = useState(null);
   const [error, setError] = useState("");
   const [showLoginMessage, setShowLoginMessage] = useState(false);
+  const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
     // Verificar si el usuario está autenticado
@@ -40,8 +41,27 @@ function Erreserbak() {
         console.error('Error fetching locations:', error);
       }
     };
+    const fetchReservationUser = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/reservation/reservationUser', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const result = response.data;
+        if (result.success && Array.isArray(result.data)) {
+          setReservations(result.data); // Guardar las reservas en el estado
+        } else {
+          console.error('Unexpected API response:', result);
+        }
+      } catch (error) {
+        console.error('Error fetching reservations:', error);
+      }
+    };
     fetchLocations();
+    fetchReservationUser();
   }, []);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -167,7 +187,23 @@ function Erreserbak() {
           <div className="w-full md:w-2/3 px-4">
             <div className="bg-white shadow-md rounded-lg overflow-hidden p-6 border border-gray-200">
               <h5 className="text-xl font-bold mb-6 text-center">{t('erreserbak.yourReservations')}</h5>
-              {/* Aquí puedes renderizar las reservas del usuario */}
+              {reservations.length > 0 ? (
+                <ul>
+                  {reservations.map((reservation) => (
+                    <li key={reservation.id} className="mb-4 ">
+                      <hr></hr>
+                      <div className="flex justify-between">
+                        <p><strong>{t('erreserbak.location')}:</strong> {reservation.location.name}</p>
+                        <p><strong>{t('erreserbak.date')}:</strong> {reservation.date}</p>
+                        <p><strong>{t('erreserbak.time')}:</strong>  {reservation.time.slice(0, 5)}</p>
+                        <p><strong>{t('erreserbak.price')}:</strong> {reservation.price}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>{t('erreserbak.noReservations')}</p>
+              )}
             </div>
           </div>
         </div>
