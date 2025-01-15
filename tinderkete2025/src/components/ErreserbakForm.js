@@ -100,6 +100,7 @@ function Erreserbak() {
       setReservationCreated(response.data.data);
       setFormData({ date: "", time: "", location_id: "" });
       setError(""); // Limpiar errores
+      window.location.reload();
     } catch (error) {
       // Manejo de errores
       setError(error.response?.data?.message || "Error al enviar los datos a la API");
