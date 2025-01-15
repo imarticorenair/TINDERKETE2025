@@ -235,6 +235,15 @@ function Navbar() {
                   {t("nav.nav7")}
                 </Link>
               </li>
+              <li className={`nav-item ${getActiveClass("/airearenKalitatea")}`}>
+                <Link
+                  className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
+                  to="/airearenKalitatea"
+                  onClick={closeMenu}
+                >
+                  {t("nav.nav8")}
+                </Link>
+              </li>
               <li>
                 <div className="text-center my-4 items-center">
                   <select
@@ -319,6 +328,15 @@ function Navbar() {
                   onClick={closeMenu}
                 >
                   {t("nav.nav7")}
+                </Link>
+              </li>
+              <li className={`nav-item ${getActiveClass("/airearenKalitatea")}`}>
+                <Link
+                  className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
+                  to="/airearenKalitatea"
+                  onClick={closeMenu}
+                >
+                  {t("nav.nav8")}
                 </Link>
               </li>
               <li>
