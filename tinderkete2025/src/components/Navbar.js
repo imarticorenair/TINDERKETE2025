@@ -137,7 +137,7 @@ function Navbar() {
 
       {/* Navbar */}
       <nav className="bg-gray-800 text-white shadow-lg">
-        <div className="container mx-auto flex flex-wrap justify-center items-center p-4">
+        <div className="container mx-auto flex  justify-center items-center p-4">
           {/* Logo */}
           <Link className="flex items-center" to="/">
             <img
