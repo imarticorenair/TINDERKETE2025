@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import logoImage from '../images/1361728.png';
@@ -7,6 +7,8 @@ import logotxuri from '../images/perfiltxuri.png';
 import logout from '../images/logout.png';
 import { useTranslation } from "react-i18next";
 import ane from '../images/ane.jpg';
+import axios from "axios";
+
 
 function Navbar() {
   const { t } = useTranslation();
@@ -14,7 +16,17 @@ function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false); // Estado del sidebar
   const location = useLocation(); // Para saber la ruta activa
   const navigate = useNavigate(); // Para redirigir al hacer logout
-
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    img: null,
+    hometown: "",
+    telephone: "",
+    birth_date: "",
+    admin: false,
+    aktibatua: false,
+  });
 
 
   const getActiveClass = (path) => {
@@ -37,12 +49,51 @@ function Navbar() {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem('email');
-    //localStorage.removeItem('isAdmin');
-    localStorage.removeItem("user");
-    navigate('/'); // Hasierako horria
+    localStorage.removeItem("email");
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("user"); // Eliminar el usuario del localStorage
+    localStorage.removeItem("token"); // Eliminar el usuario del localStorage
+    navigate('/');
   };
 
+  // useEffect hizkuntza aldatzeko
+  useEffect(() => {
+    const fetchErabiltzaile = async () => {
+      try {
+        const userId = JSON.parse(localStorage.getItem("user")); // Parse the JSON string into an object
+        const id = userId.id;
+        const response = await axios.get(
+          `http://localhost:8000/api/getUser/${id}`
+        );
+        const Erabiltzaile = response.data.data;
+
+        // Format the birth_date to "yyyy-MM-dd"
+        const formattedBirthDate = Erabiltzaile.birth_date
+          ? new Date(Erabiltzaile.birth_date).toISOString().split("T")[0]
+          : "";
+
+        setFormData({
+          name: Erabiltzaile.name,
+          surname: Erabiltzaile.surname,
+          email: Erabiltzaile.email,
+          img: Erabiltzaile.img,
+          hometown: Erabiltzaile.hometown,
+          telephone: Erabiltzaile.telephone,
+          birth_date: formattedBirthDate, // Use the formatted date here
+          admin: Erabiltzaile.admin,
+          aktibatua: Erabiltzaile.aktibatua,
+        });
+  console.log('erab   ' + Erabiltzaile.img);
+
+      } catch (err) {
+        console.error("Error fetching Erabiltzaile:", err);
+      }
+    };
+    
+    fetchErabiltzaile();
+  }, []);
+  
+  console.log('formdata   ' + formData.img);
   return (
     <div className="sticky top-0 z-50 shadow-lg">
 
@@ -53,22 +104,25 @@ function Navbar() {
       ></div>
       <div className={`fixed z-50 top-0 left-0 w-64 bg-gray-800 text-white h-full transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform`}>
         <div className="p-4">
-              <p className="text-center mb-4">
-                <img src={ane} alt="logo" className="mx-auto mb-2 w-18 h-18 object-contain rounded-full" />
-                <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">Admin</h3>
-              </p>
+          <p className="text-center mb-4">
+            <img 
+              src={`http://localhost:8000/${formData.img}`}
+             
+            alt="logo" className="mx-auto mb-2 w-18 h-18 object-contain rounded-full" />
+            <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">Admin</h3>
+          </p>
 
-              <hr />
+          <hr />
 
-              {/* Logout */}
-              <Link
-                to="/login"
-                className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                onClick={handleLogout}
-              >
-                <div className="flex justify-start items-center"><img src={logout} className="w-8 h-7 mr-2" /><h4 className="mt-2">Logout</h4></div>
-              </Link>
-      </div>
+          {/* Logout */}
+          <Link
+            to="/login"
+            className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
+            onClick={handleLogout}
+          >
+            <div className="flex justify-start items-center"><img src={logout} className="w-8 h-7 mr-2" /><h4 className="mt-2">Logout</h4></div>
+          </Link>
+        </div>
       </div>
       {/* Navbar */}
       <nav className="bg-gray-800 text-white shadow-lg">
@@ -76,17 +130,17 @@ function Navbar() {
           {/* Logo */}
           <div className="flex items-center justify-center">
             <Link className="flex items-center" to="/hasieraadmin">
-            <img
-              src={logo}
-              alt="logo"
-              className="w-auto max-w-16 h-auto max-h-16 mr-2 flame-effect rounded-full object-contain"
-            />
-            
+              <img
+                src={logo}
+                alt="logo"
+                className="w-auto max-w-16 h-auto max-h-16 mr-2 flame-effect rounded-full object-contain"
+              />
+
             </Link>
             <h1 className="text-white font-bold text-3xl no-underline">Tinderkete</h1>
           </div>
-          
-          
+
+
 
           {/* Hanburguesa menua txikia */}
           <div className="lg:hidden">
@@ -167,7 +221,7 @@ function Navbar() {
               <li>
                 <button className="" onClick={toggleSidebar}>
                   <img
-                    src={logoImage}
+                    src={`http://localhost:8000/${formData.img}`}
                     alt="1361728"
                     className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
                   />
@@ -181,7 +235,7 @@ function Navbar() {
           {/* Sidebar toggle */}
           <button className="lg:block hidden" onClick={toggleSidebar}>
             <img
-              src={logoImage}
+              src={`http://localhost:8000/${formData.img}`}
               alt="1361728"
               className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
             />

@@ -28,7 +28,7 @@ const ErabiltzaileakAdmin = () => {
     fetchUsers();
   }, []);
   const handleSortu = () => {
-    navigate('/txapelketasortu');
+    navigate('/erabiltzaileaSortu');
   };
   const handleEdit = (id) => {
     navigate(`/erabiltzaileakEditatu/${id}`);

@@ -23,9 +23,6 @@ function Erreserbak() {
   useEffect(() => {
     // Verificar si el usuario está autenticado
     const token = localStorage.getItem("token");
-    if (!token) {
-      setShowLoginMessage(true);
-    }
 
     // Fetch locations
     const fetchLocations = async () => {
@@ -79,8 +76,7 @@ function Erreserbak() {
 
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login");
-      return;
+      setShowLoginMessage(true);
     }
 
     if (!formData.date || !formData.time || !formData.location_id) {
@@ -176,8 +172,7 @@ function Erreserbak() {
                     <button
                       onClick={handleLoginRedirect}
                       className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700"
-                    >
-                      {t('erreserbak.login')}
+                    >Login
                     </button>
                   </div>
                 </div>
