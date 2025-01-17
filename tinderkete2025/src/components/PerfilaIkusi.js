@@ -6,6 +6,8 @@ import Footer from './Footer.js';
 import UserProfileTable from './UserProfileTable';
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+const ipBack = process.env.REACT_APP_BASE_URL;
+const imgBack = process.env.IMG;
 
 const Perfila = () => {
   const { t } = useTranslation();
@@ -31,7 +33,7 @@ const Perfila = () => {
     console.log("userId recibido:", userId);
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/getUser/${userId}`);
+        const response = await axios.get(`${ipBack}/getUser/${userId}`);
         console.log("Respuesta de la API:", response.data);
         setUser(response.data.data); // Ajusta según la estructura de la respuesta de la API
       } catch (error) {
@@ -74,7 +76,7 @@ const Perfila = () => {
 
     // Enviar los datos actualizados al servidor
     try {
-      const response = await axios.put(`http://localhost:8000/api/user/${userId}`, updatedUser);
+      const response = await axios.put(`${ipBack}/user/${userId}`, updatedUser);
       localStorage.setItem('user', JSON.stringify(response.data.data)); // Guardar datos actualizados en localStorage
       alert('Perfil actualizado con éxito');
     } catch (error) {
@@ -103,7 +105,7 @@ const Perfila = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
           <div className="w-full sm:w-3/4">
-            <PerfilaCard img={`http://localhost:8000/${user.img}`} onImageChange={handleImageChange} />
+            <PerfilaCard img={`${ipBack}/${user.img}`} onImageChange={handleImageChange} />
           </div>
 
           <div className="w-full sm:w-3/4">

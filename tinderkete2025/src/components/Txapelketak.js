@@ -9,6 +9,7 @@ import EventCard from "./EventCard";
 import Nav from './Navbar.js';
 import Footer from './Footer.js';
 import { useTranslation } from "react-i18next";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 const Txapelketak = () => {
   const { t } = useTranslation();
@@ -30,8 +31,7 @@ const Txapelketak = () => {
     // Realiza la llamada a la API usando fetch
     const fetchEvents = async () => {
       try {
-          /* TODO: hosting api deiak ez localhostetik hartzeko*/
-        const response = await fetch("http://localhost:8000/api/txapelketak-with-users"); // URL de la API
+        const response = await fetch(`${ipBack}/txapelketak-with-users`); // URL de la API
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }

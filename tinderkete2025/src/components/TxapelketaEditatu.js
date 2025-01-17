@@ -5,6 +5,7 @@ import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 function TxapelketaEditatu() {
     const { id } = useParams(); // Obtener el ID del torneo desde la URL
@@ -25,7 +26,7 @@ function TxapelketaEditatu() {
     useEffect(() => {
         const fetchTournament = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/txapelketak-with-users/${id}`);
+                const response = await axios.get(`${ipBack}/txapelketak-with-users/${id}`);
                 const tournament = response.data.data;
                 setFormData({
                     title: tournament.title,
@@ -44,7 +45,7 @@ function TxapelketaEditatu() {
 
         const fetchLocations = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/api/lokalekuak");
+                const response = await axios.get(`${ipBack}/lokalekuak`);
                 setLocations(response.data.data); 
             } catch (err) {
                 console.error("Error fetching locations:", err);
@@ -79,7 +80,7 @@ function TxapelketaEditatu() {
         };
 
         try {
-            await axios.put(`http://localhost:8000/api/txapelketak/${id}`, updatedTournament);
+            await axios.put(`${ipBack}/txapelketak/${id}`, updatedTournament);
             setError(""); // Limpia errores si los hubo
         } catch (err) {
             console.error("Error updating tournament:", err);

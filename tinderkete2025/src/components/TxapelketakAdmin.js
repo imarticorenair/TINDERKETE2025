@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import { useNavigate } from "react-router-dom";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 const TxapelketakAdmin = () => {
     const [tournaments, setTournaments] = useState([]);
@@ -12,7 +13,7 @@ const TxapelketakAdmin = () => {
     useEffect(() => {
         const fetchTournaments = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/txapelketak");
+                const response = await fetch(`${ipBack}/txapelketak`);
                 if (!response.ok) {
                     throw new Error("Error fetching tournaments");
                 }
@@ -36,7 +37,7 @@ const TxapelketakAdmin = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/txapelketak/${id}`, {
+            const response = await fetch(`${ipBack}/txapelketak/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

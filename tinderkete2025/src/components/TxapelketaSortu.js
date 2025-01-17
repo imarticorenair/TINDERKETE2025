@@ -3,6 +3,8 @@ import EventCard from "./EventCard";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import axios from 'axios';
+const ipBack = process.env.REACT_APP_BASE_URL;
+
 
 function TxapelketaSortu() {
   const [formData, setFormData] = useState({
@@ -23,7 +25,7 @@ function TxapelketaSortu() {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/lokalekuak/');
+        const response = await fetch(`${ipBack}/lokalekuak`);
         const result = await response.json();
 
         // Verificamos si 'result.data' es un arreglo
@@ -63,7 +65,7 @@ function TxapelketaSortu() {
     };
 
     try {
-      const response = await axios.post("http://localhost:8000/api/txapelketak", tournamentData);
+      const response = await axios.post(`${ipBack}/txapelketak`, tournamentData);
 
       console.log("Response:", response.data);
       setTournamentCreated(response.data.data);

@@ -5,6 +5,8 @@ import Footer from './Footer.js';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import libre from "../images/libre.png"; // Imagen para espacios libres
+const ipBack = process.env.REACT_APP_BASE_URL;
+const imgBack = process.env.IMG;
 
 function PartidoakCard() {
   const { t } = useTranslation();
@@ -20,7 +22,7 @@ function PartidoakCard() {
       setIsLoggedIn(true);
     }
 
-    axios.get('http://localhost:8000/api/reservations')
+    axios.get(`${ipBack}/reservations`)
       .then(response => {
         setReservations(response.data);
         console.log(response.data);
@@ -36,7 +38,7 @@ function PartidoakCard() {
       navigate("/login");
       return;
     } else {
-      axios.post(`http://localhost:8000/api/matches/${reservation.id}/users`, {},
+      axios.post(`${ipBack}/matches/${reservation.id}/users`, {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,7 +96,7 @@ function PartidoakCard() {
                     className="flex flex-col items-center mr-2 text-center mx-auto"
                   >
                     <img
-                      src={`http://localhost:8000/${player.image || libre}`}
+                      src={`${imgBack}/${player.image || libre}`}
                       alt={player.name || "Libre"}
                       className="w-16 h-16 rounded-full mb-1 object-cover"
                     />

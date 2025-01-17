@@ -8,6 +8,8 @@ import logout from '../images/logout.png';
 import { useTranslation } from "react-i18next";
 import ane from '../images/ane.jpg';
 import axios from "axios";
+const ipBack = process.env.REACT_APP_BASE_URL;
+const imgBack = process.env.IMG;
 
 
 function Navbar() {
@@ -63,7 +65,7 @@ function Navbar() {
         const userId = JSON.parse(localStorage.getItem("user")); // Parse the JSON string into an object
         const id = userId.id;
         const response = await axios.get(
-          `http://localhost:8000/api/getUser/${id}`
+          `${ipBack}/getUser/${id}`
         );
         const Erabiltzaile = response.data.data;
 
@@ -106,7 +108,7 @@ function Navbar() {
         <div className="p-4">
           <p className="text-center mb-4">
             <img 
-              src={`http://localhost:8000/${formData.img}`}
+              src={`${imgBack}/${formData.img}`}
              
             alt="logo" className="mx-auto mb-2 w-18 h-18 object-contain rounded-full" />
             <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">Admin</h3>
@@ -221,7 +223,7 @@ function Navbar() {
               <li>
                 <button className="" onClick={toggleSidebar}>
                   <img
-                    src={`http://localhost:8000/${formData.img}`}
+                    src={`${imgBack}/${formData.img}`}
                     alt="1361728"
                     className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
                   />
@@ -235,7 +237,7 @@ function Navbar() {
           {/* Sidebar toggle */}
           <button className="lg:block hidden" onClick={toggleSidebar}>
             <img
-              src={`http://localhost:8000/${formData.img}`}
+              src={`${imgBack}/${formData.img}`}
               alt="1361728"
               className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
             />

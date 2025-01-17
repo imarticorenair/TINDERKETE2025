@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import "../i18n"; // i18n konfigurazioa
 import logoImage from "../images/1361728.png";
 import axios from "axios";
+const ipBack = process.env.REACT_APP_BASE_URL;
+const imgBack = process.env.IMG;
 
 
 function Navbar() {
@@ -78,7 +80,7 @@ function Navbar() {
         const userId = JSON.parse(localStorage.getItem("user")); // Parse the JSON string into an object
         const id = userId.id;
         const response = await axios.get(
-          `http://localhost:8000/api/getUser/${id}`
+          `${ipBack}/getUser/${id}`
         );
         const Erabiltzaile = response.data.data;
 
@@ -130,7 +132,7 @@ function Navbar() {
               {/* Mostrar nombre y apellido del usuario */}
               <p className="text-center mb-4">
                 <img
-                  src={'http://localhost:8000/' + formData.img}
+                  src={`${imgBack}/` + formData.img}
                   alt="logo"
                   className="mx-auto mb-2 w-18 h-18 object-contain rounded-full"
                 />
@@ -147,7 +149,7 @@ function Navbar() {
               >
                 <div className="flex justify-start items-center">
                   <img
-                    src={'http://localhost:8000/' + formData.img}
+                    src={`${imgBack}/` + formData.img}
                     className="w-8 h-8 mr-2" />
                   <h4 className="mt-2">{t("nav.sidebar1")}</h4>
                 </div>
@@ -390,7 +392,7 @@ function Navbar() {
                   onClick={toggleSidebar} // Asegúrate de que este evento abra el sidebar
                 >
                   <img
-                    src={formData.img ? `http://localhost:8000/${formData.img}` : logoImage}
+                    src={formData.img ? `${imgBack}${formData.img}` : logoImage}
                     alt="Perfil"
                     className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
                   />
@@ -402,7 +404,7 @@ function Navbar() {
           {/* Sidebar toggle */}
           <button className="lg:block hidden ml-5" onClick={toggleSidebar}>
             <img
-              src={formData.img ? `http://localhost:8000/${formData.img}` : logoImage}
+              src={formData.img ? `${imgBack}/${formData.img}` : logoImage}
               alt="Perfil"
               className="w-auto max-w-12 h-auto max-h-12 rounded-full bg-amber-500 p-1 object-contain"
             />
