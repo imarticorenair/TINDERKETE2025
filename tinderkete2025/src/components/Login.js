@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { useTranslation } from "react-i18next";
 import axios from 'axios';
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 function Login() {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ function Login() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [accountError, setAccountError] = useState(''); // Para manejar el error de cuenta no activada
-
+  
   const handleEmailValidation = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!value) {
@@ -35,7 +36,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/login', {
+      const response = await axios.post(`${ipBack}/login`, {
         email,
         password,
       });
