@@ -4,6 +4,7 @@ import Nav from './Navbar.js';
 import Footer from './Footer.js';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 function Erreserbak() {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ function Erreserbak() {
     // Fetch locations
     const fetchLocations = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/lokalekuak/');
+        const response = await fetch(`${ipBack}/lokalekuak/`);
         const result = await response.json();
         if (result.success && Array.isArray(result.data)) {
           setLocations(result.data);
@@ -40,7 +41,7 @@ function Erreserbak() {
     };
     const fetchReservationUser = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/reservation/reservationUser', {
+        const response = await axios.get(`${ipBack}/reservation/reservationUser`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -85,7 +86,7 @@ function Erreserbak() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/reservations", formData, {
+      const response = await axios.post(`${ipBack}/reservations`, formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

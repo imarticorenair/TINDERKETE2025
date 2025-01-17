@@ -3,6 +3,7 @@ import './style.css';
 import logo from '../images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 function Register() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Register() {
     try {
       console.log("bodu: "+JSON.stringify(userData));
         
-        const response = await fetch('http://localhost:8000/api/register', {
+        const response = await fetch(`${ipBack}/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

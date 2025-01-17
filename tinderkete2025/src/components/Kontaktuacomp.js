@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Nav from './Navbar.js'; 
 import Footer from './Footer.js';
 import { useTranslation } from "react-i18next";
+const ipBack = process.env.REACT_APP_BASE_URL;
+
 
 function Kontaktu() {
   const { t } = useTranslation();
@@ -35,7 +37,7 @@ function Kontaktu() {
     console.log('Enviando datos:', payload); // Verifica los datos enviados
   
     try {
-      const response = await fetch('http://localhost:8000/api/send-email', {
+      const response = await fetch(`${ipBack}/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

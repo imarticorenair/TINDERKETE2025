@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Footer from "./Footer.js";
 import { useNavigate } from "react-router-dom";
 import NavbarAdmin from "./NavbarAdmin.js";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 const ErabiltzaileakAdmin = () => {
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ const ErabiltzaileakAdmin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/getUser");
+        const response = await fetch(`${ipBack}/getUser`);
         if (!response.ok) {
           throw new Error("Errorea");
         }
@@ -28,8 +29,10 @@ const ErabiltzaileakAdmin = () => {
     fetchUsers();
   }, []);
   const handleSortu = () => {
+
     navigate('/erabiltzaileaSortu');
-  };
+
+
   const handleEdit = (id) => {
     navigate(`/erabiltzaileakEditatu/${id}`);
   };
@@ -37,7 +40,7 @@ const ErabiltzaileakAdmin = () => {
   const handleDelete = async (id) => {
     try {
       // Llama al backend para actualizar user.aktibatua a 0
-      const response = await fetch(`http://localhost:8000/api/deleteUser/${id}`, {
+      const response = await fetch(`${ipBack}/deleteUser/${id}`, {
         method: "PATCH", // Usa el método adecuado según tu API (PATCH, PUT, POST)
         headers: {
           "Content-Type": "application/json",

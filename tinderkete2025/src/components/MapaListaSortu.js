@@ -4,6 +4,8 @@ import Footer from './Footer.js';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import axios from 'axios';
+const ipBack = process.env.REACT_APP_BASE_URL;
+
 
 function MapaSortu() {
 
@@ -30,7 +32,7 @@ function MapaSortu() {
     console.log(mapaData);
   
     try {
-      const response = await axios.post("http://localhost:8000/api/lokalekuak", mapaData);
+      const response = await axios.post(`${ipBack}/lokalekuak`, mapaData);
   
       if (response.status >= 200 && response.status < 300) {
         alert("Mapa ongi sortu da.");

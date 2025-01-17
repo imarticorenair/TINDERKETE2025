@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Nav from './Navbar.js';
 import Footer from './Footer.js';
 import { useTranslation } from "react-i18next";
+const ipBack = process.env.REACT_APP_BASE_URL;
+
 
 function MapaLista() {
   const { t } = useTranslation(); 
@@ -12,7 +14,7 @@ function MapaLista() {
   useEffect(() => {
     const fetchMapa = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/lokalekuak/');
+        const response = await fetch(`${ipBack}/lokalekuak/`);
         const result = await response.json();
   
         if (response.ok && result.success && Array.isArray(result.data)) {
