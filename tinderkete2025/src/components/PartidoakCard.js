@@ -22,7 +22,7 @@ function PartidoakCard() {
       setIsLoggedIn(true);
     }
 
-    axios.get(`${ipBack}/reservations`)
+    axios.get(`${ipBack}/api/reservations`)
       .then(response => {
         setReservations(response.data);
         console.log(response.data);
@@ -38,7 +38,7 @@ function PartidoakCard() {
       navigate("/login");
       return;
     } else {
-      axios.post(`${ipBack}/matches/${reservation.id}/users`, {},
+      axios.post(`${ipBack}/api/matches/${reservation.id}/users`, {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -96,7 +96,7 @@ function PartidoakCard() {
                     className="flex flex-col items-center mr-2 text-center mx-auto"
                   >
                     <img
-                      src={`${imgBack}/${player.image || libre}`}
+                      src={`${ipBack}/${player.image || libre}`}
                       alt={player.name || "Libre"}
                       className="w-16 h-16 rounded-full mb-1 object-cover"
                     />

@@ -28,7 +28,7 @@ function Erreserbak() {
     // Fetch locations
     const fetchLocations = async () => {
       try {
-        const response = await fetch(`${ipBack}/lokalekuak/`);
+        const response = await fetch(`${ipBack}/api/lokalekuak/`);
         const result = await response.json();
         if (result.success && Array.isArray(result.data)) {
           setLocations(result.data);
@@ -41,7 +41,7 @@ function Erreserbak() {
     };
     const fetchReservationUser = async () => {
       try {
-        const response = await axios.get(`${ipBack}/reservation/reservationUser`, {
+        const response = await axios.get(`${ipBack}/api/reservation/reservationUser`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -86,7 +86,7 @@ function Erreserbak() {
     }
 
     try {
-      const response = await axios.post(`${ipBack}/reservations`, formData, {
+      const response = await axios.post(`${ipBack}/api/reservations`, formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

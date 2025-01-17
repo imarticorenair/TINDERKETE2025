@@ -24,7 +24,7 @@ function MapaEditatu() {
         const fetchMapa = async () => {
             try {
                 const response = await axios.get(
-                    `${ipBack}/getMap/${id}`
+                    `${ipBack}/api/getMap/${id}`
                 );
                 const Mapa = response.data.data;
                 setFormData({
@@ -56,7 +56,7 @@ function MapaEditatu() {
 
         try {
             await axios.put(
-                `${ipBack}/mapak/${id}`,
+                `${ipBack}/api/mapak/${id}`,
                 formData,
                 {
                     headers: {

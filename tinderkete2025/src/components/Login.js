@@ -36,7 +36,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post(`${ipBack}/login`, {
+      const response = await axios.post(`${ipBack}/api/login`, {
         email,
         password,
       });

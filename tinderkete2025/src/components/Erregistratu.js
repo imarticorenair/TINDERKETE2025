@@ -35,7 +35,7 @@ function Register() {
     try {
       console.log("bodu: "+JSON.stringify(userData));
         
-        const response = await fetch(`${ipBack}/register`, {
+        const response = await fetch(`${ipBack}/api/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

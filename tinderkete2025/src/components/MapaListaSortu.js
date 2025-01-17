@@ -32,7 +32,7 @@ function MapaSortu() {
     console.log(mapaData);
   
     try {
-      const response = await axios.post(`${ipBack}/lokalekuak`, mapaData);
+      const response = await axios.post(`${ipBack}/api/lokalekuak`, mapaData);
   
       if (response.status >= 200 && response.status < 300) {
         alert("Mapa ongi sortu da.");

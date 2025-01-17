@@ -26,7 +26,7 @@ function TxapelketaEditatu() {
     useEffect(() => {
         const fetchTournament = async () => {
             try {
-                const response = await axios.get(`${ipBack}/txapelketak-with-users/${id}`);
+                const response = await axios.get(`${ipBack}/api/txapelketak-with-users/${id}`);
                 const tournament = response.data.data;
                 setFormData({
                     title: tournament.title,
@@ -45,7 +45,7 @@ function TxapelketaEditatu() {
 
         const fetchLocations = async () => {
             try {
-                const response = await axios.get(`${ipBack}/lokalekuak`);
+                const response = await axios.get(`${ipBack}/api/lokalekuak`);
                 setLocations(response.data.data); 
             } catch (err) {
                 console.error("Error fetching locations:", err);
@@ -80,7 +80,7 @@ function TxapelketaEditatu() {
         };
 
         try {
-            await axios.put(`${ipBack}/txapelketak/${id}`, updatedTournament);
+            await axios.put(`${ipBack}/api/txapelketak/${id}`, updatedTournament);
             setError(""); // Limpia errores si los hubo
         } catch (err) {
             console.error("Error updating tournament:", err);

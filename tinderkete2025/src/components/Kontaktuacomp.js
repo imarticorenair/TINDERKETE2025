@@ -37,7 +37,7 @@ function Kontaktu() {
     console.log('Enviando datos:', payload); // Verifica los datos enviados
   
     try {
-      const response = await fetch(`${ipBack}/send-email`, {
+      const response = await fetch(`${ipBack}/api/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

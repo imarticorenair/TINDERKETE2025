@@ -13,7 +13,7 @@ const TxapelketakAdmin = () => {
     useEffect(() => {
         const fetchTournaments = async () => {
             try {
-                const response = await fetch(`${ipBack}/txapelketak`);
+                const response = await fetch(`${ipBack}/api/txapelketak`);
                 if (!response.ok) {
                     throw new Error("Error fetching tournaments");
                 }
@@ -37,7 +37,7 @@ const TxapelketakAdmin = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`${ipBack}/txapelketak/${id}`, {
+            const response = await fetch(`${ipBack}/api/txapelketak/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -25,7 +25,7 @@ function TxapelketaSortu() {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch(`${ipBack}/lokalekuak`);
+        const response = await fetch(`${ipBack}/api/lokalekuak`);
         const result = await response.json();
 
         // Verificamos si 'result.data' es un arreglo
@@ -65,7 +65,7 @@ function TxapelketaSortu() {
     };
 
     try {
-      const response = await axios.post(`${ipBack}/txapelketak`, tournamentData);
+      const response = await axios.post(`${ipBack}/api/txapelketak`, tournamentData);
 
       console.log("Response:", response.data);
       setTournamentCreated(response.data.data);

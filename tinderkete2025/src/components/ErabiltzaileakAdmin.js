@@ -13,7 +13,7 @@ const ErabiltzaileakAdmin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch(`${ipBack}/getUser`);
+        const response = await fetch(`${ipBack}/api/getUser`);
         if (!response.ok) {
           throw new Error("Errorea");
         }
@@ -28,10 +28,10 @@ const ErabiltzaileakAdmin = () => {
 
     fetchUsers();
   }, []);
+
   const handleSortu = () => {
-
     navigate('/erabiltzaileaSortu');
-
+  };
 
   const handleEdit = (id) => {
     navigate(`/erabiltzaileakEditatu/${id}`);
@@ -39,9 +39,8 @@ const ErabiltzaileakAdmin = () => {
 
   const handleDelete = async (id) => {
     try {
-      // Llama al backend para actualizar user.aktibatua a 0
-      const response = await fetch(`${ipBack}/deleteUser/${id}`, {
-        method: "PATCH", // Usa el método adecuado según tu API (PATCH, PUT, POST)
+      const response = await fetch(`${ipBack}/api/deleteUser/${id}`, {
+        method: "PATCH", // Ensure your backend handles this method
         headers: {
           "Content-Type": "application/json",
         },
@@ -52,7 +51,6 @@ const ErabiltzaileakAdmin = () => {
         throw new Error("Errorea al desactivar el usuario.");
       }
 
-      // Actualizar el estado en el frontend
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.id === id ? { ...user, aktibatua: 0 } : user
@@ -71,7 +69,6 @@ const ErabiltzaileakAdmin = () => {
     return <p className="text-center text-red-500 font-semibold">Error: {error}</p>;
   }
 
-  // Filtrar solo los usuarios que tienen aktibatua = 1
   const filteredUsers = users.filter((user) => user.aktibatua === 1);
 
   return (
@@ -81,7 +78,7 @@ const ErabiltzaileakAdmin = () => {
         <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Erabiltzaileak</h1>
         <div>
           <button
-            onClick={() => handleSortu()}
+            onClick={handleSortu}
             className="flex justify-center mx-auto bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
           >
             Sortu
@@ -132,7 +129,13 @@ const ErabiltzaileakAdmin = () => {
                     <td className="px-4 py-2">{user.name}</td>
                     <td className="px-4 py-2">{user.surname}</td>
                     <td className="px-4 py-2">{user.email}</td>
-                    <td className="px-4 py-2">{user.img}</td>
+                    <td className="px-4 py-2">
+                      {user.img ? (
+                        <img src={user.img} alt="User" className="w-16 h-16 rounded-full" />
+                      ) : (
+                        <span>No Image</span>
+                      )}
+                    </td>
                     <td className="px-4 py-2">{user.hometown}</td>
                     <td className="px-4 py-2">{user.telephone}</td>
                     <td className="px-4 py-2">{user.birth_date}</td>

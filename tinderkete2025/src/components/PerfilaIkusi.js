@@ -33,7 +33,7 @@ const Perfila = () => {
     console.log("userId recibido:", userId);
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${ipBack}/getUser/${userId}`);
+        const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
         console.log("Respuesta de la API:", response.data);
         setUser(response.data.data); // Ajusta según la estructura de la respuesta de la API
       } catch (error) {
@@ -76,7 +76,7 @@ const Perfila = () => {
 
     // Enviar los datos actualizados al servidor
     try {
-      const response = await axios.put(`${ipBack}/user/${userId}`, updatedUser);
+      const response = await axios.put(`${ipBack}/api/user/${userId}`, updatedUser);
       localStorage.setItem('user', JSON.stringify(response.data.data)); // Guardar datos actualizados en localStorage
       alert('Perfil actualizado con éxito');
     } catch (error) {

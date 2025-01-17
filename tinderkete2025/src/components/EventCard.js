@@ -25,7 +25,7 @@ function EventCard({
         throw new Error("Usuario no autenticado");
       }
 
-      const response = await fetch(`${ipBack}/tournaments/${tournamentId}/register`, {
+      const response = await fetch(`${ipBack}/api/tournaments/${tournamentId}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

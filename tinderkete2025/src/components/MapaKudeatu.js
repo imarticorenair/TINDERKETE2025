@@ -18,7 +18,7 @@ function MapaKudeatu() {
     useEffect(() => {
         const fetchMaps = async () => {
             try {
-                const response = await fetch(`${ipBack}/lokalekuak`);
+                const response = await fetch(`${ipBack}/api/lokalekuak`);
 
                 console.log("Server Response:", response); // Log completo de la respuesta
 
@@ -50,7 +50,7 @@ function MapaKudeatu() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`${ipBack}/lokalekuakDelete/${id}`, {
+            const response = await fetch(`${ipBack}/api/lokalekuakDelete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -26,7 +26,7 @@ function ErabiltzaileaEditatu() {
     const fetchErabiltzaile = async () => {
       try {
         const response = await axios.get(
-          `${ipBack}/getUser/${id}`
+          `${ipBack}/api/getUser/${id}`
         );
         const Erabiltzaile = response.data.data;
 

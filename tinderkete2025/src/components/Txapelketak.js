@@ -31,7 +31,7 @@ const Txapelketak = () => {
     // Realiza la llamada a la API usando fetch
     const fetchEvents = async () => {
       try {
-        const response = await fetch(`${ipBack}/txapelketak-with-users`); // URL de la API
+        const response = await fetch(`${ipBack}/api/txapelketak-with-users`); // URL de la API
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }

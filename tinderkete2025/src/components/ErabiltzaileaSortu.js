@@ -51,7 +51,7 @@ function ErabiltzaileaSortu() {
             formDataToSend.append("img", formData.img);
         }
         try {
-            const response = await axios.post(`${ipBack}/userStore`, formDataToSend, {
+            const response = await axios.post(`${ipBack}/api/userStore`, formDataToSend, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
