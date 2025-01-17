@@ -4,6 +4,8 @@ import Footer from './Footer.js';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import axios from 'axios';
+const ipBack = process.env.REACT_APP_BASE_URL;
+
 
 function MapaKudeatu() {
     const { t } = useTranslation();
@@ -16,7 +18,7 @@ function MapaKudeatu() {
     useEffect(() => {
         const fetchMaps = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/lokalekuak");
+                const response = await fetch(`${ipBack}/lokalekuak`);
 
                 console.log("Server Response:", response); // Log completo de la respuesta
 
@@ -48,7 +50,7 @@ function MapaKudeatu() {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/lokalekuakDelete/${id}`, {
+            const response = await fetch(`${ipBack}/lokalekuakDelete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

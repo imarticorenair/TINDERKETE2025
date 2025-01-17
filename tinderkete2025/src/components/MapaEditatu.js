@@ -3,6 +3,8 @@ import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+const ipBack = process.env.REACT_APP_BASE_URL;
+
 
 function MapaEditatu() {
     const { id } = useParams(); // Obtener el ID del torneo desde la URL
@@ -22,7 +24,7 @@ function MapaEditatu() {
         const fetchMapa = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:8000/api/getMap/${id}`
+                    `${ipBack}/getMap/${id}`
                 );
                 const Mapa = response.data.data;
                 setFormData({
@@ -54,7 +56,7 @@ function MapaEditatu() {
 
         try {
             await axios.put(
-                `http://localhost:8000/api/mapak/${id}`,
+                `${ipBack}/mapak/${id}`,
                 formData,
                 {
                     headers: {
