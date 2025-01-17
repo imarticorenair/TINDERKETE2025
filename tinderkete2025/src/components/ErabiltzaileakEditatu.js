@@ -3,6 +3,7 @@ import NavbarAdmin from "./NavbarAdmin";
 import Footer from "./Footer";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 function ErabiltzaileaEditatu() {
   const { id } = useParams();
@@ -25,7 +26,7 @@ function ErabiltzaileaEditatu() {
     const fetchErabiltzaile = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/getUser/${id}`
+          `${ipBack}/getUser/${id}`
         );
         const Erabiltzaile = response.data.data;
 
@@ -77,7 +78,7 @@ function ErabiltzaileaEditatu() {
     });
 
     try {
-      await axios.put(`http://localhost:8000/api/user/${id}`, formDataToSend, {
+      await axios.put(`${ipBack}/api/user/${id}`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import axios from "axios";
 import Footer from "./Footer";
+const ipBack = process.env.REACT_APP_BASE_URL;
+
+
 function ErabiltzaileaSortu() {
     const [formData, setFormData] = useState({
         name: "",
@@ -48,7 +51,7 @@ function ErabiltzaileaSortu() {
             formDataToSend.append("img", formData.img);
         }
         try {
-            const response = await axios.post("http://localhost:8000/api/userStore", formDataToSend, {
+            const response = await axios.post(`${ipBack}/userStore`, formDataToSend, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

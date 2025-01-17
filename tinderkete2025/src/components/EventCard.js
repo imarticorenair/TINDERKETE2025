@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from "react-i18next";
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 
 function EventCard({
@@ -24,7 +25,7 @@ function EventCard({
         throw new Error("Usuario no autenticado");
       }
 
-      const response = await fetch(`http://localhost:8000/api/tournaments/${tournamentId}/register`, {
+      const response = await fetch(`${ipBack}/tournaments/${tournamentId}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
