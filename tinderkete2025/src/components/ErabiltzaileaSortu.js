@@ -68,151 +68,204 @@ function ErabiltzaileaSortu() {
     
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <NavbarAdmin />
-            <div className="container mx-auto flex-grow px-8 py-8">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-blue-600">Erabiltzailea Sortu</h1>
-                </div>
-                <div className="flex flex-wrap lg:flex-nowrap -mx-4">
-                    <div className="w-full lg:w-2/3 px-4 mb-8">
-                        <div className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden p-6 h-full">
-                            <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Izena</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu erabiltzailearen "
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Abizena</label>
-                                    <input
-                                        type="text"
-                                        name="surname"
-                                        value={formData.surname}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu erabiltzailearen "
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Email</label>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu erabiltzailearen "
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Password</label>
-                                    <input
-                                        type="text"
-                                        name="password"
-                                        value={formData.password}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu erabiltzailearen "
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2">
-                                    <label className="block mb-1 text-gray-700">Herria</label>
-                                    <input
-                                        type="text"
-                                        name="hometown"
-                                        value={formData.hometown}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu erabiltzailearen "
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Telefonoa</label>
-                                    <input
-                                        type="number"
-                                        name="telephone"
-                                        value={formData.telephone}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu prezioa"
-                                        maxLength="9"
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Jaiotze-data</label>
-                                    <input
-                                        type="date"
-                                        name="birth_date"
-                                        value={formData.birth_date}
-                                        onChange={handleInputChange}
-                                        placeholder="Sartu gehienezko partehartzaile kopurua"
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Admin</label>
-                                    <input
-                                        type="checkbox"
-                                        name="admin"
-                                        checked={formData.admin}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, admin: e.target.checked })
-                                        }
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Irudia</label>
-                                    <input
-                                        type="file"
-                                        name="img"
-                                        onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-
-                                <div className="col-span-2 md:col-span-1">
-                                    <label className="block mb-1 text-gray-700">Aktibatuta</label>
-                                    <input
-                                        type="checkbox"
-                                        name="aktibatua"
-                                        checked={formData.aktibatua}
-                                        onChange={(e) =>
-                                            setFormData({ ...formData, aktibatua: e.target.checked })
-                                        }
-                                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
-                                >Sortu
-                                </button>
-                            </form>
-                            {/* Mensaje de error o éxito */}
-                            {userCreated && (
-                                <div className="mt-4 text-center text-green-500">
-                                    User created: {userCreated.title}
-                                </div>
-                            )}
-                            {error && (
-                                <div className="mt-4 text-center text-red-500">
-                                    {error}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Footer />
+<div>
+    <NavbarAdmin />
+    <div className="container mx-auto px-4 py-10">
+        <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-blue-600">Erabiltzailea Sortu</h1>
         </div>
+
+        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
+            <div className="grid grid-cols-2 gap-5">
+                {/* Izena */}
+            <div className="mb-4">
+                <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                    Izena
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Sartu erabiltzailearen izena"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+
+            {/* Abizena */}
+            <div className="mb-4">
+                <label htmlFor="surname" className="block text-gray-700 font-bold mb-2">
+                    Abizena
+                </label>
+                <input
+                    type="text"
+                    id="surname"
+                    name="surname"
+                    value={formData.surname}
+                    onChange={handleInputChange}
+                    placeholder="Sartu erabiltzailearen abizena"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-5">
+                {/* Email */}
+            <div className="mb-4">
+                <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Sartu erabiltzailearen email-a"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+
+            {/* Password */}
+            <div className="mb-4">
+                <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
+                    Pasahitza
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    placeholder="Sartu erabiltzailearen pasahitza"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+            </div>        
+            <div className="grid grid-cols-2 gap-5">
+            {/* Herria */}
+            <div className="mb-4">
+                <label htmlFor="hometown" className="block text-gray-700 font-bold mb-2">
+                    Herria
+                </label>
+                <input
+                    type="text"
+                    id="hometown"
+                    name="hometown"
+                    value={formData.hometown}
+                    onChange={handleInputChange}
+                    placeholder="Sartu erabiltzailearen herria"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+
+            {/* Telefonoa */}
+            <div className="mb-4">
+                <label htmlFor="telephone" className="block text-gray-700 font-bold mb-2">
+                    Telefonoa
+                </label>
+                <input
+                    type="tel"
+                    id="telephone"
+                    name="telephone"
+                    value={formData.telephone}
+                    onChange={handleInputChange}
+                    placeholder="Sartu erabiltzailearen telefonoa"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-5">
+            {/* Jaiotze-data */}
+            <div className="mb-4">
+                <label htmlFor="birth_date" className="block text-gray-700 font-bold mb-2">
+                    Jaiotze-data
+                </label>
+                <input
+                    type="date"
+                    id="birth_date"
+                    name="birth_date"
+                    value={formData.birth_date}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+            <div className="grid grid-cols-2 gap-5">
+            {/* Admin */}
+            <div className="mb-4">
+                <label htmlFor="admin" className="block text-gray-700 font-bold mb-2">
+                    Admin
+                </label>
+                <input
+                    type="checkbox"
+                    id="admin"
+                    name="admin"
+                    checked={formData.admin}
+                    onChange={(e) => setFormData({ ...formData, admin: e.target.checked })}
+                    className="mr-2"
+                />
+                Administratzailea da?
+            </div>
+
+                        {/* Aktibatuta */}
+                        <div className="mb-4">
+                <label htmlFor="aktibatua" className="block text-gray-700 font-bold mb-2">
+                    Aktibatuta
+                </label>
+                <input
+                    type="checkbox"
+                    id="aktibatua"
+                    name="aktibatua"
+                    checked={formData.aktibatua}
+                    onChange={(e) => setFormData({ ...formData, aktibatua: e.target.checked })}
+                    className="mr-2"
+                />
+                Aktibatuta dago?
+            </div>
+            </div>
+            </div>
+            {/* Irudia */}
+            <div className="mb-4">
+                <label htmlFor="img" className="block text-gray-700 font-bold mb-2">
+                    Irudia
+                </label>
+                <input
+                    type="file"
+                    id="img"
+                    name="img"
+                    onChange={(e) => setFormData({ ...formData, img: e.target.files[0] })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                />
+            </div>
+
+            {/* Botón de enviar */}
+            <div className="text-center">
+                <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+                >
+                    Sortu
+                </button>
+            </div>
+        </form>
+
+        {/* Mensaje de error o éxito */}
+        {userCreated && (
+            <div className="mt-4 text-center text-green-500">
+                User created: {userCreated.title}
+            </div>
+        )}
+        {error && (
+            <div className="mt-4 text-center text-red-500">
+                {error}
+            </div>
+        )}
+    </div>
+    <Footer />
+</div>
+
     );
 }
 export default ErabiltzaileaSortu;

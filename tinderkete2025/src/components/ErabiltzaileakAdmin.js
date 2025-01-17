@@ -29,8 +29,10 @@ const ErabiltzaileakAdmin = () => {
     fetchUsers();
   }, []);
   const handleSortu = () => {
+
     navigate('/erabiltzaileaSortu');
-  };
+
+
   const handleEdit = (id) => {
     navigate(`/erabiltzaileakEditatu/${id}`);
   };
