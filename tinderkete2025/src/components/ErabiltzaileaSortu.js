@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import axios from "axios";
 import Footer from "./Footer";
+import { useTranslation } from "react-i18next";
+const ipBack = process.env.REACT_APP_BASE_URL;
+
+
+
+
 function ErabiltzaileaSortu() {
+
+    const { t } = useTranslation();
+
     const [formData, setFormData] = useState({
         name: "",
         surname: "",
@@ -196,7 +205,7 @@ function ErabiltzaileaSortu() {
                             {/* Mensaje de error o éxito */}
                             {userCreated && (
                                 <div className="mt-4 text-center text-green-500">
-                                    User created: {userCreated.title}
+                                    {t('login.ongi')}
                                 </div>
                             )}
                             {error && (

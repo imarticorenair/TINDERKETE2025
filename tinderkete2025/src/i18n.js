@@ -247,6 +247,7 @@ i18n
               "loginTitle": "Login",
               "loginButton": "Sartu",
               "accountNotActivated": "Erabiltzailea ez da existitzen",
+              "ongi": "Erabiltzailea ongi sortu da",
               
             },
             "footer":{
