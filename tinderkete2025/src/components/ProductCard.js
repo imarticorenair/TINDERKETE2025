@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from "react-i18next";
 
-function ProductCard({ name, price, image, onClick }) { // Agregamos onClick como prop
+function ProductCard({ name, price, image, onClick }) { 
   const { t } = useTranslation();
 
   return (
@@ -12,7 +12,7 @@ function ProductCard({ name, price, image, onClick }) { // Agregamos onClick com
         <p className="card-text">{t('produktCard.prezioa')} {price}€</p>
         <button
           className="btn btn-primary w-full"
-          onClick={onClick} // Asignamos la función al botón
+          onClick={onClick} 
         >
           {t('produktCard.erosi')}
         </button>

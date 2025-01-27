@@ -14,31 +14,30 @@ const ipBack = process.env.REACT_APP_BASE_URL;
 const Txapelketak = () => {
   const { t } = useTranslation();
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true); // Para manejar el estado de carga
-  const [error, setError] = useState(null); // Para manejar errores
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null);
   const getImagePath = (imageName) => {
     try {
-      // Usa require para cargar la imagen de forma dinámica
+      
       return require(`../images/${imageName}`);
     } catch (err) {
       console.error("Error al cargar la imagen:", err);
-      // Ruta alternativa si la imagen no existe
+     
       return require(`../images/comingsoon.jpg`);
     }
   };
 
   useEffect(() => {
-    // Realiza la llamada a la API usando fetch
     const fetchEvents = async () => {
       try {
-        const response = await fetch(`${ipBack}/api/txapelketak-with-users`); // URL de la API
+        const response = await fetch(`${ipBack}/api/txapelketak-with-users`); 
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
-        const result = await response.json(); // Convierte la respuesta a JSON
+        const result = await response.json(); 
         const formattedEvents = result.data.map(tournament => ({
           id: tournament.id,
-          title: tournament.title, // Ajustar según la API
+          title: tournament.title, 
           location: tournament.location.name,
           date: tournament.date,
           time: tournament.time || "16:00",
@@ -47,9 +46,9 @@ const Txapelketak = () => {
           maxParticipants: tournament.max_participants || 0,
           price: tournament.price || 0,
           image: tournament.location.img || "comingsoon.png",
-          participantImages: tournament.users.map(user => user.img), // Si tienes imágenes de participantes
+          participantImages: tournament.users.map(user => user.img), 
         }));
-        setEvents(formattedEvents); // Actualiza el estado con los eventos
+        setEvents(formattedEvents); 
         setLoading(false);
       } catch (err) {
         console.error("Error al obtener los eventos:", err);

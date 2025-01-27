@@ -40,7 +40,7 @@ const ErabiltzaileakAdmin = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`${ipBack}/api/deleteUser/${id}`, {
-        method: "PATCH", // Ensure your backend handles this method
+        method: "DELETE", 
         headers: {
           "Content-Type": "application/json",
         },
@@ -48,7 +48,7 @@ const ErabiltzaileakAdmin = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Errorea al desactivar el usuario.");
+        throw new Error("Errorea erabiltzailea desaktibatzean.");
       }
 
       setUsers((prevUsers) =>
@@ -57,16 +57,16 @@ const ErabiltzaileakAdmin = () => {
         )
       );
     } catch (err) {
-      alert(`Errorea al desactivar el usuario: ${err.message}`);
+      alert(`Errorea erabiltzailea desaktibatzean: ${err.message}`);
     }
   };
 
   if (loading) {
-    return <p className="text-center text-xl font-semibold">Loading users...</p>;
+    return <p className="text-center text-xl font-semibold">Erabiltzaileak kargatzen...</p>;
   }
 
   if (error) {
-    return <p className="text-center text-red-500 font-semibold">Error: {error}</p>;
+    return <p className="text-center text-red-500 font-semibold">Errorea: {error}</p>;
   }
 
   const filteredUsers = users.filter((user) => user.aktibatua === 1);

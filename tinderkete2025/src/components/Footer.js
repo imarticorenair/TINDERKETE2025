@@ -3,33 +3,33 @@ import img1 from '../images/facebookAplicacion.png';
 import img2 from '../images/logoInsta.png';
 import img3 from '../images/Xaplicacion.png';
 import logo from '../images/logo.png';
-import { useTranslation } from "react-i18next"; // useTranslation inportatzen du
-import '../i18n'; // i18n konfigurazioa
+import { useTranslation } from "react-i18next"; 
+import '../i18n'; 
 
 function Footer() {
-    const { t, i18n } = useTranslation(); // useTranslationen hooka erabiltzen du t eta i18n-ra konektatzeko
+    const { t, i18n } = useTranslation(); 
 
-    // Hizkuntzaren estatu ofiziala, localStorage-etik hartzen du
+   
     const [activeLanguage, setActiveLanguage] = useState(
         localStorage.getItem('language') || i18n.language
     );
 
-    // useEffect hizkuntza aldatzeko
+    
     useEffect(() => {
-        i18n.changeLanguage(activeLanguage); // i18n hizkuntza aldatzen du
-        localStorage.setItem('language', activeLanguage); // Hizkuntza localstoragen gordetzen du
+        i18n.changeLanguage(activeLanguage); 
+        localStorage.setItem('language', activeLanguage); 
     }, [activeLanguage]);
 
-    // Hizkuntza aldatzeko funtzioa
+   
     const changeLanguage = (event) => {
-        setActiveLanguage(event.target.value); // activeLenguageren egoera aldatzen du
+        setActiveLanguage(event.target.value); 
     };
 
     return (
         <footer className="bg-gray-800 dark:bg-gray-900">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="">
-                    {/* Burua ezkerra */}
+                    
                     <div className="md:flex md:justify-between">
                         <div className="mb-6 md:mb-0">
                             <a href="/" className="flex items-center">
@@ -40,7 +40,7 @@ function Footer() {
                             </a>
                         </div>
 
-                        {/* Burua eskubi */}
+                        
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-6 sm:flex justify-between">
                             <div>
                                 <h2 className="mb-6 text-sm font-semibold text-white">
@@ -85,9 +85,9 @@ function Footer() {
                     </div>
                 </div>
 
-                {/* Divider */}
+                
                 <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
-                {/* Esaldia */}
+                
                 <div className="text-center my-8">
                     <h3 className="text-2xl font-bold text-white">
                         {t('footer.esaldi')}
@@ -97,7 +97,7 @@ function Footer() {
                     </p>
                 </div>
 
-                {/* Sare sozialak */}
+                
                 <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-4 sm:gap-6 lg:justify-between text-center lg:text-left sm:flex justify-between">
                     <div className="flex justify-center lg:justify-start gap-2">
                         <a href="#" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">

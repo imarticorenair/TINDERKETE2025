@@ -47,7 +47,11 @@ i18n
               "emailInvalid" : "You must enter an '@' sign at the email address.",
               "loginTitle": "Login",
               "loginButton": "Enter",
-              "accountNotActivated": "The user does not exist"
+              "accountNotActivated": "The user does not exist",
+              "passwordRequired":"Password is required",
+              "invalidCredentials": "Invalid credentials",
+              "somethingWentWrong": "Something went wrong",
+
               
             },
             "footer":{
@@ -172,7 +176,11 @@ i18n
               "bidali" : "Register",
               "kontua" : "Have an account?",
               "pasahitzaBaieztatu1": "Confirm password",
-              "pasahitzaBaieztatu2": "Confirm password"
+              "pasahitzaBaieztatu2": "Confirm password",
+              "pasahitzaGaizki":"Passwords do not match",
+              "adinezNagusi":"The user must be of legal age",
+              "erabilOngi":"User successfully created",
+              "datuGaizki":"Some data was entered incorrectly",
             },
             "txapelketa1": {
               "title" : "Fronton tournament!",
@@ -255,6 +263,9 @@ i18n
               "loginTitle": "Login",
               "loginButton": "Sartu",
               "accountNotActivated": "Erabiltzailea ez da existitzen",
+              "passwordRequired":"Pasahitza derrigorrezkoa da",
+              "invalidCredentials": "Datuak gaizki sartu dira",
+              "somethingWentWrong":"Errorea gertatu da",
               
             },
             "footer":{
@@ -380,7 +391,11 @@ i18n
               "bidali" : "Erregistratu",
               "kontua" : "Kontu bat baduzu?",
               "pasahitzaBaieztatu1": "Sartu berriro pasahitza",
-              "pasahitzaBaieztatu2": "Baieztatu pasahitza"
+              "pasahitzaBaieztatu2": "Baieztatu pasahitza",
+              "pasahitzaGaizki":"Pasahitzak ez dira bat etorri",
+              "adinezNagusi":"Erabiltzailea adinez nagusia izan behar da",
+              "erabilOngi":"Erabiltzailea ongi sortu da",
+              "datuGaizki":"Daturenbat gaizki sartu da",
             },
             "txapelketa1": {
               "title" : "Frontoi Txapelketa!",

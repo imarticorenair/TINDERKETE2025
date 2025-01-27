@@ -20,12 +20,12 @@ function MapaLista() {
         if (response.ok && result.success && Array.isArray(result.data)) {
           setMapaCreated(result.data);
         } else {
-          setError('La respuesta de la API no contiene un arreglo de ubicaciones o hay un problema con los datos.');
-          console.error('La respuesta de la API no contiene un arreglo de ubicaciones:', result);
+          setError('APIaren erantzunak ez dauka kokapenen array bat edo datuekin arazo bat dago.');
+          console.error('APIaren erantzunak ez dauka kokapenen array bat:', result);
         }
       } catch (error) {
-        setError('Error al obtener datos de la API.');
-        console.error('Error fetching locations:', error);
+        setError('APIko datuak eskuratzean errorea gertatu da.');
+        console.error('Errorea kokapenak eskuratzean:', error);
       }
     };
 
@@ -35,7 +35,7 @@ function MapaLista() {
 
   const [activeList, setActiveList] = useState('frontoiak');
 
-  // Filtrar los mapas según el tipo activo (frontoiak o trinketeak)
+  
   const frontoiak = mapaCreated ? mapaCreated.filter(item => item.type === 'frontoiak') : [];
   const trinketeak = mapaCreated ? mapaCreated.filter(item => item.type === 'trinketeak') : [];
 
@@ -66,14 +66,14 @@ function MapaLista() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {(activeList === 'frontoiak' ? frontoiak : trinketeak).map((item, index) => {
-            // Reemplaza el zoom en la URL del iframe dinámicamente
+            
             const updatedIframeSrc = item.iframe ? item.iframe.replace(/!4f\d+(\.\d+)?/, '!4f40') : '';
 
 
             return (
               <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
                 <iframe
-                  src={updatedIframeSrc} // Usar la URL ajustada
+                  src={updatedIframeSrc}
                   className="w-full h-60 border-0"
                   title={item.name}
                 ></iframe>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "./Footer.js";
-import { useTranslation } from "react-i18next"; // useTranslation inportatzen du
+import { useTranslation } from "react-i18next"; 
 
 function TxapelketaSortu() {
   const { t } = useTranslation();

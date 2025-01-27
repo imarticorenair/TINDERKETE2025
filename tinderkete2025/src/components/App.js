@@ -31,9 +31,9 @@ import AirearenKalitatea from "./AirearenKalitatea";
 
 
 function App() {
-  // Verifica si es la primera vez que se abre la página
+  
   if (!localStorage.getItem('firstVisit')) {
-    // Elimina los ítems y marca que ya se abrió
+    
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('email');
     localStorage.setItem('firstVisit', 'true');
@@ -41,7 +41,6 @@ function App() {
 
   return (
     <Router>
-      {/* Rutas */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

@@ -13,7 +13,7 @@ function Erreserbak() {
   const [locations, setLocations] = useState([]);
   const [formData, setFormData] = useState({
     date: "",
-    time: "", // Mantener solo la hora sin los minutos
+    time: "", 
     location_id: "",
   });
   const [reservationCreated, setReservationCreated] = useState(null);
@@ -22,10 +22,9 @@ function Erreserbak() {
   const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
-    // Verificar si el usuario está autenticado
+    
     const token = localStorage.getItem("token");
 
-    // Fetch locations
     const fetchLocations = async () => {
       try {
         const response = await fetch(`${ipBack}/api/lokalekuak/`);
@@ -33,10 +32,10 @@ function Erreserbak() {
         if (result.success && Array.isArray(result.data)) {
           setLocations(result.data);
         } else {
-          console.error('Unexpected API response:', result);
+          console.error('API erantzuna espero ez bezala izan da:', result);
         }
       } catch (error) {
-        console.error('Error fetching locations:', error);
+        console.error('Errorea location-ak lortzean:', error);
       }
     };
     const fetchReservationUser = async () => {
@@ -48,12 +47,12 @@ function Erreserbak() {
         });
         const result = response.data;
         if (result.success && Array.isArray(result.data)) {
-          setReservations(result.data); // Guardar las reservas en el estado
+          setReservations(result.data); 
         } else {
-          console.error('Unexpected API response:', result);
+          console.error('API erantzuna espero ez bezala izan da', result);
         }
       } catch (error) {
-        console.error('Error fetching reservations:', error);
+        console.error('Errorea erreserbak lortzean:', error);
       }
     };
     fetchLocations();
@@ -64,8 +63,8 @@ function Erreserbak() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "time") {
-      // Asegurarse de que los minutos sean siempre 00
-      const timeWithZeroMinutes = value.slice(0, 2) + ":00"; // Ajustar minutos a 00
+      
+      const timeWithZeroMinutes = value.slice(0, 2) + ":00"; 
       setFormData((prev) => ({ ...prev, [name]: timeWithZeroMinutes }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
@@ -81,7 +80,7 @@ function Erreserbak() {
     }
 
     if (!formData.date || !formData.time || !formData.location_id) {
-      setError("Por favor, complete todos los campos.");
+      setError("Mesedez, bete eremu guztiak.");
       return;
     }
 
@@ -93,14 +92,14 @@ function Erreserbak() {
         },
       });
 
-      // Si la reserva es creada correctamente
+      
       setReservationCreated(response.data.data);
       setFormData({ date: "", time: "", location_id: "" });
-      setError(""); // Limpiar errores
+      setError("");
       window.location.reload();
     } catch (error) {
-      // Manejo de errores
-      setError(error.response?.data?.message || "Error al enviar los datos a la API");
+     
+      setError(error.response?.data?.message || "Errorea datuak APIra bidaltzean.");
       console.error("Error:", error.response?.data || error.message);
     }
   };
@@ -116,7 +115,7 @@ function Erreserbak() {
           <p className="text-xl mt-2 text-gray-600">{t('erreserbak.description')}</p>
         </div>
         <div className="flex flex-wrap -mx-4">
-          {/* Formulario */}
+          
           <div className="w-full md:w-1/3 px-4 mb-8">
             <div className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden p-6">
               <h5 className="text-xl font-bold mb-6 text-center">{t('erreserbak.header')}</h5>
@@ -180,7 +179,7 @@ function Erreserbak() {
               )}
             </div>
           </div>
-          {/* Reservas */}
+          
           <div className="w-full md:w-2/3 px-4">
             <div className="bg-white shadow-md rounded-lg overflow-hidden p-6 border border-gray-200">
               <h5 className="text-xl font-bold mb-6 text-center">{t('erreserbak.yourReservations')}</h5>

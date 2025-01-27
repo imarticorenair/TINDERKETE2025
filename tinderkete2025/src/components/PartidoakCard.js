@@ -4,7 +4,7 @@ import Nav from './Navbar.js';
 import Footer from './Footer.js';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import libre from "../images/libre.png"; // Imagen para espacios libres
+import libre from "../images/libre.png"; 
 const ipBack = process.env.REACT_APP_BASE_URL;
 const imgBack = process.env.IMG;
 
@@ -14,7 +14,7 @@ function PartidoakCard() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [reservations, setReservations] = useState([]);
-  const [responseMessage, setResponseMessage] = useState(''); // Nuevo estado para el mensaje
+  const [responseMessage, setResponseMessage] = useState(''); 
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
@@ -47,12 +47,12 @@ function PartidoakCard() {
       )
         .then(response => {
           console.log(response.data);
-          setResponseMessage(response.data.message || t('partidak.success')); // Actualizar con el mensaje de éxito
+          setResponseMessage(response.data.message || t('partidak.success')); 
           navigate("/erreserbak");
         })
         .catch(error => {
           console.error("Error al unirse a la reserva:", error.response?.data || error.message);
-          setResponseMessage(error.response?.data?.message || t('partidak.error')); // Mensaje de error
+          setResponseMessage(error.response?.data?.message || t('partidak.error')); 
           alert(error.response.data.message);
         });
     }
@@ -67,7 +67,7 @@ function PartidoakCard() {
           <p className="text-xl mt-2 text-gray-600">{t('partidak.description')}</p>
         </div>
 
-        {/* Lista de partidas */}
+        
         <div className="container mx-auto flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
           {reservations.map((reservation, index) => (
             <div

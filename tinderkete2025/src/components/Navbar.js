@@ -59,33 +59,30 @@ function Navbar() {
     e.preventDefault();
     localStorage.removeItem("email");
     localStorage.removeItem("isAdmin");
-    localStorage.removeItem("user"); // Eliminar el usuario del localStorage
-    localStorage.removeItem("token"); // Eliminar el usuario del localStorage
+    localStorage.removeItem("user"); 
+    localStorage.removeItem("token"); 
     window.location.reload();
   };
 
-  const { t, i18n } = useTranslation(); // useTranslationen hooka erabiltzen du t eta i18n-ra konektatzeko
+  const { t, i18n } = useTranslation(); 
 
-  // Hizkuntzaren estatu ofiziala, localStorage-etik hartzen du
   const [activeLanguage, setActiveLanguage] = useState(
     localStorage.getItem("language") || i18n.language
   );
 
-  // useEffect hizkuntza aldatzeko
   useEffect(() => {
-    i18n.changeLanguage(activeLanguage); // i18n hizkuntza aldatzen du
-    localStorage.setItem("language", activeLanguage); // Hizkuntza localstoragen gordetzen du
+    i18n.changeLanguage(activeLanguage); 
+    localStorage.setItem("language", activeLanguage); 
 
     const fetchErabiltzaile = async () => {
       try {
-        const userId = JSON.parse(localStorage.getItem("user")); // Parse the JSON string into an object
+        const userId = JSON.parse(localStorage.getItem("user")); 
         const id = userId.id;
         const response = await axios.get(
           `${ipBack}/api/getUser/${id}`
         );
         const Erabiltzaile = response.data.data;
 
-        // Format the birth_date to "yyyy-MM-dd"
         const formattedBirthDate = Erabiltzaile.birth_date
           ? new Date(Erabiltzaile.birth_date).toISOString().split("T")[0]
           : "";
@@ -97,7 +94,7 @@ function Navbar() {
           img: Erabiltzaile.img,
           hometown: Erabiltzaile.hometown,
           telephone: Erabiltzaile.telephone,
-          birth_date: formattedBirthDate, // Use the formatted date here
+          birth_date: formattedBirthDate,
           admin: Erabiltzaile.admin,
           aktibatua: Erabiltzaile.aktibatua,
         });
@@ -109,16 +106,15 @@ function Navbar() {
     fetchErabiltzaile();
   }, [activeLanguage]);
 
-  // Hizkuntza aldatzeko funtzioa
   const changeLanguage = (event) => {
-    setActiveLanguage(event.target.value); // activeLenguageren egoera aldatzen du
+    setActiveLanguage(event.target.value); 
   };
 
   //console.log('argazkia '+formData.img);
 
   return (
     <div className="sticky top-0 z-50 shadow-lg">
-      {/* Sidebar */}
+      
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 ${sidebarOpen ? "block" : "hidden"
           }`}
@@ -129,10 +125,10 @@ function Navbar() {
           } transition-transform`}
       >
         <div className="p-4">
-          {/* Verificar si el usuario no es Oihan ni Admin */}
+          
           {userData && email !== !isAdmin ? (
             <>
-              {/* Mostrar nombre y apellido del usuario */}
+              
               <p className="text-center mb-4">
                 <img
                   src={`${ipBack}/` + formData.img}
@@ -140,7 +136,7 @@ function Navbar() {
                   className="mx-auto mb-2 w-18 h-18 object-contain rounded-full"
                 />
                 <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">
-                  {`${nombre} ${apellido}`} {/* Mostrar nombre y apellido */}
+                  {`${nombre} ${apellido}`} 
                 </h3>
               </p>
 
@@ -158,7 +154,7 @@ function Navbar() {
                 </div>
               </Link>
               <hr />
-              {/* Logout */}
+              
               <Link
                 to="/login"
                 className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
@@ -171,7 +167,7 @@ function Navbar() {
               </Link>
             </>
           ) : (
-            // Mostrar botón de Login cuando no haya usuario autenticado
+            
             <Link
               to="/login"
               className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
@@ -186,10 +182,10 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Navbar */}
+      
       <nav className="bg-gray-800 text-white shadow-lg">
         <div className="container mx-auto flex  justify-center items-center p-4">
-          {/* Logo */}
+         
           <Link className="flex items-center" to="/">
             <img
               src={logo}
@@ -201,7 +197,7 @@ function Navbar() {
             Tinderkete
           </h1>
 
-          {/* Hanburguesa menua txikia */}
+         
           <div className="lg:hidden">
             <button
               className="navbar-burger flex items-center text-blue-600 p-3"
@@ -229,7 +225,7 @@ function Navbar() {
             </select>
           </div>
 
-          {/* Pantaila handitako navbar */}
+          
           <div className="hidden lg:flex space-x-6 mt-3">
             <ul className="flex space-x-4 items-center">
               <li className={`nav-item ${getActiveClass("/")}`}>
@@ -311,7 +307,7 @@ function Navbar() {
             </ul>
           </div>
 
-          {/* Hanburguesa menua pantaila txikitan */}
+          
           <div
             className={`lg:hidden ${menuOpen ? "block" : "hidden"
               } relative flex-row text-center text-white p-4 top-full mt-2 w-[100%] rounded-lg active:transition active:duration-700 active:ease-in-out`}
@@ -392,7 +388,7 @@ function Navbar() {
               <li>
                 <button
                   className=""
-                  onClick={toggleSidebar} // Asegúrate de que este evento abra el sidebar
+                  onClick={toggleSidebar} 
                 >
                   <img
                     src={formData.img ? `${ipBack}${formData.img}` : logoImage}
@@ -404,7 +400,7 @@ function Navbar() {
             </ul>
           </div>
 
-          {/* Sidebar toggle */}
+          
           <button className="lg:block hidden ml-5" onClick={toggleSidebar}>
             <img
               src={formData.img ? `${ipBack}/${formData.img}` : logoImage}

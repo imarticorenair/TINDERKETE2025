@@ -1,4 +1,3 @@
-// Resto de las importaciones
 import React, { useState, useEffect } from "react";
 import EventCard from "./EventCard";
 import NavbarAdmin from "./NavbarAdmin.js";
@@ -8,8 +7,8 @@ import { useParams, useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
 function TxapelketaEditatu() {
-    const { id } = useParams(); // Obtener el ID del torneo desde la URL
-    const navigate = useNavigate(); // Para redirigir después de actualizar
+    const { id } = useParams(); 
+    const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         title: "",
         location: "",
@@ -19,10 +18,10 @@ function TxapelketaEditatu() {
         price: "",
         maxParticipants: "",
     });
-    const [error, setError] = useState(""); // Para manejar errores
-    const [locations, setLocations] = useState([]); // Lista de ubicaciones
+    const [error, setError] = useState(""); 
+    const [locations, setLocations] = useState([]); 
 
-    // Obtener los datos iniciales del torneo
+   
     useEffect(() => {
         const fetchTournament = async () => {
             try {
@@ -30,7 +29,7 @@ function TxapelketaEditatu() {
                 const tournament = response.data.data;
                 setFormData({
                     title: tournament.title,
-                    location: tournament.location.id.toString(), // Usamos el ID como valor del formulario
+                    location: tournament.location.id.toString(), 
                     date: tournament.date,
                     time: tournament.time,
                     description: tournament.description,
@@ -81,7 +80,7 @@ function TxapelketaEditatu() {
 
         try {
             await axios.put(`${ipBack}/api/txapelketak/${id}`, updatedTournament);
-            setError(""); // Limpia errores si los hubo
+            setError(""); 
         } catch (err) {
             console.error("Error updating tournament:", err);
             setError(err.response?.data?.message || "Error al actualizar el torneo.");
@@ -192,7 +191,7 @@ function TxapelketaEditatu() {
                         </div>
                     </div>
 
-                    {/* Vista previa */}
+                   
                     <div className="w-full lg:w-1/3 px-4">
                         <div className="sticky top-4">
                             <EventCard

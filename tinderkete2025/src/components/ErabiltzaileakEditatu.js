@@ -30,7 +30,7 @@ function ErabiltzaileaEditatu() {
         );
         const Erabiltzaile = response.data.data;
 
-        // Format the birth_date to "yyyy-MM-dd"
+        
         const formattedBirthDate = Erabiltzaile.birth_date
           ? new Date(Erabiltzaile.birth_date).toISOString().split("T")[0]
           : "";
@@ -42,13 +42,13 @@ function ErabiltzaileaEditatu() {
           img: Erabiltzaile.img,
           hometown: Erabiltzaile.hometown,
           telephone: Erabiltzaile.telephone,
-          birth_date: formattedBirthDate, // Use the formatted date here
+          birth_date: formattedBirthDate, 
           admin: Erabiltzaile.admin,
           aktibatua: Erabiltzaile.aktibatua,
         });
       } catch (err) {
         console.error("Error fetching Erabiltzaile:", err);
-        setError("No se pudieron cargar los datos del torneo.");
+        setError("Errorea txapelketako datuak kargatzean.");
       }
     };
 
@@ -84,9 +84,9 @@ function ErabiltzaileaEditatu() {
 
       setSuccessMessage("Erabiltzailea eguneratu da!");
       setError("");
-      setTimeout(() => navigate("/erabiltzaileakAdmin"), 2000); // Redirigir después de 2 segundos
+      setTimeout(() => navigate("/erabiltzaileakAdmin"), 2000); 
     } catch (err) {
-      console.error("Error updating user:", err);
+      console.error("Errorea erabiltzailea eguneratzerakoan:", err);
       setError(err.response?.data?.message || "Errorea erabiltzailea eguneratzerakoan.");
     }
   };

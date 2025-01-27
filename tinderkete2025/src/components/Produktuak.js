@@ -28,7 +28,7 @@ const Produktuak = () => {
       image: pilotak,
     },
   ];
-  // Estado para controlar los comentarios de los usuarios (simplificado)
+  
   const [comments] = useState([
     { id: 1, text: "Itzelako zerbitzua, oso profesionala. Ohian entrenatzailea primerako tipoa da.", name: "Ana M." },
     { id: 2, text: "Las pelotas de frontenis son de buena calidad y a buen precio.", name: "Carlos G." },
@@ -43,7 +43,7 @@ const Produktuak = () => {
           <h1 className="text-3xl font-bold text-blue-600">{t('produkt.header')}</h1>
           <p className="text-xl mt-2 text-gray-600">{t('produkt.header2')}</p>
         </div>
-        {/* Produktuak */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <div 
@@ -55,11 +55,11 @@ const Produktuak = () => {
           ))}
         </div>
 
-        {/* Komentarioak */}
+        
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">{t('produkt.iritziak')}</h2>
           <div className="space-y-4 text-center">
-            {comments.slice(0, 2).map((comment) => ( // bi komentario soilik erakutsi
+            {comments.slice(0, 2).map((comment) => ( 
               <div key={comment.id} className="text-sm text-gray-700">
                 <p>"{comment.text}"</p>
                 <p className="text-xs text-gray-500">- {comment.name}</p>

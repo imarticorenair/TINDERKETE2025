@@ -8,33 +8,31 @@ const ipBack = process.env.REACT_APP_BASE_URL;
 function Kontaktu() {
   const { t } = useTranslation();
 
-  // Estado para los valores de los campos del formulario
+  
   const [izen, setIzen] = useState('');
   const [email, setEmail] = useState('');
   const [telefonoa, setTelefonoa] = useState('');
   const [mezua, setMezua] = useState('');
 
-  // handleSubmit donde enviamos los datos al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Obtener el usuario del localStorage (si existe)
     const user = JSON.parse(localStorage.getItem('user'));
   
-    // Crear el payload con los datos del formulario
+    
     const payload = {
-      name: izen,       // Nombre del formulario
-      email,            // Correo del formulario
-      phone: telefonoa, // Teléfono del formulario
-      message: mezua,   // Mensaje del formulario
+      name: izen,       
+      email,            
+      phone: telefonoa, 
+      message: mezua,   
     };
   
-    // Si hay un usuario logueado, añadir el id al payload
+    
     if (user && user.id) {
-      payload.user_id = user.id;  // Solo añadir el id si el usuario está logueado
+      payload.user_id = user.id; 
     }
   
-    console.log('Enviando datos:', payload); // Verifica los datos enviados
+    console.log('Datuak bidaltzen:', payload); 
   
     try {
       const response = await fetch(`${ipBack}/api/send-email`, {
@@ -48,11 +46,11 @@ function Kontaktu() {
       if (response.ok) {
         alert(t('kontaktua.ongiBidali'));
       } else {
-        alert('Error al enviar el correo');
+        alert('Errorea emaila bidaltzean');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al enviar el correo');
+      alert('Errorea emaila bidaltzean');
     }
   };
   
@@ -61,13 +59,12 @@ function Kontaktu() {
     <div className="flex flex-col min-h-screen">
       <Nav />
 
-      <div className="container mx-auto flex-grow px-4 py-8"> {/* Se asegura que el contenido crezca y el footer quede abajo */}
+      <div className="container mx-auto flex-grow px-4 py-8"> 
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-blue-600">{t('kontaktua.header')}</h1>
           <p className="text-xl mt-2 text-gray-600">{t('kontaktua.header2')}</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Campo de nombre */}
           <div className="mb-4">
             <label htmlFor="izen" className="block text-sm font-medium text-gray-700">{t('kontaktua.izena')}</label>
             <input
@@ -81,7 +78,7 @@ function Kontaktu() {
             />
           </div>
 
-          {/* Campo de email */}
+          
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('kontaktua.email')}</label>
             <input
@@ -95,7 +92,7 @@ function Kontaktu() {
             />
           </div>
 
-          {/* Campo de teléfono */}
+          
           <div className="mb-4">
             <label htmlFor="telefonoa" className="block text-sm font-medium text-gray-700">{t('kontaktua.telefonoa')}</label>
             <input
@@ -109,7 +106,7 @@ function Kontaktu() {
             />
           </div>
 
-          {/* Campo de mensaje */}
+          
           <div className="mb-4">
             <label htmlFor="mezua" className="block text-sm font-medium text-gray-700">{t('kontaktua.mezua')}</label>
             <textarea
@@ -122,7 +119,7 @@ function Kontaktu() {
             ></textarea>
           </div>
 
-          {/* Botón de envío */}
+          
           <div className="mb-4">
             <button
               type="submit"

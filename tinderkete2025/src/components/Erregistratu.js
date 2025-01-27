@@ -19,7 +19,21 @@ function Register() {
     e.preventDefault();
   
     if (password !== passwordConfirmation) {
-      alert('Pasahitzak ez dira bat etorri');
+      alert(t('register.pasahitzaGaizki'));
+      return;
+    }
+  
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    const dayDifference = today.getDate() - birthDate.getDate();
+  
+    if (
+      age < 18 ||
+      (age === 18 && (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)))
+    ) {
+      alert(t('register.adinezNagusi')); 
       return;
     }
   
@@ -33,45 +47,44 @@ function Register() {
     };
   
     try {
-      console.log("bodu: "+JSON.stringify(userData));
-        
-        const response = await fetch(`${ipBack}/api/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        });
-        
-        const data = await response.json(); // Leer la respuesta solo una vez
-        
+      console.log('bodu: ' + JSON.stringify(userData));
+  
+      const response = await fetch(`${ipBack}/api/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      const data = await response.json();
+  
       if (response.ok) {
-        // Si la respuesta es exitosa
-        alert('Erabiltzailea ongi sortu da.');
+        alert(t('register.erabilOngi'));
         navigate('/login');
       } else {
-        // Si hubo un error
-        alert('Errorea: ' + (data?.message || 'Daturenbat gaizki sartu da'));
+        alert('Errorea: ' + (data?.message || t('register.datuGaizki')));
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Errorea gertatu da');
+      alert('Error');
     }
   };
+  
   
 
   const { t } = useTranslation();
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Header vacío para diseño */}
+      
       <header className="bg-gray-800 py-4"></header>
 
-      {/* Contenido principal */}
+      
       <div className="flex flex-1 justify-center items-center">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
 
-          {/* Logo */}
+          
           <div className="flex justify-center -mt-20 mb-6">
             <img src={logo} alt="Logo" className="h-24 w-24" />
           </div>
@@ -125,7 +138,7 @@ function Register() {
               className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}  // Vinculado al estado de password
+              onChange={(e) => setPassword(e.target.value)}  
               placeholder={t('register.pasahitzap')}
               required
             />
@@ -138,7 +151,7 @@ function Register() {
               className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               id="passwordc"
               value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}  // Vinculado al estado de passwordConfirmation
+              onChange={(e) => setPasswordConfirmation(e.target.value)}  
               placeholder={t('register.pasahitzaBaieztatu1')}
               required
             />

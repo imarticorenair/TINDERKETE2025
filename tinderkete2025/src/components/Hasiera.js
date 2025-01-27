@@ -20,7 +20,6 @@ import bikoteikono from '../images/bikoteikono.png';
 import tenispelota from '../images/tenispelota.png';
 import raketatenis from '../images/raketatenis.png';
 import jaialaipala from '../images/jaialaipala.png';
-import bikoteaproba from '../images/bikoteaproba.png';
 import bikoteaproba2 from '../images/bikoteaproba2.png';
 
 function Hasiera() {
@@ -30,23 +29,23 @@ function Hasiera() {
 
   useEffect(() => {
     AOS.init({
-      duration: 800, // Animazioaren iraupena (milisegundutan)
-      once: true, // Behin bakarrik egin scroll egiterakoan
+      duration: 800, 
+      once: true, 
     });
   }, []);
 
   return (
     <div className="bg-gray-100">
 
-    {/* Navbar */}
+    
       <Nav />
 
-      {/* Main */}
+      
       <div className="relative">
         <header className="relative flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-indigo-800 min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] lg:min-h-[65vh] xl:min-h-[70vh]">
-          {/* Contenedor principal */}
+         
           <div className="absolute inset-0 flex flex-col sm:flex-row justify-between items-center w-full h-full">
-            {/* Imagen izquierda (oculta en móvil) */}
+          
             <div className="relative w-full sm:w-1/3 h-full flex justify-center items-center hidden sm:block">
               <img
                 className="w-full h-full object-cover animate-fade-right"
@@ -56,7 +55,7 @@ function Hasiera() {
               />
             </div>
 
-            {/* Título y Subtítulo */}
+            
             <div className="relative z-20 text-center px-4 sm:px-0 flex flex-col justify-center items-center sm:mt-15 h-full">
               <h1 className="font-boxing text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white animate-jump-in">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-gray-300 to-white">
@@ -68,7 +67,7 @@ function Hasiera() {
               </p>
             </div>
 
-            {/* Imagen derecha (oculta en móvil) */}
+            
             <div className="relative block w-full sm:w-1/3 h-full flex justify-center items-center hidden sm:block">
               <img
                 className="w-full h-full object-cover animate-fade-left"

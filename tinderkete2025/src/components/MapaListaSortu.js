@@ -37,7 +37,6 @@ function MapaSortu() {
       if (response.status >= 200 && response.status < 300) {
         alert("Mapa ongi sortu da.");
   
-        // Aquí reseteamos los campos del formulario
         setName("");
         setType("");
         setIframe("");

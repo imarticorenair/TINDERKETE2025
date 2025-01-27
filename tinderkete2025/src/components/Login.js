@@ -13,7 +13,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [accountError, setAccountError] = useState(''); // Para manejar el error de cuenta no activada
+  const [accountError, setAccountError] = useState(''); 
   
   const handleEmailValidation = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,7 +28,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleEmailValidation(email); // Validar el correo antes de continuar
+    handleEmailValidation(email); 
     
     if (emailError || !password) {
       setPasswordError(t('login.passwordRequired'));
@@ -43,17 +43,15 @@ function Login() {
 
       const { user, token } = response.data;
 
-      // Verificar si el usuario está activado
+      
       if (user.aktibatua === 0) {
-        alert(t('login.accountNotActivated')); // Mensaje si la cuenta no está activada
-        return; // Detener el proceso de inicio de sesión
+        alert(t('login.accountNotActivated')); 
+        return; 
       }
 
-      // Si todo está bien, almacenar el token y los datos del usuario
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      // Redirigir dependiendo del rol del usuario
       if (user.admin === 1) {
         navigate('/hasieraadmin');
       } else {
@@ -107,7 +105,6 @@ function Login() {
               {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
             </div>
 
-            {/* Mostrar mensaje de error si la cuenta no está activada */}
             {accountError && <p className="text-red-500 text-sm mt-1">{accountError}</p>}
 
             <div className="mb-4">

@@ -48,7 +48,7 @@ const TxapelketakAdmin = () => {
                 throw new Error("Errorea deia egiteko garaian.");
             }
 
-            // Remove the tournament from the state after successful deletion
+            
             setTournaments(tournaments.filter((tournament) => tournament.id !== id));
             alert("Txapelketa egoki ezabatu da.");
         } catch (error) {

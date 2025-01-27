@@ -14,10 +14,10 @@ const ipBack = process.env.REACT_APP_BASE_URL;
 
 function Navbar() {
   const { t } = useTranslation();
-  const [menuOpen, setMenuOpen] = useState(false); // Estado del menú hamburguesa
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Estado del sidebar
-  const location = useLocation(); // Para saber la ruta activa
-  const navigate = useNavigate(); // Para redirigir al hacer logout
+  const [menuOpen, setMenuOpen] = useState(false); 
+  const [sidebarOpen, setSidebarOpen] = useState(false); 
+  const location = useLocation(); 
+  const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -32,33 +32,32 @@ function Navbar() {
 
 
   const getActiveClass = (path) => {
-    return location.pathname === path ? 'bg-amber-500 rounded-md text-white' : 'text-gray-300'; //Dagoen orrialdeko itxura
+    return location.pathname === path ? 'bg-amber-500 rounded-md text-white' : 'text-gray-300'; 
   };
   //const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Erabiltzailea admin baldin bada funtzionalitate bat geihago dago
-  const email = localStorage.getItem('email'); // Emaila berifikatzen du
+  const email = localStorage.getItem('email');
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Hanburguesa menua ireki itxi
+    setMenuOpen(!menuOpen); 
   };
 
   const closeMenu = () => {
-    setMenuOpen(false); // Hanburguesa menua itxi klik egitean link batean
+    setMenuOpen(false); 
   };
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen); // Sidebar ireki itxi
+    setSidebarOpen(!sidebarOpen); 
   };
 
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("email");
     localStorage.removeItem("isAdmin");
-    localStorage.removeItem("user"); // Eliminar el usuario del localStorage
-    localStorage.removeItem("token"); // Eliminar el usuario del localStorage
+    localStorage.removeItem("user"); 
+    localStorage.removeItem("token"); 
     navigate('/');
   };
 
-  // useEffect hizkuntza aldatzeko
   useEffect(() => {
     const fetchErabiltzaile = async () => {
       try {
@@ -69,7 +68,7 @@ function Navbar() {
         );
         const Erabiltzaile = response.data.data;
 
-        // Format the birth_date to "yyyy-MM-dd"
+        
         const formattedBirthDate = Erabiltzaile.birth_date
           ? new Date(Erabiltzaile.birth_date).toISOString().split("T")[0]
           : "";
@@ -81,7 +80,7 @@ function Navbar() {
           img: Erabiltzaile.img,
           hometown: Erabiltzaile.hometown,
           telephone: Erabiltzaile.telephone,
-          birth_date: formattedBirthDate, // Use the formatted date here
+          birth_date: formattedBirthDate, 
           admin: Erabiltzaile.admin,
           aktibatua: Erabiltzaile.aktibatua,
         });
@@ -99,7 +98,7 @@ function Navbar() {
   return (
     <div className="sticky top-0 z-50 shadow-lg">
 
-      {/* Sidebar */}
+      
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 ${sidebarOpen ? 'block' : 'hidden'}`}
         onClick={toggleSidebar}
@@ -116,7 +115,7 @@ function Navbar() {
 
           <hr />
 
-          {/* Logout */}
+         
           <Link
             to="/login"
             className="text-center nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
@@ -126,10 +125,10 @@ function Navbar() {
           </Link>
         </div>
       </div>
-      {/* Navbar */}
+     
       <nav className="bg-gray-800 text-white shadow-lg">
         <div className="container mx-auto flex flex-wrap lg:justify-between justify-center items-center p-4">
-          {/* Logo */}
+         
           <div className="flex items-center justify-center">
             <Link className="flex items-center" to="/hasieraadmin">
               <img
@@ -144,7 +143,7 @@ function Navbar() {
 
 
 
-          {/* Hanburguesa menua txikia */}
+          
           <div className="lg:hidden">
             <button
               className="navbar-burger flex items-center text-blue-600 p-3"
@@ -157,7 +156,7 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Pantaila handitako navbar */}
+          
           <div className="hidden lg:flex space-x-6 mt-3">
             <ul className="flex space-x-4">
 
@@ -188,7 +187,7 @@ function Navbar() {
             </ul>
           </div>
 
-          {/* Hanburguesa menua pantaila txikitan */}
+          
           <div
             className={`lg:hidden ${menuOpen ? 'block' : 'hidden'} relative flex-row text-center text-white p-4 top-full mt-2 w-[100%] rounded-lg active:transition active:duration-700 active:ease-in-out`}
           >
@@ -234,7 +233,7 @@ function Navbar() {
 
           </div>
 
-          {/* Sidebar toggle */}
+          
           <button className="lg:block hidden" onClick={toggleSidebar}>
             <img
               src={`${ipBack}/`+formData.img}

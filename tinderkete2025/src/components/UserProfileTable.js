@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserProfileTable = ({ user, onEditClick }) => {
-  console.log("Datos que recibe UserProfileTable:", user); // Imprime los datos que llegan al componente
+  console.log("Datos que recibe UserProfileTable:", user);
   return (
     <div>
       <table className="rounded-lg min-w-full table-auto w-full max-w-4xl mx-auto bg-slate-50">

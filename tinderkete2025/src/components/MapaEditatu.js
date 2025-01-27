@@ -7,8 +7,8 @@ const ipBack = process.env.REACT_APP_BASE_URL;
 
 
 function MapaEditatu() {
-    const { id } = useParams(); // Obtener el ID del torneo desde la URL
-    const navigate = useNavigate(); // Para redirigir después de actualizar
+    const { id } = useParams();
+    const navigate = useNavigate(); 
     const [formData, setFormData] = useState({
         name: "",
         type: "",
@@ -16,10 +16,10 @@ function MapaEditatu() {
         url: "",
         img: "",
     });
-    const [error, setError] = useState(""); // Para manejar errores
-    const [locations, setLocations] = useState([]); // Lista de ubicaciones
+    const [error, setError] = useState(""); 
+    const [locations, setLocations] = useState([]); 
 
-    // Obtener los datos iniciales del torneo
+    
     useEffect(() => {
         const fetchMapa = async () => {
             try {
@@ -65,8 +65,8 @@ function MapaEditatu() {
                 }
             );
 
-            alert("Mapa ongi eguneratu da!"); // Muestra un mensaje de éxito
-            navigate('/mapakudeatu'); // Redirigir después de la actualización
+            alert("Mapa ongi eguneratu da!"); 
+            navigate('/mapakudeatu');
         } catch (err) {
             console.error("Error updating Mapa:", err);
             setError(err.response?.data?.message || "Error al actualizar el mapa.");
@@ -83,7 +83,7 @@ function MapaEditatu() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
-                    {/* Izena */}
+                    
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                             Izena
@@ -99,7 +99,7 @@ function MapaEditatu() {
                         />
                     </div>
 
-                    {/* Mota */}
+                   
                     <div className="mb-4">
                         <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
                             Mota
@@ -115,7 +115,7 @@ function MapaEditatu() {
                         />
                     </div>
 
-                    {/* Iframe */}
+                   
                     <div className="mb-4">
                         <label htmlFor="iframe" className="block text-gray-700 font-bold mb-2">
                             Iframe
@@ -131,7 +131,7 @@ function MapaEditatu() {
                         ></textarea>
                     </div>
 
-                    {/* Url */}
+                    
                     <div className="mb-4">
                         <label htmlFor="url" className="block text-gray-700 font-bold mb-2">
                             URL
@@ -146,7 +146,7 @@ function MapaEditatu() {
                         />
                     </div>
 
-                    {/* Imagen */}
+                    
                     <div className="mb-4">
                         <label htmlFor="img" className="block text-gray-700 font-bold mb-2">
                             IRUDIA
@@ -155,12 +155,12 @@ function MapaEditatu() {
                             type="file"
                             id="img"
                             name="img"
-                            onChange={handleInputChange} // Manejamos el archivo seleccionado
+                            onChange={handleInputChange} 
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
                         />
                     </div>
 
-                    {/* Botón de enviar */}
+                  
                     <div className="text-center">
                         <button
                             type="submit"

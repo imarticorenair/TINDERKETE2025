@@ -5,36 +5,30 @@ import { useTranslation } from "react-i18next";
 
 const AirQualityList = () => {
   const { t } = useTranslation();
-  const [data, setData] = useState([]); // Para almacenar los datos obtenidos de la API
-  const [loading, setLoading] = useState(false); // Para mostrar el estado de carga
-  const [error, setError] = useState(null); // Para manejar errores
-  const [countyId, setCountyId] = useState("01"); // Valor predeterminado para el condado (Ej. Álava)
-  const [startDate, setStartDate] = useState("2023-12-31T00:00"); // Fecha y hora de inicio
-  const [endDate, setEndDate] = useState("2023-12-31T23:59"); // Fecha y hora de finalización
-  const [lang, setLang] = useState("SPANISH"); // Idioma de la respuesta
+  const [data, setData] = useState([]); 
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState(null); 
+  const [countyId, setCountyId] = useState("01");
+  const [startDate, setStartDate] = useState("2023-12-31T00:00"); 
+  const [endDate, setEndDate] = useState("2023-12-31T23:59");
+  const [lang, setLang] = useState("SPANISH");
 
-  // Lista de condados con sus códigos y nombres
   const counties = [
     { id: "01", name: "Araba" },
     { id: "20", name: "Bizkaia" },
     { id: "48", name: "Gipuzkoa" },
-    // Puedes agregar más condados si es necesario
   ];
 
   const fetchAirQualityData = async () => {
-    setLoading(true); // Iniciar el estado de carga
+    setLoading(true); 
     try {
-      // Codificar las fechas y construir la URL
       const encodedStartDate = encodeURIComponent(startDate);
       const encodedEndDate = encodeURIComponent(endDate);
 
-      // Crear la URL final
       const url = `https://api.euskadi.eus/air-quality/measurements/hourly/counties/${countyId}/from/${encodedStartDate}/to/${encodedEndDate}?lang=SPANISH`;
 
-      // Imprimir la URL generada en la consola
-      console.log("Generated URL:", url); // <-- Aquí se imprime la URL generada
+      console.log("Generated URL:", url);
 
-      // Realizar la solicitud a la API
       const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -47,16 +41,16 @@ const AirQualityList = () => {
       }
 
       const result = await response.json();
-      setData(result); // Guardar los datos obtenidos en el estado
+      setData(result); 
     } catch (error) {
-      setError(error.message); // En caso de error, mostrar el mensaje
+      setError(error.message); 
     } finally {
-      setLoading(false); // Finalizar el estado de carga
+      setLoading(false); 
     }
   };
 
   const handleFetchData = () => {
-    fetchAirQualityData(); // Llamar a la función para obtener los datos
+    fetchAirQualityData(); 
   };
 
   if (loading)
@@ -71,14 +65,14 @@ const AirQualityList = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Nav /> {/* Incluyendo el Nav */}
+      <Nav /> 
       <div className="container mx-auto flex-grow px-4 py-8">
         {" "}
-        {/* Se asegura que el contenido crezca y el footer quede abajo */}
+        
         <h1 className="text-2xl font-bold text-center mb-6 mb-5">
           {t("airearenKalitatea.titulua")}
         </h1>
-        {/* Inputs para los parámetros de la API */}
+        
         <div className="mb-4 text-center">
           <label className="mr-2 mb-2">{t("airearenKalitatea.county")}</label>
           <select
@@ -111,16 +105,6 @@ const AirQualityList = () => {
             className="border px-4 py-2 rounded-md"
           />
           <br />
-          {/* <label className="mr-2 mb-2">{t("airearenKalitatea.language")}</label> */}
-
-          {/* <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value)}
-            className="border px-4 py-2 rounded-md"
-          >
-            <option value="SPANISH">SPANISH</option>
-            <option value="ENGLISH">ENGLISH</option>
-          </select> */}
           <br />
           <button
             onClick={handleFetchData}
@@ -129,7 +113,7 @@ const AirQualityList = () => {
             {t("airearenKalitatea.fetch_data")}
           </button>
         </div>
-        {/* Mostrar los datos obtenidos de la API */}
+        
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border-collapse border border-gray-200">
             <thead>
@@ -151,7 +135,7 @@ const AirQualityList = () => {
             <tbody>
               {data.map((entry, index) => (
                 <React.Fragment key={index}>
-                  {/* Mostrar cada estación y medición */}
+                  
                   {entry.station.map((station) =>
                     station.measurements.map((measurement, idx) => (
                       <tr key={idx} className="hover:bg-gray-50">
@@ -178,7 +162,7 @@ const AirQualityList = () => {
           </table>
         </div>
       </div>
-      <Footer /> {/* Incluyendo el Footer */}
+      <Footer />
     </div>
   );
 };

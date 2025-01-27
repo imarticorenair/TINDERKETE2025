@@ -14,9 +14,9 @@ const Perfila = () => {
 
   const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
-  // Estado de usuario con las propiedades correctas
+ 
   const [user, setUser] = useState({
-    img: perfiltxuri, // Imagen predeterminada
+    img: perfiltxuri, 
     name: "",
     surname: "",
     email: "",
@@ -28,14 +28,14 @@ const Perfila = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
 
-  // Cargar los datos del usuario al montar el componente
+ 
   useEffect(() => {
     console.log("userId recibido:", userId);
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
         console.log("Respuesta de la API:", response.data);
-        setUser(response.data.data); // Ajusta según la estructura de la respuesta de la API
+        setUser(response.data.data);
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
       }
@@ -44,12 +44,12 @@ const Perfila = () => {
     fetchUser();
   }, [userId]);
 
-  // Manejar clic en editar
+  
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  // Manejar cambios en los campos de entrada
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({
@@ -58,12 +58,12 @@ const Perfila = () => {
     }));
   };
 
-  // Manejar envío del formulario
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEditing(false);
 
-    // Preparar el objeto con los datos actualizados
+    
     const updatedUser = {
       //img: user.img,
       name: user.name,
@@ -74,10 +74,10 @@ const Perfila = () => {
       telephone: user.telephone,
     };
 
-    // Enviar los datos actualizados al servidor
+    
     try {
       const response = await axios.put(`${ipBack}/api/user/${userId}`, updatedUser);
-      localStorage.setItem('user', JSON.stringify(response.data.data)); // Guardar datos actualizados en localStorage
+      localStorage.setItem('user', JSON.stringify(response.data.data)); 
       alert('Perfil actualizado con éxito');
     } catch (error) {
       console.error('Error al actualizar los datos:', error.response?.data || error.message);
@@ -86,7 +86,7 @@ const Perfila = () => {
     
   };
 
-  // Manejar cambio de imagen
+  
   const handleImageChange = (newImage) => {
     setUser((prevUser) => ({
       ...prevUser,

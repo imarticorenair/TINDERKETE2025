@@ -20,17 +20,17 @@ function MapaKudeatu() {
             try {
                 const response = await fetch(`${ipBack}/api/lokalekuak`);
 
-                console.log("Server Response:", response); // Log completo de la respuesta
+                console.log("Server Response:", response); 
 
                 if (!response.ok) {
                     throw new Error(`Errorea: ${response.status} ${response.statusText}`);
                 }
 
                 const result = await response.json();
-                console.log("Result JSON:", result); // Log del JSON recibido
+                console.log("Result JSON:", result);
                 setMaps(result.data || []);
             } catch (err) {
-                console.error("Fetch Error:", err.message); // Log del error
+                console.error("Fetch Error:", err.message); 
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -61,7 +61,7 @@ function MapaKudeatu() {
                 throw new Error("Errorea mapa ezabatzerakoan.");
             }
 
-            // Update state only after ensuring the API call is successful
+            
             setMaps((prevMaps) => {
                 const updatedMaps = prevMaps.filter((map) => map.id !== id);
                 console.log("Updated maps state:", updatedMaps);
@@ -76,7 +76,7 @@ function MapaKudeatu() {
         return <p className="text-center text-xl font-semibold">Loading maps...</p>;
     }
 
-    if (error !== null) {  // Check if error is not null (string or other value)
+    if (error !== null) { 
         return <p className="text-center text-red-500 font-semibold">Error: {error}</p>;
     }
 
