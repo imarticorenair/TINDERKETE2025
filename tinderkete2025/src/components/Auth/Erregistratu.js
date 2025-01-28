@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './style.css';
-import logo from '../images/logo.png';
+import '../style.css';
+import logo from '../../images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 const ipBack = process.env.REACT_APP_BASE_URL;

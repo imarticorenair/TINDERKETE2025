@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import logo from '../images/logo.png';
-import logoImage from '../images/1361728.png';
-import '../components/navar.css';
-import logotxuri from '../images/perfiltxuri.png';
-import logout from '../images/logout.png';
+import logo from '../../images/logo.png';
+import logoImage from '../../images/1361728.png';
+import '../../components/navar.css';
+import logotxuri from '../../images/perfiltxuri.png';
+import logout from '../../images/logout.png';
 import { useTranslation } from "react-i18next";
-import ane from '../images/ane.jpg';
+import ane from '../../images/ane.jpg';
 import axios from "axios";
 const ipBack = process.env.REACT_APP_BASE_URL;
 //const imgBack = process.env.REACT_APP_IMAGES_URL;

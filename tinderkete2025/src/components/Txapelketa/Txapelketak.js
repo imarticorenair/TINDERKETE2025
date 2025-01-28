@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import EventCard from "./EventCard";
-// import urnietafrontoiaImg from "../images/urnietafrontoia.jpg";
-// import lezoFrontoiaImg from "../images/LezoFrontoia.jpg";
-// import zestoaFrontoiaImg from "../images/zestoafrontoia.jpg";
-// import agi from '../images/agi.png';
-// import p1 from '../images/pertsona1.jpg';
-// import p2 from '../images/pertsona2.jpg';
-import Nav from './Navbar.js';
-import Footer from './Footer.js';
+import EventCard from "../Txapelketa/EventCard.js";
+// import urnietafrontoiaImg from "../../images/urnietafrontoia.jpg";
+// import lezoFrontoiaImg from "../../images/LezoFrontoia.jpg";
+// import zestoaFrontoiaImg from "../../images/zestoafrontoia.jpg";
+// import agi from '../../images/agi.png';
+// import p1 from '../../images/pertsona1.jpg';
+// import p2 from '../../images/pertsona2.jpg';
+import Nav from '../Layout/Navbar.js';
+import Footer from '../Layout/Footer.js';
 import { useTranslation } from "react-i18next";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
@@ -19,11 +19,11 @@ const Txapelketak = () => {
   const getImagePath = (imageName) => {
     try {
       
-      return require(`../images/${imageName}`);
+      return require(`../../images/${imageName}`);
     } catch (err) {
       console.error("Error al cargar la imagen:", err);
      
-      return require(`../images/comingsoon.jpg`);
+      return require(`../../images/comingsoon.jpg`);
     }
   };
 

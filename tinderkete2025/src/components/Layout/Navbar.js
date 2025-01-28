@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../images/logo.png";
-import logotxuri from "../images/perfiltxuri.png";
-import logout from "../images/logout.png";
+import logo from "../../images/logo.png";
+import logotxuri from "../../images/perfiltxuri.png";
+import logout from "../../images/logout.png";
 import { useTranslation } from "react-i18next";
-import "../i18n"; // i18n konfigurazioa
-import logoImage from "../images/1361728.png";
+import "../../i18n"; // i18n konfigurazioa
+import logoImage from "../../images/1361728.png";
 import axios from "axios";
 const ipBack = process.env.REACT_APP_BASE_URL;
 //const imgBack = process.env.IMG;

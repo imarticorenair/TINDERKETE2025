@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PerfilaCard from './PerfilaCard.js';
-import perfiltxuri from '../images/perfiltxuri.png';
-import Nav from './Navbar.js';
-import Footer from './Footer.js';
+import perfiltxuri from '../../images/perfiltxuri.png';
+import Nav from '../Layout/Navbar.js';
+import Footer from '../Layout/Footer.js';
 import UserProfileTable from './UserProfileTable';
 import { useTranslation } from "react-i18next";
 import axios from "axios";

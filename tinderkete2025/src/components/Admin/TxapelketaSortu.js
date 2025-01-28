@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import EventCard from "./EventCard";
+import EventCard from "../Txapelketa/Txapelketak.js";
 import NavbarAdmin from "./NavbarAdmin.js";
-import Footer from "./Footer.js";
+import Footer from "../Layout/Footer";
 import axios from 'axios';
 const ipBack = process.env.REACT_APP_BASE_URL;
 

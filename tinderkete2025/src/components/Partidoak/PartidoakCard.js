@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Nav from './Navbar.js';
-import Footer from './Footer.js';
+import Nav from '../Layout/Navbar.js';
+import Footer from '../Layout/Footer.js';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import libre from "../images/libre.png"; 
+import libre from "../../images/libre.png"; 
 const ipBack = process.env.REACT_APP_BASE_URL;
 const imgBack = process.env.IMG;
 

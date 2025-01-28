@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Nav from './Navbar.js'; 
-import Footer from './Footer.js';
+import Nav from '../Layout/Navbar.js'; 
+import Footer from '../Layout/Footer.js';
 import { useTranslation } from "react-i18next";
 const ipBack = process.env.REACT_APP_BASE_URL;
 

@@ -1,10 +1,10 @@
 import React from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
-import Footer from "./Footer.js";
+import Footer from "../Layout/Footer";
 import { useTranslation } from "react-i18next";
-import ezarpenak from '../images/ezarpenak.png';
-import ezarpenak2 from '../images/ezarpenak2.png';
-import ezarpenak3 from '../images/ezarpenak3.png';
+import ezarpenak from '../../images/ezarpenak.png';
+import ezarpenak2 from '../../images/ezarpenak2.png';
+import ezarpenak3 from '../../images/ezarpenak3.png';
 
 function Hasiera() {
   const { t } = useTranslation(); 

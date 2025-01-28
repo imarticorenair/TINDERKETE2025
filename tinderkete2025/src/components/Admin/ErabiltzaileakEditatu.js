@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin";
-import Footer from "./Footer";
+import Footer from "../Layout/Footer";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
-import Footer from "./Footer.js";
+import Footer from "../Layout/Footer";
 import { useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;
 

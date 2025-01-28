@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import img1 from '../images/facebookAplicacion.png';
-import img2 from '../images/logoInsta.png';
-import img3 from '../images/Xaplicacion.png';
-import logo from '../images/logo.png';
+import img1 from '../../images/facebookAplicacion.png';
+import img2 from '../../images/logoInsta.png';
+import img3 from '../../images/Xaplicacion.png';
+import logo from '../../images/logo.png';
 import { useTranslation } from "react-i18next"; 
-import '../i18n'; 
+import '../../i18n'; 
 
 function Footer() {
     const { t, i18n } = useTranslation(); 

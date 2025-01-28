@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
-import Footer from "./Footer.js";
+import Footer from "../Layout/Footer";
 import { useTranslation } from "react-i18next"; 
 
 function TxapelketaSortu() {

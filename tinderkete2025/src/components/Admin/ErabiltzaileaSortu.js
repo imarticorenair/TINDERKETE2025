@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import axios from "axios";
-import Footer from "./Footer";
+import Footer from "../Layout/Footer";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
 function ErabiltzaileaSortu() {

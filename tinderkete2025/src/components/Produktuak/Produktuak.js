@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import ProductCard from './ProductCard'; 
-import entrenatzailea from '../images/oihanEntrenatzailea.jpg'; 
-import pala from '../images/pala.jpg'; 
-import pilotak from '../images/frontenisPelotak.jpg'; 
-import Nav from './Navbar.js'; 
-import Footer from './Footer.js';
+import ProductCard from './ProductCard.js'; 
+import entrenatzailea from '../../images/oihanEntrenatzailea.jpg'; 
+import pala from '../../images/pala.jpg'; 
+import pilotak from '../../images/frontenisPelotak.jpg'; 
+import Nav from '../Layout/Navbar.js'; 
+import Footer from '../Layout/Footer.js';
 import { useTranslation } from "react-i18next";
 
 

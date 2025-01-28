@@ -1,26 +1,26 @@
 import React from "react";
-import Nav from "./Navbar.js";
-import Footer from "./Footer.js";
-import bat from "../images/LezoFrontoia.jpg";
-import bi from "../images/Tinder-Emblem.png";
-import hiru from "../images/urnietafrontoia.jpg";
-import eskupilota from "../images/eskupilota.jpg";
-import trinkete from "../images/trinkete.jpg";
-import comingsoon from "../images/comingsoon.jpg";
+import Nav from "../Layout/Navbar.js";
+import Footer from "../Layout/Footer.js";
+import bat from "../../images/LezoFrontoia.jpg";
+import bi from "../../images/Tinder-Emblem.png";
+import hiru from "../../images/urnietafrontoia.jpg";
+import eskupilota from "../../images/eskupilota.jpg";
+import trinkete from "../../images/trinkete.jpg";
+import comingsoon from "../../images/comingsoon.jpg";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import AOS from 'aos';
 import "aos/dist/aos.css";
 
-import bikotetenis from '../images/bikotetenis.png';
-import bikote from '../images/bikotea.png';
-import palaikono from '../images/palaikono.png';
-import bikoteikono from '../images/bikoteikono.png';
-import tenispelota from '../images/tenispelota.png';
-import raketatenis from '../images/raketatenis.png';
-import jaialaipala from '../images/jaialaipala.png';
-import bikoteaproba2 from '../images/bikoteaproba2.png';
+import bikotetenis from '../../images/bikotetenis.png';
+import bikote from '../../images/bikotea.png';
+import palaikono from '../../images/palaikono.png';
+import bikoteikono from '../../images/bikoteikono.png';
+import tenispelota from '../../images/tenispelota.png';
+import raketatenis from '../../images/raketatenis.png';
+import jaialaipala from '../../images/jaialaipala.png';
+import bikoteaproba2 from '../../images/bikoteaproba2.png';
 
 function Hasiera() {
   const navigate = useNavigate();
