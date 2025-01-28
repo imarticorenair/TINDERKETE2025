@@ -22,7 +22,7 @@ import TxapelketakAdmin from './TxapelketakAdmin';
 import TxapelketaEditatu from './TxapelketaEditatu';
 import Txapelketakkudeatu from './TxapelketakKudeatu';
 import NavbarAdmin from './NavbarAdmin';
-import HasieraAdmin from './HasieraAdmin';
+import HasieraAdmin from './Admin/HasieraAdmin';
 import MapaListaSortu from './MapaListaSortu';
 import MapaKudeatu from "./MapaKudeatu";
 import MapaEditatu from "./MapaEditatu";
