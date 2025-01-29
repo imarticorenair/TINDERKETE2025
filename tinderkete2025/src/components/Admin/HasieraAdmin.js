@@ -1,161 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
-const ipBack = process.env.REACT_APP_BASE_URL;
+import ezarpenak from '../../images/ezarpenak.png';
+import ezarpenak2 from '../../images/ezarpenak2.png';
+import ezarpenak3 from '../../images/ezarpenak3.png';
 
-function MapaKudeatu() {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const [maps, setMaps] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user')); 
-
-    if (!user || user.role !== 'admin') {
-      navigate('/');
-      window.location.reload();
-    } else {
-      const fetchMaps = async () => {
-        try {
-          const response = await fetch(`${ipBack}/api/lokalekuak`);
-
-          console.log("Server Response:", response);
-
-          if (!response.ok) {
-            throw new Error(`Errorea: ${response.status} ${response.statusText}`);
-          }
-
-          const result = await response.json();
-          console.log("Result JSON:", result);
-          setMaps(result.data || []);
-        } catch (err) {
-          console.error("Fetch Error:", err.message);
-          setError(err.message);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchMaps();
-    }
-  }, [navigate]);
-
-  const handleSortu = () => {
-    navigate("/mapalistasortu");
-  };
-
-  const handleEdit = (id) => {
-    navigate(`/mapaeditatu/${id}`);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      const response = await fetch(`${ipBack}/api/lokalekuakDelete/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Errorea mapa ezabatzerakoan.");
-      }
-
-      setMaps((prevMaps) => {
-        const updatedMaps = prevMaps.filter((map) => map.id !== id);
-        console.log("Updated maps state:", updatedMaps);
-        return updatedMaps;
-      });
-    } catch (err) {
-      alert(`Errorea mapa ezabatzerakoan: ${err.message}`);
-    }
-  };
-
-  if (loading) {
-    return <p className="text-center text-xl font-semibold">Loading maps...</p>;
-  }
-
-  if (error !== null) {
-    return <p className="text-center text-red-500 font-semibold">Error: {error}</p>;
-  }
+function Hasiera() {
+  const { t } = useTranslation(); 
 
   return (
-    <div>
+    <div className="bg-gray-100">
+      
       <NavbarAdmin />
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600">{t('mapakSortu.header')}</h1>
-          <p className="text-xl mt-2 text-gray-600">{t('mapakSortu.subHeader')}</p>
-        </div>
-        <div>
-          <button
-            onClick={() => handleSortu()}
-            className="flex justify-center mx-auto bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-          >
-            Sortu
-          </button>
-        </div>
-        <div className="overflow-x-auto shadow-md rounded-lg my-4">
-          <table className="min-w-full bg-white table-auto border-collapse">
-            <thead>
-              <tr className="bg-blue-500 text-white">
-                <th className="px-4 py-2">Editatu</th>
-                <th className="px-4 py-2">Ezabatu</th>
-                <th className="px-4 py-2">ID</th>
-                <th className="px-4 py-2">Izena</th>
-                <th className="px-4 py-2">Mota</th>
-                <th className="px-4 py-2">Iframe</th>
-                <th className="px-4 py-2">Url</th>
-                <th className="px-4 py-2">Img</th>
-              </tr>
-            </thead>
-            <tbody>
-              {maps.length === 0 ? (
-                <tr>
-                  <td colSpan="7" className="text-center py-4 text-gray-600">No maps found.</td>
-                </tr>
-              ) : (
-                maps.map((map) => (
-                  <tr key={map.id} className="border-b hover:bg-gray-100">
-                    <td className="px-4 py-2">
-                      <button
-                        onClick={() => handleEdit(map.id)}
-                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-                      >
-                        Edit
-                      </button>
-                    </td>
-                    <td className="px-4 py-2">
-                      <button
-                        onClick={() => handleDelete(map.id)}
-                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-                      >
-                        Ezabatu
-                      </button>
-                    </td>
-                    <td className="px-4 py-2 text-center">{map.id}</td>
-                    <td className="px-4 py-2">{map.name}</td>
-                    <td className="px-4 py-2">{map.type}</td>
-                    <td className="px-4 py-2">{map.iframe}</td>
-                    <td className="px-4 py-2">{map.url}</td>
-                    <td className="px-4 py-2">{map.img}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+
+      
+      <div className="relative">
+        <header className="relative flex items-center justify-center bg-gradient-to-r from-blue-400 to-indigo-800 h-[35vh] md:h-[45vh] xl:h-[65vh]">
+          <div className="absolute inset-0 flex flex-col md:flex-row justify-between items-center w-full">
+            <div className="relative w-full md:w-1/3 h-full flex justify-center items-center">
+             
+            </div>
+            
+            <div className="relative z-20 text-center p-4">
+              <h1 className="font-boxing text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white animate-jump-in">
+                <span className="bg-clip-text text-6xl text-transparent text-white">
+                  {t('hasieraAdmin.header')}
+                </span>
+              </h1>
+            </div>
+            <div className="relative w-full md:w-1/3 h-full flex justify-center items-center">
+             
+            </div>
+          </div>
+        </header>
       </div>
 
+      
+      <section className="flex flex-wrap justify-center items-center w-full relative bg-white py-8">
+        <div className="bg-blue-400 rounded-full p-4 w-24 md:w-32 lg:w-40 animate-fade-right animate-delay-300 mx-4 mb-4">
+          <img src={ezarpenak2} alt="Ezarpenak 2" className="w-full h-full object-cover rounded-full" />
+        </div>
+        <div className="bg-blue-600 rounded-full p-4 w-24 md:w-32 lg:w-40 animate-fade animate-delay-500 mx-4 mb-4">
+          <img className="rounded-full" src={ezarpenak} alt="Ezarpenak" />
+        </div>
+        <div className="bg-blue-400 rounded-full p-4 w-24 md:w-32 lg:w-40 animate-fade-left animate-delay-300 mx-4 mb-4">
+          <img src={ezarpenak3} alt="Ezarpenak 3" className="w-full h-full object-cover rounded-full" />
+        </div>
+      </section>    
+
+     
       <Footer />
     </div>
   );
 }
 
-export default MapaKudeatu;
+export default Hasiera;
