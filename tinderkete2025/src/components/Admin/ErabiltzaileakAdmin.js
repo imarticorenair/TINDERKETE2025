@@ -129,13 +129,7 @@ const ErabiltzaileakAdmin = () => {
                     <td className="px-4 py-2">{user.name}</td>
                     <td className="px-4 py-2">{user.surname}</td>
                     <td className="px-4 py-2">{user.email}</td>
-                    <td className="px-4 py-2">
-                      {user.img ? (
-                        <img src={user.img} alt="User" className="w-16 h-16 rounded-full" />
-                      ) : (
-                        <span>No Image</span>
-                      )}
-                    </td>
+                    <td className="px-4 py-2">{user.img}</td>
                     <td className="px-4 py-2">{user.hometown}</td>
                     <td className="px-4 py-2">{user.telephone}</td>
                     <td className="px-4 py-2">{user.birth_date}</td>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EventCard from "../Txapelketa/Txapelketak.js";
+import EventCard from "../Txapelketa/EventCard.js";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
 import axios from 'axios';
