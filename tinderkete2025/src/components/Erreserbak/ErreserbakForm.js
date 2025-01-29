@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Nav from '../Layout/Navbar.js';
-import Footer from '../Erreserbak/ErreserbakForm.js';
+import Footer from '../Layout/Footer.js';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
-function Erreserbak() {
+function ErreserbakForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -209,4 +209,4 @@ function Erreserbak() {
   );
 }
 
-export default Erreserbak;
+export default ErreserbakForm;
