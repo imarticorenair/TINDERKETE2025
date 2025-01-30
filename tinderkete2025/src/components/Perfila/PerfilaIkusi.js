@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PerfilaCard from './PerfilaCard.js';
-import perfiltxuri from '../../images/perfiltxuri.png';
 import Nav from '../Layout/Navbar.js';
 import Footer from '../Layout/Footer.js';
 import UserProfileTable from './UserProfileTable';
@@ -14,9 +13,8 @@ const Perfila = () => {
 
   const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
- 
   const [user, setUser] = useState({
-    img: perfiltxuri, 
+    img: "",
     name: "",
     surname: "",
     email: "",
@@ -28,7 +26,6 @@ const Perfila = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
 
- 
   useEffect(() => {
     console.log("userId recibido:", userId);
     const fetchUser = async () => {
@@ -44,12 +41,10 @@ const Perfila = () => {
     fetchUser();
   }, [userId]);
 
-  
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser((prevUser) => ({
@@ -58,39 +53,46 @@ const Perfila = () => {
     }));
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEditing(false);
 
-    
-    const updatedUser = {
-      //img: user.img,
-      name: user.name,
-      surname: user.surname,
-      email: user.email,
-      hometown: user.hometown,
-      birth_date: user.birth_date,
-      telephone: user.telephone,
-    };
+    const formData = new FormData();
 
-    
+    formData.append("name", user.name);
+    formData.append("surname", user.surname);
+    formData.append("email", user.email);
+    formData.append("hometown", user.hometown);
+    formData.append("birth_date", user.birth_date);
+    formData.append("telephone", user.telephone);
+    if (user.img) {
+      formData.append("img", user.img);
+    }
+
     try {
-      const response = await axios.put(`${ipBack}/api/user/${userId}`, updatedUser);
-      localStorage.setItem('user', JSON.stringify(response.data.data)); 
+      const response = await axios.post(`${ipBack}/api/user/${userId}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      // Actualiza los datos del usuario en el estado local
+      setUser(response.data.data);  // Aquí actualizas el estado con la respuesta de la API
       alert('Perfil actualizado con éxito');
+      
     } catch (error) {
       console.error('Error al actualizar los datos:', error.response?.data || error.message);
       alert(`Error al actualizar: ${error.response?.data?.message || error.message}`);
     }
-    
   };
 
-  
-  const handleImageChange = (newImage) => {
+  useEffect(() => {
+    console.log('User aldaketa', user);
+  }, [user]);
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0];
     setUser((prevUser) => ({
       ...prevUser,
-      image: newImage,
+      img: selectedImage,
     }));
   };
 
@@ -167,6 +169,17 @@ const Perfila = () => {
                     name="telephone"
                     value={user.telephone}
                     onChange={handleInputChange}
+                    className="w-full p-2 border border-gray-300 rounded"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="img" className="block font-bold text-gray-700">Irudia</label>
+                  <input
+                    type="file"
+                    id="img"
+                    name="img"
+                    onChange={handleImageChange}
                     className="w-full p-2 border border-gray-300 rounded"
                   />
                 </div>
