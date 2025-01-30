@@ -39,7 +39,7 @@ function ErabiltzaileaEditatu() {
           name: Erabiltzaile.name,
           surname: Erabiltzaile.surname,
           email: Erabiltzaile.email,
-          // img: Erabiltzaile.img,
+          img: "",
           hometown: Erabiltzaile.hometown,
           telephone: Erabiltzaile.telephone,
           birth_date: formattedBirthDate,
@@ -63,28 +63,34 @@ function ErabiltzaileaEditatu() {
     });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, img: e.target.files[0] });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formDataToSend = {
-      name: formData.name,
-      surname: formData.surname,
-      email: formData.email,
-      // img: formData.img,
-      hometown: formData.hometown,
-      telephone: formData.telephone,
-      birth_date: formData.birth_date,
-      admin: formData.admin,
-      aktibatua: formData.aktibatua,
-    };
+    const formDataToSend = new FormData();
+
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("surname", formData.surname);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("hometown", formData.hometown);
+    formDataToSend.append("telephone", formData.telephone);
+    formDataToSend.append("birth_date", formData.birth_date);
+    formDataToSend.append("admin", formData.admin ? 1 : 0);
+    formDataToSend.append("aktibatua", formData.aktibatua ? 1 : 0);
+    if (formData.img) {
+      formDataToSend.append("img", formData.img);
+    }
 
     console.log('formdatatosend: ', formDataToSend);
     try {
-      const response = await axios.put(`${ipBack}/api/user/${id}`, formDataToSend);
+      const response = await axios.post(
+        `${ipBack}/api/user/${id}`,
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log('Respuesta del servidor:', response);
 
       setSuccessMessage("Erabiltzailea eguneratu da!");
@@ -98,10 +104,6 @@ function ErabiltzaileaEditatu() {
       }
     }
   };
-
-  // useEffect(() => {
-  //   console.log('Estado de formData actualizado: ', formData);
-  // }, [formData]); // Esto se ejecutará cada vez que `formData` cambie.
 
   return (
     <div className="flex flex-col min-h-screen">
