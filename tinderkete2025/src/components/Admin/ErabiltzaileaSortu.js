@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import axios from "axios";
 import Footer from "../Layout/Footer";
+import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 const ipBack = process.env.REACT_APP_BASE_URL;
 
 function ErabiltzaileaSortu() {
+  const navigate = useNavigate(); // Inicializamos el hook de navegación
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -47,6 +50,7 @@ function ErabiltzaileaSortu() {
     if (formData.img) {
       formDataToSend.append("img", formData.img);
     }
+
     try {
       const response = await axios.post(
         `${ipBack}/api/userStore`,
@@ -61,6 +65,10 @@ function ErabiltzaileaSortu() {
       console.log("Response:", response.data);
       setUserCreated(response.data.data);
       setError("");
+
+      // Redirigimos al usuario a la página de administración de usuarios
+      navigate('/erabiltzaileakAdmin'); // Redirige a la página de administración de usuarios
+
     } catch (error) {
       setError(
         error.response?.data?.message || "Errorea API datuak bidaltzean"
@@ -292,4 +300,5 @@ function ErabiltzaileaSortu() {
     </div>
   );
 }
+
 export default ErabiltzaileaSortu;

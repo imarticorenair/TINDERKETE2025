@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import EventCard from "../Txapelketa/Txapelketak.js";
+import { useNavigate } from 'react-router-dom';
+import EventCard from "../Txapelketa/EventCard.js";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
 import axios from 'axios';
@@ -21,6 +22,7 @@ function TxapelketaSortu() {
   const [error, setError] = useState(""); 
   const [locations, setLocations] = useState([]); 
 
+  const navigate = useNavigate();
   
   useEffect(() => {
     const fetchLocations = async () => {
@@ -70,6 +72,9 @@ function TxapelketaSortu() {
       console.log("Response:", response.data);
       setTournamentCreated(response.data.data);
       setError(""); 
+      
+      // Si el torneo fue creado, redirige a TxapelketakAdmin
+      navigate("/TxapelketakAdmin"); // Redirigir
     } catch (error) {
       setError(error.response?.data?.message || "Error al enviar los datos a la API");
       console.error("Error:", error.response?.data || error.message);
@@ -178,7 +183,9 @@ function TxapelketaSortu() {
                 <button
                   type="submit"
                   className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
-                >Sortu
+                  onClick={() => navigate("/TxapelketakAdmin")} 
+                >
+                  Sortu
                 </button>
               </form>
             

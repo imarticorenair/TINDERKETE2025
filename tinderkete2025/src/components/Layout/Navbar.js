@@ -61,7 +61,8 @@ function Navbar() {
     localStorage.removeItem("isAdmin");
     localStorage.removeItem("user"); 
     localStorage.removeItem("token"); 
-    window.location.reload();
+    //window.location.reload();
+    navigate("/");
   };
 
   const { t, i18n } = useTranslation(); 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavbarAdmin from './NavbarAdmin.js';
 import Footer from '../Layout/Footer';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import axios from 'axios';
 const ipBack = process.env.REACT_APP_BASE_URL;

@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import NavbarAdmin from './NavbarAdmin.js';
 import Footer from '../Layout/Footer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Importamos useNavigate
 import { useTranslation } from "react-i18next";
 import axios from 'axios';
 const ipBack = process.env.REACT_APP_BASE_URL;
 
-
 function MapaSortu() {
-
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Inicializamos el hook de navegación
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
@@ -20,7 +18,7 @@ function MapaSortu() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const mapaData = {
       name: name,
       type: type,
@@ -28,20 +26,24 @@ function MapaSortu() {
       url: url,
       img: img,
     };
-  
+
     console.log(mapaData);
-  
+
     try {
       const response = await axios.post(`${ipBack}/api/lokalekuak`, mapaData);
-  
+
       if (response.status >= 200 && response.status < 300) {
         alert("Mapa ongi sortu da.");
-  
+
+        // Limpiamos los campos del formulario
         setName("");
         setType("");
         setIframe("");
         setUrl("");
         setImg("");
+
+        // Redirigimos a la página de mapas gestionados
+        navigate('/mapakudeatu'); // Redirige a /mapakudeatu después de crear el mapa
       } else {
         alert("Errorea: " + (response.data?.message || "Daturenbat gaizki sartu da"));
       }
@@ -50,10 +52,6 @@ function MapaSortu() {
       alert("Errorea gertatu da: " + (error.response?.data?.message || error.message));
     }
   };
-  
-  
-  
-
 
   return (
     <div>
