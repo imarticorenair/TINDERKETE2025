@@ -35,6 +35,7 @@ i18n
               "notLoggedInMessage" : "Not logged in? Check in now!",
               "price": "Price",
               "noReservations": "No reservations",
+              "itzuli": "Go back"
             },
             "login":{
               "password" : "Password",
@@ -94,8 +95,8 @@ i18n
                 "fetch_data" : "Send"      
             },
             "partidak": {
-              "header": "Public and private matches",
-              "description": "Choose if you want to join a private or public match.",
+              "header": "Matches",
+              "description": "Choose which match you want to register for.",
               "public": "Public",
               "private": "Private",
               "frontoia":"Frontons",
@@ -257,6 +258,7 @@ i18n
               "notLoggedInMessage" : "Ez zaude logeatuta? Logeatu orain!",
               "price": "Prezioa",
               "noReservations": "Ez duzu erreserbarik",
+              "itzuli": "Itzuli"
 
             },
             "login":{
@@ -318,8 +320,8 @@ i18n
                   
             },
             "partidak": {
-              "header": "Partida publiko eta pribatuak",
-              "description": "Aukeratu partida pribatu edo publiko batean izena eman nahi duzun.",
+              "header": "Partidak",
+              "description": "Aukeratu zein partidatan izena eman nahi duzun.",
               "public": "Publikoak",
               "private": "Pribatuak",
               "frontoia":"Frontoia",

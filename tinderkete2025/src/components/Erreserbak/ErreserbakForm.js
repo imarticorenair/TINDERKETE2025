@@ -105,6 +105,11 @@ function ErreserbakForm() {
   };
 
   const handleLoginRedirect = () => navigate("/login");
+  const handleLoginRedirect2 = () => {
+    navigate("/erreserbak");
+    window.location.reload(); 
+  };
+  
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -167,15 +172,25 @@ function ErreserbakForm() {
 
               {showLoginMessage && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-                  <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <p className="text-red-600 mb-4">{t('erreserbak.notLoggedInMessage')}</p>
+                <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+                  <p className="text-red-600 mb-4">{t('erreserbak.notLoggedInMessage')}</p>
+                  
+                  <div className="flex flex-col gap-4"> 
                     <button
                       onClick={handleLoginRedirect}
                       className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700"
-                    >Login
+                    >
+                      Login
+                    </button>
+                    <button
+                      onClick={handleLoginRedirect2}
+                      className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700"
+                    >
+                      {t('erreserbak.itzuli')}
                     </button>
                   </div>
                 </div>
+              </div>
               )}
             </div>
           </div>

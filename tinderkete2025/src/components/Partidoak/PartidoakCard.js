@@ -14,7 +14,8 @@ function PartidoakCard() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [reservations, setReservations] = useState([]);
-  const [responseMessage, setResponseMessage] = useState(''); 
+  const [responseMessage, setResponseMessage] = useState('');
+  const [showLoginMessage, setShowLoginMessage] = useState(false); // Estado para controlar la visibilidad del modal
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
@@ -35,16 +36,14 @@ function PartidoakCard() {
   const handleJoinClick = (reservation) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login");
+      setShowLoginMessage(true); // Muestra el modal si no hay token
       return;
     } else {
-      axios.post(`${ipBack}/api/matches/${reservation.id}/users`, {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
+      axios.post(`${ipBack}/api/matches/${reservation.id}/users`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         }
-      )
+      })
         .then(response => {
           console.log(response.data);
           setResponseMessage(response.data.message || t('partidak.success')); 
@@ -58,6 +57,16 @@ function PartidoakCard() {
     }
   };
 
+  const handleLoginRedirect = () => {
+    navigate("/login");
+    setShowLoginMessage(false); // Cierra el modal después de redirigir
+  };
+
+  const handleBackRedirect = () => {
+    navigate("/PartidoakCard");
+    setShowLoginMessage(false); // Cierra el modal
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Nav />
@@ -67,7 +76,6 @@ function PartidoakCard() {
           <p className="text-xl mt-2 text-gray-600">{t('partidak.description')}</p>
         </div>
 
-        
         <div className="container mx-auto flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
           {reservations.map((reservation, index) => (
             <div
@@ -139,6 +147,29 @@ function PartidoakCard() {
       </div>
 
       <Footer />
+
+      {/* Modal para mostrar cuando no hay token */}
+      {showLoginMessage && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p className="text-red-600 mb-4">{t('erreserbak.notLoggedInMessage')}</p>
+            <div className="flex flex-col gap-4">
+              <button
+                onClick={handleLoginRedirect}
+                className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700"
+              >
+                Login
+              </button>
+              <button
+                onClick={handleBackRedirect}
+                className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700"
+              >
+                {t('erreserbak.itzuli')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
