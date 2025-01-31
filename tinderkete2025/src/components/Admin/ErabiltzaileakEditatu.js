@@ -91,7 +91,7 @@ function ErabiltzaileaEditatu() {
           },
         }
       );
-      console.log('Respuesta del servidor:', response);
+      console.log('Zerbitzariko mezua:', response);
 
       setSuccessMessage("Erabiltzailea eguneratu da!");
       setError("");

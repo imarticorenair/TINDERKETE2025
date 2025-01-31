@@ -31,7 +31,6 @@ const Perfila = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
-        console.log("Respuesta de la API:", response.data);
         setUser(response.data.data);
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
@@ -77,6 +76,7 @@ const Perfila = () => {
       // Actualiza los datos del usuario en el estado local
       setUser(response.data.data);  // Aquí actualizas el estado con la respuesta de la API
       alert('Perfil actualizado con éxito');
+      window.location.reload();
       
     } catch (error) {
       console.error('Error al actualizar los datos:', error.response?.data || error.message);

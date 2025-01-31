@@ -3,10 +3,12 @@ import EventCard from "../Txapelketa/EventCard.js";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
 
 function TxapelketaSortu() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     location: "",
@@ -32,10 +34,10 @@ function TxapelketaSortu() {
         if (result.success && Array.isArray(result.data)) {
           setLocations(result.data);
         } else {
-          console.error('La respuesta de la API no contiene un arreglo de ubicaciones:', result);
+          console.error('zerbitzariak ez du kokalekurik:', result);
         }
       } catch (error) {
-        console.error('Error fetching locations:', error);
+        console.error('Errorea kokalekuak bilatzen:', error);
       }
     };
 
@@ -70,8 +72,9 @@ function TxapelketaSortu() {
       console.log("Response:", response.data);
       setTournamentCreated(response.data.data);
       setError(""); 
+      navigate('/txapelketakAdmin');
     } catch (error) {
-      setError(error.response?.data?.message || "Error al enviar los datos a la API");
+      setError(error.response?.data?.message || "Errorea txapelketak aurkitzen");
       console.error("Error:", error.response?.data || error.message);
     }
   };
@@ -184,7 +187,7 @@ function TxapelketaSortu() {
             
               {tournamentCreated && (
                 <div className="mt-4 text-center text-green-500">
-                  Tournament created: {tournamentCreated.title}
+                  Txapelketa sortuta: {tournamentCreated.title}
                 </div>
               )}
               {error && (
