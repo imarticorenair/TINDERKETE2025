@@ -78,11 +78,12 @@ const Perfila = () => {
     try {
       const response = await axios.put(`${ipBack}/api/user/${userId}`, updatedUser);
       localStorage.setItem('user', JSON.stringify(response.data.data)); 
-      alert('Perfil actualizado con éxito');
+      alert(t("perfila.aktualizatu"));
     } catch (error) {
-      console.error('Error al actualizar los datos:', error.response?.data || error.message);
-      alert(`Error al actualizar: ${error.response?.data?.message || error.message}`);
+      console.error(t("perfila.errore1"), error.response?.data || error.message);
+      alert(`${t("perfila.errore2")} ${error.response?.data?.message || error.message}`);
     }
+    
     
   };
 

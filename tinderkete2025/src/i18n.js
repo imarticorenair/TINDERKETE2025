@@ -226,7 +226,16 @@ i18n
               "bidali" : "Submit"
             },
             "perfila": {
-              "errorea" : "Error editing profile data"
+              "errorea" : "Error editing profile data",
+              "argazkia" :"Change profile picture",
+              "editatu": "Edit profile",
+              "1": "First names",
+              "2": "Date of Birth",
+              "3": "Town",
+              "4": "Phone",
+              "aktualizatu": "Profile updated successfully",
+              "errore1": "An error occurred while updating data:",
+              "errore2": "Error updating:",
             }
           }
         },
@@ -439,7 +448,16 @@ i18n
               "bidali" : "Bidali"
             },
             "perfila": {
-              "errorea" : "Errore bat gertatu da profilaren datuak editatzean"
+              "errorea" : "Errore bat gertatu da profilaren datuak editatzean",
+              "argazkia": "Argazkia aldatu",
+              "editatu": "Profila editatu",
+              "1": "Izen abizenak",
+              "2": "Jaiotze data",
+              "3": "Jaioterria",
+              "4": "Telefonoa",
+              "aktualizatu": "Profila behar bezala eguneratu da",
+              "errore1": "Errore bat gertatu da datuak eguneratzean:",
+              "errore2": "Errorea eguneratzean:",
             }
           }
         }
