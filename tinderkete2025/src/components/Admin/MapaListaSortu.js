@@ -11,49 +11,49 @@ function MapaSortu() {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    type: "",
+    iframe: "",
+    url: "",
+    img: "",
+  });
 
-  const [name, setName] = useState('');
-  const [type, setType] = useState('');
-  const [iframe, setIframe] = useState('');
-  const [url, setUrl] = useState('');
-  const [img, setImg] = useState('');
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,  
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const mapaData = {
-      name: name,
-      type: type,
-      iframe: iframe,
-      url: url,
-      img: img,
-    };
-  
-    console.log(mapaData);
-  
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("type", formData.type);
+    formDataToSend.append("iframe", formData.iframe);
+    formDataToSend.append("url", formData.url);
+    formDataToSend.append("img", formData.img);
+
     try {
-      const response = await axios.post(`${ipBack}/api/lokalekuak`, mapaData);
-  
-      if (response.status >= 200 && response.status < 300) {
-        alert("Mapa ongi sortu da.");
-  
-        setName("");
-        setType("");
-        setIframe("");
-        setUrl("");
-        setImg("");
-      } else {
-        alert("Errorea: " + (response.data?.message || "Daturenbat gaizki sartu da"));
-      }
+      const response = await axios.post(
+        `${ipBack}/api/lokalekuak`,
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Response:", response.data);
+      alert("Mapa ongi sortu da.");
+      navigate('/mapakudeatu');
     } catch (error) {
       console.error("Errorea:", error);
       alert("Errorea gertatu da: " + (error.response?.data?.message || error.message));
     }
   };
-  
-  
-  
-
 
   return (
     <div>
@@ -73,8 +73,8 @@ function MapaSortu() {
               type="text"
               id="name"
               name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={formData.name}
+              onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
               required
             />
@@ -87,8 +87,8 @@ function MapaSortu() {
             <select
               id="type"
               name="type"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
+              value={formData.type}
+              onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
               required
             >
@@ -105,8 +105,8 @@ function MapaSortu() {
             <textarea
               id="iframe"
               name="iframe"
-              value={iframe}
-              onChange={(e) => setIframe(e.target.value)}
+              value={formData.iframe}
+              onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
               rows="4"
               required
@@ -121,8 +121,8 @@ function MapaSortu() {
               type="text"
               id="url"
               name="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              value={formData.url}
+              onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             />
           </div>
@@ -135,8 +135,9 @@ function MapaSortu() {
               type="file"
               id="img"
               name="img"
-              value={img}
-              onChange={(e) => setImg(e.target.value)}
+              onChange={(e) =>
+                setFormData({ ...formData, img: e.target.files[0] })
+              }
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
             />
           </div>

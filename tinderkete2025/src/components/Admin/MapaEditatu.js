@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
 
 function MapaEditatu() {
     const { id } = useParams();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const { t } = useTranslation();
+
     const [formData, setFormData] = useState({
         name: "",
         type: "",
@@ -16,10 +19,10 @@ function MapaEditatu() {
         url: "",
         img: "",
     });
-    const [error, setError] = useState(""); 
-    const [locations, setLocations] = useState([]); 
+    const [error, setError] = useState("");
+    const [locations, setLocations] = useState([]);
 
-    
+
     useEffect(() => {
         const fetchMapa = async () => {
             try {
@@ -65,7 +68,7 @@ function MapaEditatu() {
                 }
             );
 
-            alert("Mapa ongi eguneratu da!"); 
+            alert("Mapa ongi eguneratu da!");
             navigate('/mapakudeatu');
         } catch (err) {
             console.error("Error updating Mapa:", err);
@@ -83,7 +86,7 @@ function MapaEditatu() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
-                    
+
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                             Izena
@@ -99,23 +102,26 @@ function MapaEditatu() {
                         />
                     </div>
 
-                   
+
                     <div className="mb-4">
                         <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
                             Mota
                         </label>
-                        <input
-                            type="text"
+                        <select
                             id="type"
                             name="type"
                             value={formData.type}
                             onChange={handleInputChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
                             required
-                        />
+                        >
+                            <option value=" "> </option>
+                            <option value="frontoiak">{t('mapak.frontoiak')}</option>
+                            <option value="trinketeak">{t('mapak.trinketeak')}</option>
+                        </select>
                     </div>
 
-                   
+
                     <div className="mb-4">
                         <label htmlFor="iframe" className="block text-gray-700 font-bold mb-2">
                             Iframe
@@ -131,7 +137,7 @@ function MapaEditatu() {
                         ></textarea>
                     </div>
 
-                    
+
                     <div className="mb-4">
                         <label htmlFor="url" className="block text-gray-700 font-bold mb-2">
                             URL
@@ -146,7 +152,7 @@ function MapaEditatu() {
                         />
                     </div>
 
-                    
+
                     <div className="mb-4">
                         <label htmlFor="img" className="block text-gray-700 font-bold mb-2">
                             IRUDIA
@@ -155,12 +161,12 @@ function MapaEditatu() {
                             type="file"
                             id="img"
                             name="img"
-                            onChange={handleInputChange} 
+                            onChange={handleInputChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
                         />
                     </div>
 
-                  
+
                     <div className="text-center">
                         <button
                             type="submit"
