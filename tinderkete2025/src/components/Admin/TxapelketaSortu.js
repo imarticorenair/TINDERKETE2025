@@ -23,7 +23,6 @@ function TxapelketaSortu() {
   const [error, setError] = useState(""); 
   const [locations, setLocations] = useState([]); 
 
-  const navigate = useNavigate();
   
   useEffect(() => {
     const fetchLocations = async () => {
