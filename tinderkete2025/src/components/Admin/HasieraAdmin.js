@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
 import { useTranslation } from "react-i18next";
@@ -9,6 +10,22 @@ import ezarpenak3 from '../../images/ezarpenak3.png';
 function Hasiera() {
   const { t } = useTranslation(); 
 
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const erabiltzailea = localStorage.getItem("user");
+    let userObj = null;
+
+    if (erabiltzailea) {
+      userObj = JSON.parse(erabiltzailea);
+    }
+
+    if (!userObj || userObj.admin !== 1) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [navigate]); 
+  
   return (
     <div className="bg-gray-100">
       
