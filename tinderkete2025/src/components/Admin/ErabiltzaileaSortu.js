@@ -61,14 +61,7 @@ function ErabiltzaileaSortu() {
           },
         }
       );
-
-      console.log("Response:", response.data);
-      setUserCreated(response.data.data);
-      setError("");
-
-      // Redirigimos al usuario a la página de administración de usuarios
-      navigate('/erabiltzaileakAdmin'); // Redirige a la página de administración de usuarios
-
+      navigate('/erabiltzaileakAdmin');
     } catch (error) {
       setError(
         error.response?.data?.message || "Errorea API datuak bidaltzean"

@@ -4,8 +4,8 @@ import Footer from "../Layout/Footer";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
-const ipBack = process.env.REACT_APP_BASE_URL;
 
+const ipBack = process.env.REACT_APP_BASE_URL;
 
 function MapaEditatu() {
     const { id } = useParams();
@@ -17,29 +17,26 @@ function MapaEditatu() {
         type: "",
         iframe: "",
         url: "",
-        img: "",
+        img: null,  
     });
-    const [error, setError] = useState("");
-    const [locations, setLocations] = useState([]);
 
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchMapa = async () => {
             try {
-                const response = await axios.get(
-                    `${ipBack}/api/getMap/${id}`
-                );
+                const response = await axios.get(`${ipBack}/api/getMap/${id}`);
                 const Mapa = response.data.data;
                 setFormData({
-                    name: Mapa.name,
-                    type: Mapa.type,
-                    iframe: Mapa.iframe,
-                    url: Mapa.url,
-                    img: Mapa.img,
+                    name: Mapa.name || "",
+                    type: Mapa.type || "",
+                    iframe: Mapa.iframe || "",
+                    url: Mapa.url || "",
+                    img: Mapa.img || "",  
                 });
             } catch (err) {
                 console.error("Error fetching Mapa:", err);
-                setError("No se pudieron cargar los datos del torneo.");
+                setError("No se pudieron cargar los datos del mapa.");
             }
         };
 
@@ -50,23 +47,35 @@ function MapaEditatu() {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: value || "",
         });
+    };
+
+    const handleFileChange = (e) => {
+        if (e.target.files.length > 0) {
+            setFormData({ ...formData, img: e.target.files[0] });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formDataToSend = new FormData();
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("type", formData.type);
+        formDataToSend.append("iframe", formData.iframe);
+        formDataToSend.append("url", formData.url);
+
+        if (formData.img instanceof File) {
+            formDataToSend.append("img", formData.img);
+        }
+
         try {
-            await axios.put(
-                `${ipBack}/api/mapak/${id}`,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+            await axios.post(`${ipBack}/api/mapak/${id}`, formDataToSend, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
 
             alert("Mapa ongi eguneratu da!");
             navigate('/mapakudeatu');
@@ -75,7 +84,6 @@ function MapaEditatu() {
             setError(err.response?.data?.message || "Error al actualizar el mapa.");
         }
     };
-
 
     return (
         <div>
@@ -86,11 +94,8 @@ function MapaEditatu() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
-
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
-                            Izena
-                        </label>
+                        <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Izena</label>
                         <input
                             type="text"
                             id="name"
@@ -102,11 +107,8 @@ function MapaEditatu() {
                         />
                     </div>
 
-
                     <div className="mb-4">
-                        <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
-                            Mota
-                        </label>
+                        <label htmlFor="type" className="block text-gray-700 font-bold mb-2">Mota</label>
                         <select
                             id="type"
                             name="type"
@@ -115,17 +117,14 @@ function MapaEditatu() {
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
                             required
                         >
-                            <option value=" "> </option>
+                            <option value="">Seleccione una opción</option>
                             <option value="frontoiak">{t('mapak.frontoiak')}</option>
                             <option value="trinketeak">{t('mapak.trinketeak')}</option>
                         </select>
                     </div>
 
-
                     <div className="mb-4">
-                        <label htmlFor="iframe" className="block text-gray-700 font-bold mb-2">
-                            Iframe
-                        </label>
+                        <label htmlFor="iframe" className="block text-gray-700 font-bold mb-2">Iframe</label>
                         <textarea
                             id="iframe"
                             name="iframe"
@@ -137,11 +136,8 @@ function MapaEditatu() {
                         ></textarea>
                     </div>
 
-
                     <div className="mb-4">
-                        <label htmlFor="url" className="block text-gray-700 font-bold mb-2">
-                            URL
-                        </label>
+                        <label htmlFor="url" className="block text-gray-700 font-bold mb-2">URL</label>
                         <input
                             type="text"
                             id="url"
@@ -152,20 +148,22 @@ function MapaEditatu() {
                         />
                     </div>
 
-
                     <div className="mb-4">
-                        <label htmlFor="img" className="block text-gray-700 font-bold mb-2">
-                            IRUDIA
-                        </label>
+                        <label htmlFor="img" className="block text-gray-700 font-bold mb-2">IRUDIA</label>
                         <input
                             type="file"
                             id="img"
                             name="img"
-                            onChange={handleInputChange}
+                            accept="image/*"
+                            onChange={handleFileChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
                         />
+                        {formData.img && !(formData.img instanceof File) && (
+                            <div className="mt-2">
+                                <img src={`${ipBack}/storage/${formData.img}`} alt="Mapa" className="w-32 h-32 object-cover" />
+                            </div>
+                        )}
                     </div>
-
 
                     <div className="text-center">
                         <button
@@ -182,7 +180,6 @@ function MapaEditatu() {
             <Footer />
         </div>
     );
-
 }
 
 export default MapaEditatu;
