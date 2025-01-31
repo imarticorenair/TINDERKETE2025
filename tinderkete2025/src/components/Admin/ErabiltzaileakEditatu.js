@@ -12,7 +12,7 @@ function ErabiltzaileaEditatu() {
     name: "",
     surname: "",
     email: "",
-    img: null,
+    img: "",
     hometown: "",
     telephone: "",
     birth_date: "",
@@ -30,7 +30,7 @@ function ErabiltzaileaEditatu() {
         );
         const Erabiltzaile = response.data.data;
 
-        
+
         const formattedBirthDate = Erabiltzaile.birth_date
           ? new Date(Erabiltzaile.birth_date).toISOString().split("T")[0]
           : "";
@@ -39,10 +39,10 @@ function ErabiltzaileaEditatu() {
           name: Erabiltzaile.name,
           surname: Erabiltzaile.surname,
           email: Erabiltzaile.email,
-          img: Erabiltzaile.img,
+          img: "",
           hometown: Erabiltzaile.hometown,
           telephone: Erabiltzaile.telephone,
-          birth_date: formattedBirthDate, 
+          birth_date: formattedBirthDate,
           admin: Erabiltzaile.admin,
           aktibatua: Erabiltzaile.aktibatua,
         });
@@ -63,31 +63,45 @@ function ErabiltzaileaEditatu() {
     });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, img: e.target.files[0] });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      if (value !== null) {
-        formDataToSend.append(key, value);
-      }
-    });
 
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("surname", formData.surname);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("hometown", formData.hometown);
+    formDataToSend.append("telephone", formData.telephone);
+    formDataToSend.append("birth_date", formData.birth_date);
+    formDataToSend.append("admin", formData.admin ? 1 : 0);
+    formDataToSend.append("aktibatua", formData.aktibatua ? 1 : 0);
+    if (formData.img) {
+      formDataToSend.append("img", formData.img);
+    }
+
+    console.log('formdatatosend: ', formDataToSend);
     try {
-      await axios.put(`${ipBack}/api/user/${id}`, formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        `${ipBack}/api/user/${id}`,
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log('Zerbitzariko mezua:', response);
 
       setSuccessMessage("Erabiltzailea eguneratu da!");
       setError("");
-      setTimeout(() => navigate("/erabiltzaileakAdmin"), 2000); 
+      setTimeout(() => navigate("/erabiltzaileakAdmin"), 1000);
     } catch (err) {
-      console.error("Errorea erabiltzailea eguneratzerakoan:", err);
-      setError(err.response?.data?.message || "Errorea erabiltzailea eguneratzerakoan.");
+      if (err.response?.data?.errors) {
+        setError(Object.values(err.response.data.errors).join(", "));
+      } else {
+        setError(err.response?.data?.message || "Errorea erabiltzailea eguneratzerakoan.");
+      }
     }
   };
 
@@ -139,8 +153,11 @@ function ErabiltzaileaEditatu() {
                   <label className="block mb-1 text-gray-700">Irudia</label>
                   <input
                     type="file"
+                    id="img"
                     name="img"
-                    onChange={handleFileChange}
+                    onChange={(e) =>
+                      setFormData({ ...formData, img: e.target.files[0] })
+                    }
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>

@@ -20,14 +20,11 @@ function MapaKudeatu() {
             try {
                 const response = await fetch(`${ipBack}/api/lokalekuak`);
 
-                console.log("Server Response:", response); 
-
                 if (!response.ok) {
                     throw new Error(`Errorea: ${response.status} ${response.statusText}`);
                 }
 
                 const result = await response.json();
-                console.log("Result JSON:", result);
                 setMaps(result.data || []);
             } catch (err) {
                 console.error("Fetch Error:", err.message); 
@@ -64,7 +61,6 @@ function MapaKudeatu() {
             
             setMaps((prevMaps) => {
                 const updatedMaps = prevMaps.filter((map) => map.id !== id);
-                console.log("Updated maps state:", updatedMaps);
                 return updatedMaps;
             });
         } catch (err) {

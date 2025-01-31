@@ -84,7 +84,6 @@ function Navbar() {
           admin: Erabiltzaile.admin,
           aktibatua: Erabiltzaile.aktibatua,
         });
-  console.log('erab   ' + Erabiltzaile.img);
 
       } catch (err) {
         console.error("Error fetching Erabiltzaile:", err);
@@ -94,7 +93,6 @@ function Navbar() {
     fetchErabiltzaile();
   }, []);
   
-  console.log('formdata   ' + formData.img);
   return (
     <div className="sticky top-0 z-50 shadow-lg">
 
