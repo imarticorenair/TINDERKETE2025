@@ -4,11 +4,9 @@ import Footer from '../Layout/Footer.js';
 import { useTranslation } from "react-i18next";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
-
 function Kontaktu() {
   const { t } = useTranslation();
 
-  
   const [izen, setIzen] = useState('');
   const [email, setEmail] = useState('');
   const [telefonoa, setTelefonoa] = useState('');
@@ -19,7 +17,6 @@ function Kontaktu() {
   
     const user = JSON.parse(localStorage.getItem('user'));
   
-    
     const payload = {
       name: izen,       
       email,            
@@ -27,7 +24,6 @@ function Kontaktu() {
       message: mezua,   
     };
   
-    
     if (user && user.id) {
       payload.user_id = user.id; 
     }
@@ -44,7 +40,10 @@ function Kontaktu() {
       });
   
       if (response.ok) {
-        alert(t('kontaktua.ongiBidali'));
+        alert(t('kontaktua.ongiBidali')); // Muestra el mensaje de éxito
+        setTimeout(() => {
+          window.location.reload(); // Recarga la página después de 2 segundos
+        }, 500); // El tiempo de espera puede ajustarse
       } else {
         alert('Errorea emaila bidaltzean');
       }
@@ -78,7 +77,6 @@ function Kontaktu() {
             />
           </div>
 
-          
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('kontaktua.email')}</label>
             <input
@@ -92,7 +90,6 @@ function Kontaktu() {
             />
           </div>
 
-          
           <div className="mb-4">
             <label htmlFor="telefonoa" className="block text-sm font-medium text-gray-700">{t('kontaktua.telefonoa')}</label>
             <input
@@ -106,7 +103,6 @@ function Kontaktu() {
             />
           </div>
 
-          
           <div className="mb-4">
             <label htmlFor="mezua" className="block text-sm font-medium text-gray-700">{t('kontaktua.mezua')}</label>
             <textarea
@@ -119,7 +115,6 @@ function Kontaktu() {
             ></textarea>
           </div>
 
-          
           <div className="mb-4">
             <button
               type="submit"

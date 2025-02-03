@@ -34,7 +34,7 @@ const Estatistikak = () => {
     labels: ['Trinketea', 'Frontoia'],
     datasets: [
       {
-        label: 'Número de Participantes',
+        label: 'Parte-hartzaile kopurua',
         data: [data.trinkete, data.fronton],
         backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
         borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],

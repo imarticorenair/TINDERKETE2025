@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import EventCard from "../Txapelketa/EventCard.js";
 import NavbarAdmin from "./NavbarAdmin.js";
 import Footer from "../Layout/Footer";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;
-
 
 function TxapelketaSortu() {
   const navigate = useNavigate();
@@ -23,28 +22,25 @@ function TxapelketaSortu() {
   const [error, setError] = useState("");
   const [locations, setLocations] = useState([]);
 
-
   useEffect(() => {
     const fetchLocations = async () => {
       try {
         const response = await fetch(`${ipBack}/api/lokalekuak`);
         const result = await response.json();
 
-
         if (result.success && Array.isArray(result.data)) {
           setLocations(result.data);
           console.log(locations);
         } else {
-          console.error('zerbitzariak ez du kokalekurik:', result);
+          console.error("zerbitzariak ez du kokalekurik:", result);
         }
       } catch (error) {
-        console.error('Errorea kokalekuak bilatzen:', error);
+        console.error("Errorea kokalekuak bilatzen:", error);
       }
     };
 
     fetchLocations();
   }, []);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,14 +64,19 @@ function TxapelketaSortu() {
     };
 
     try {
-      const response = await axios.post(`${ipBack}/api/txapelketak`, tournamentData);
+      const response = await axios.post(
+        `${ipBack}/api/txapelketak`,
+        tournamentData
+      );
 
       console.log("Response:", response.data);
       setTournamentCreated(response.data.data);
       setError("");
-      navigate('/txapelketakAdmin');
+      navigate("/txapelketakAdmin");
     } catch (error) {
-      setError(error.response?.data?.message || "Errorea txapelketak aurkitzen");
+      setError(
+        error.response?.data?.message || "Errorea txapelketak aurkitzen"
+      );
       console.error("Error:", error.response?.data || error.message);
     }
   };
@@ -88,11 +89,12 @@ function TxapelketaSortu() {
           <h1 className="text-3xl font-bold text-blue-600">Txapelketa Sortu</h1>
         </div>
         <div className="flex flex-wrap lg:flex-nowrap -mx-4">
-
           <div className="w-full lg:w-2/3 px-4 mb-8">
             <div className="bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden p-6 h-full">
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-
+              <form
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                onSubmit={handleSubmit}
+              >
                 <div className="col-span-2 md:col-span-1">
                   <label className="block mb-1 text-gray-700">Izenburua</label>
                   <input
@@ -115,8 +117,12 @@ function TxapelketaSortu() {
                     list="locations-list"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
+                    <option value="">{"---"}</option>{" "}
+                    {/* Opción inicial con '---' */}
                     {locations.map((location) => (
-                      <option key={location.id} value={location.id}>{location.name}</option>
+                      <option key={location.id} value={location.id}>
+                        {location.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -144,7 +150,9 @@ function TxapelketaSortu() {
                 </div>
 
                 <div className="col-span-2">
-                  <label className="block mb-1 text-gray-700">Deskribapena</label>
+                  <label className="block mb-1 text-gray-700">
+                    Deskribapena
+                  </label>
                   <textarea
                     name="description"
                     value={formData.description}
@@ -155,7 +163,9 @@ function TxapelketaSortu() {
                 </div>
 
                 <div className="col-span-2 md:col-span-1">
-                  <label className="block mb-1 text-gray-700">Prezioa (€)</label>
+                  <label className="block mb-1 text-gray-700">
+                    Prezioa (€)
+                  </label>
                   <input
                     type="number"
                     name="price"
@@ -167,7 +177,9 @@ function TxapelketaSortu() {
                 </div>
 
                 <div className="col-span-2 md:col-span-1">
-                  <label className="block mb-1 text-gray-700">Gehieneko Partehartzaileak</label>
+                  <label className="block mb-1 text-gray-700">
+                    Gehieneko Partehartzaileak
+                  </label>
                   <input
                     type="number"
                     name="maxParticipants"
@@ -192,28 +204,36 @@ function TxapelketaSortu() {
                 </div>
               )}
               {error && (
-                <div className="mt-4 text-center text-red-500">
-                  {error}
-                </div>
+                <div className="mt-4 text-center text-red-500">{error}</div>
               )}
             </div>
           </div>
-
 
           <div className="w-full lg:w-1/3 px-4">
             <div className="sticky top-4">
               <EventCard
                 title={formData.title || "Txapelketaren izenburua"}
-                location={locations.find(loc => loc.id.toString() === formData.location)?.name || "Kokalekua"}
+                location={
+                  locations.find(
+                    (loc) => loc.id.toString() === formData.location
+                  )?.name || "Kokalekua"
+                }
                 date={formData.date || "Data"}
                 time={formData.time || "Ordua"}
                 description={formData.description || "Deskribapena"}
                 price={formData.price || "0"}
                 participants={0}
                 maxParticipants={formData.maxParticipants || "0"}
-                image={locations.find(loc => loc.id.toString() === formData.location)?.img
-                  ? `${ipBack}/${locations.find(loc => loc.id.toString() === formData.location)?.img}`
-                  : "https://via.placeholder.com/150?text=Irudi+faltan"
+                image={
+                  locations.find(
+                    (loc) => loc.id.toString() === formData.location
+                  )?.img
+                    ? `${ipBack}/${
+                        locations.find(
+                          (loc) => loc.id.toString() === formData.location
+                        )?.img
+                      }`
+                    : "https://via.placeholder.com/150?text=Irudi+faltan"
                 }
                 participantImages={[]}
               />
