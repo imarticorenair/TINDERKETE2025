@@ -26,19 +26,40 @@ const Perfila = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
 
+  // useEffect(() => {
+  //   console.log("userId recibido:", userId);
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
+  //       setUser(response.data.data);
+  //     } catch (error) {
+  //       console.error("Error al obtener los datos del usuario:", error);
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, [userId]);
+
   useEffect(() => {
     console.log("userId recibido:", userId);
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
-        setUser(response.data.data);
+        const userData = response.data.data;
+  
+        if (userData.birth_date) {
+          userData.birth_date = userData.birth_date.split("T")[0]; 
+        }
+  
+        setUser(userData);
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
       }
     };
-
+  
     fetchUser();
   }, [userId]);
+  
 
   const handleEditClick = () => {
     setIsEditing(true);
