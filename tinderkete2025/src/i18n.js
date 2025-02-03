@@ -21,7 +21,7 @@ i18n
           translation: {
             "erreserbak": {
               "header": "Reservation",
-              "description": "You can make private or public matches in the reservation area!",
+              "description": "You can book trinquets or frontons in the reservation area!",
               "sportType": "Sport Type",
               "playerCount": "Player Count",
               "location": "Location",
@@ -244,7 +244,7 @@ i18n
           translation: {
             "erreserbak": {
               "header": "Erreserbak",
-              "description": "Erreserbak egiteko gunean partida pribatuak edo publikoak egin ditzakezu!",
+              "description": "Erreserbak egiteko gunean trinkete edo frontoiak erreserba ditzazkezu!",
               "sportType": "Zelai mota",
               "playerCount": "Jokalari kopurua",
               "location": "Kokalekua",
