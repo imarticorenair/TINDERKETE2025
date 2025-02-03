@@ -85,13 +85,13 @@ const TxapelketakAdmin = () => {
                                 <th className="px-4 py-2"></th>
                                 <th className="px-4 py-2"></th>
                                 <th className="px-4 py-2">ID</th>
-                                <th className="px-4 py-2">Title</th>
-                                <th className="px-4 py-2">Description</th>
-                                <th className="px-4 py-2">Date</th>
-                                <th className="px-4 py-2">Time</th>
-                                <th className="px-4 py-2">Price</th>
-                                <th className="px-4 py-2">Max Participants</th>
-                                <th className="px-4 py-2">Location ID</th>
+                                <th className="px-4 py-2">Izenburua</th>
+                                <th className="px-4 py-2">Deskribapena</th>
+                                <th className="px-4 py-2">Data</th>
+                                <th className="px-4 py-2">Ordua</th>
+                                <th className="px-4 py-2">Prezioa</th>
+                                <th className="px-4 py-2">Parte hartzaile kopurua</th>
+                                <th className="px-4 py-2">Kokapen ID</th>
                             </tr>
                         </thead>
                         <tbody>
