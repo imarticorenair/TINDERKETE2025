@@ -218,13 +218,13 @@ i18n
               "header" : "Application Management Control Panel",
             },
             "mapakSortu": {
-              "header" : "Map Creation Area",
-              "subHeader" : "In this area you can create maps of frontons and Trinquets.",
-              "izena" : "Name",
-              "mota" : "Type",
+              "header" : "Mapak kudeatzeko gunea",
+              "subHeader" : "Gune honetan Frontoi eta Trinketeen mapak sor eta kudeatu ditzakezu.",
+              "izena" : "Izena",
+              "mota" : "Mota",
               "iframe" : "Iframe",
               "url" : "URL",
-              "bidali" : "Submit"
+              "bidali" : "Bidali"
             },
             "perfila": {
               "errorea" : "Error editing profile data",
