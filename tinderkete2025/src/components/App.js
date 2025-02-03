@@ -27,6 +27,7 @@ import MapaListaSortu from './Admin/MapaListaSortu';
 import MapaKudeatu from "./Admin/MapaKudeatu";
 import MapaEditatu from "./Admin/MapaEditatu";
 import AirearenKalitatea from "./Airea/AirearenKalitatea";
+import Estatistikak from "./Admin/Estatistikak";
 
 
 
@@ -66,6 +67,7 @@ function App() {
         <Route path="/mapakudeatu" element={<MapaKudeatu />} /> 
         <Route path="/mapaeditatu/:id" element={<MapaEditatu />} /> 
         <Route path="/airearenKalitatea" element={<AirearenKalitatea />} /> 
+        <Route path="/Estatistikak" element={<Estatistikak />} /> 
       </Routes>
     </Router>
   );

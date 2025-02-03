@@ -182,6 +182,14 @@ function Navbar() {
                 >Erabiltzaileak Kudeatu
                 </Link>
               </li>
+              <li className={`nav-item ${getActiveClass('/Estatistikak')}`}>
+                <Link
+                  className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
+                  to="/Estatistikak"
+                  onClick={closeMenu}
+                >Estatistikak
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -208,13 +216,22 @@ function Navbar() {
                   Mapak Kudeatu
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass('/MapaLista')}`}>
+              <li className={`nav-item ${getActiveClass('/ErabiltzaileakAdmin')}`}>
                 <Link
                   className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
                   to="/erabiltzaileakAdmin"
                   onClick={closeMenu}
                 >
                   Erabiltzaileak Kudeatu
+                </Link>
+              </li>
+              <li className={`nav-item ${getActiveClass('/Estatistikak')}`}>
+                <Link
+                  className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
+                  to="/erabiltzaileakAdmin"
+                  onClick={closeMenu}
+                >
+                  Estatistikak
                 </Link>
               </li>
               <li>
