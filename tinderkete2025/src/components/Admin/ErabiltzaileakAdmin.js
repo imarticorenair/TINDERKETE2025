@@ -40,7 +40,7 @@ const ErabiltzaileakAdmin = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`${ipBack}/api/deleteUser/${id}`, {
-        method: "DELETE", 
+        method: "PATCH", 
         headers: {
           "Content-Type": "application/json",
         },
