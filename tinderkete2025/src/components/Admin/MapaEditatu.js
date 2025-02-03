@@ -158,11 +158,6 @@ function MapaEditatu() {
                             onChange={handleFileChange}
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
                         />
-                        {formData.img && !(formData.img instanceof File) && (
-                            <div className="mt-2">
-                                <img src={`${ipBack}/storage/${formData.img}`} alt="Mapa" className="w-32 h-32 object-cover" />
-                            </div>
-                        )}
                     </div>
 
                     <div className="text-center">
