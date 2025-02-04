@@ -9,11 +9,18 @@ const TxapelketakAdmin = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         const fetchTournaments = async () => {
             try {
-                const response = await fetch(`${ipBack}/api/txapelketak`);
+                const response = await fetch(`${ipBack}/api/txapelketak`, {
+                    method: 'GET', 
+                    headers: {
+                        'Authorization': `Bearer ${token}`,  
+                        'Content-Type': 'application/json'
+                    }
+                });
                 if (!response.ok) {
                     throw new Error("Error fetching tournaments");
                 }
@@ -40,6 +47,7 @@ const TxapelketakAdmin = () => {
             const response = await fetch(`${ipBack}/api/txapelketak/${id}`, {
                 method: "DELETE",
                 headers: {
+                    'Authorization': `Bearer ${token}`,  
                     "Content-Type": "application/json",
                 },
             });
@@ -48,7 +56,7 @@ const TxapelketakAdmin = () => {
                 throw new Error("Errorea deia egiteko garaian.");
             }
 
-            
+
             setTournaments(tournaments.filter((tournament) => tournament.id !== id));
             alert("Txapelketa egoki ezabatu da.");
         } catch (error) {
@@ -71,7 +79,7 @@ const TxapelketakAdmin = () => {
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Txapelketak</h1>
                 <div>
-                <button
+                    <button
                         onClick={() => handleSortu()}
                         className="flex justify-center mx-auto bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                     >

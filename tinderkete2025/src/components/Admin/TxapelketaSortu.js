@@ -21,11 +21,18 @@ function TxapelketaSortu() {
   const [tournamentCreated, setTournamentCreated] = useState(null);
   const [error, setError] = useState("");
   const [locations, setLocations] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch(`${ipBack}/api/lokalekuak`);
+        const response = await fetch(`${ipBack}/api/lokalekuak`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
         const result = await response.json();
 
         if (result.success && Array.isArray(result.data)) {
@@ -66,8 +73,13 @@ function TxapelketaSortu() {
     try {
       const response = await axios.post(
         `${ipBack}/api/txapelketak`,
-        tournamentData
-      );
+        tournamentData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
 
       console.log("Response:", response.data);
       setTournamentCreated(response.data.data);
@@ -118,7 +130,6 @@ function TxapelketaSortu() {
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="">{"---"}</option>{" "}
-                    {/* Opción inicial con '---' */}
                     {locations.map((location) => (
                       <option key={location.id} value={location.id}>
                         {location.name}
@@ -228,11 +239,10 @@ function TxapelketaSortu() {
                   locations.find(
                     (loc) => loc.id.toString() === formData.location
                   )?.img
-                    ? `${ipBack}/${
-                        locations.find(
-                          (loc) => loc.id.toString() === formData.location
-                        )?.img
-                      }`
+                    ? `${ipBack}/${locations.find(
+                      (loc) => loc.id.toString() === formData.location
+                    )?.img
+                    }`
                     : "https://via.placeholder.com/150?text=Irudi+faltan"
                 }
                 participantImages={[]}

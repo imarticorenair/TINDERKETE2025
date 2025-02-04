@@ -7,8 +7,8 @@ import { useParams, useNavigate } from "react-router-dom";
 const ipBack = process.env.REACT_APP_BASE_URL;
 
 function TxapelketaEditatu() {
-    const { id } = useParams(); 
-    const navigate = useNavigate(); 
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         title: "",
         location: "",
@@ -18,18 +18,23 @@ function TxapelketaEditatu() {
         price: "",
         maxParticipants: "",
     });
-    const [error, setError] = useState(""); 
-    const [locations, setLocations] = useState([]); 
+    const [error, setError] = useState("");
+    const [locations, setLocations] = useState([]);
+    const token = localStorage.getItem("token");
 
-   
     useEffect(() => {
         const fetchTournament = async () => {
             try {
-                const response = await axios.get(`${ipBack}/api/txapelketak-with-users/${id}`);
+                const response = await axios.get(`${ipBack}/api/txapelketak-with-users/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
                 const tournament = response.data.data;
                 setFormData({
                     title: tournament.title,
-                    location: tournament.location.id.toString(), 
+                    location: tournament.location.id.toString(),
                     date: tournament.date,
                     time: tournament.time,
                     description: tournament.description,
@@ -45,7 +50,7 @@ function TxapelketaEditatu() {
         const fetchLocations = async () => {
             try {
                 const response = await axios.get(`${ipBack}/api/lokalekuak`);
-                setLocations(response.data.data); 
+                setLocations(response.data.data);
             } catch (err) {
                 console.error("Error fetching locations:", err);
                 setError("No se pudieron cargar las ubicaciones.");
@@ -70,7 +75,7 @@ function TxapelketaEditatu() {
 
         const updatedTournament = {
             title: formData.title,
-            location_id: parseInt(formData.location), 
+            location_id: parseInt(formData.location),
             date: formData.date,
             time: formData.time,
             description: formData.description,
@@ -79,8 +84,13 @@ function TxapelketaEditatu() {
         };
 
         try {
-            await axios.put(`${ipBack}/api/txapelketak/${id}`, updatedTournament);
-            setError(""); 
+            await axios.put(`${ipBack}/api/txapelketak/${id}`, updatedTournament, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            setError("");
         } catch (err) {
             console.error("Error updating tournament:", err);
             setError(err.response?.data?.message || "Error al actualizar el torneo.");
@@ -90,7 +100,7 @@ function TxapelketaEditatu() {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <NavbarAdmin  />
+            <NavbarAdmin />
             <div className="container mx-auto flex-grow px-8 py-8">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-blue-600">Txapelketa Editatu</h1>
@@ -113,20 +123,21 @@ function TxapelketaEditatu() {
                                 </div>
                                 <div className="col-span-2 md:col-span-1">
                                     <label className="block mb-1 text-gray-700">Kokalekua</label>
-                                    <input
-                                        type="text"
+                                    <select
                                         name="location"
                                         value={formData.location}
                                         onChange={handleInputChange}
+                                        placeholder="Sartu kokalekua"
                                         list="locations-list"
-                                        placeholder="Aukeratu kokalekua"
                                         className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                                    />
-                                    <datalist id="locations-list">
+                                    >
+                                        <option value="">{"---"}</option>{" "}
                                         {locations.map((location) => (
-                                            <option key={location.id} value={location.id}>{location.name}</option>
+                                            <option key={location.id} value={location.id}>
+                                                {location.name}
+                                            </option>
                                         ))}
-                                    </datalist>
+                                    </select>
                                 </div>
                                 <div className="col-span-2 md:col-span-1">
                                     <label className="block mb-1 text-gray-700">Data</label>
@@ -191,7 +202,7 @@ function TxapelketaEditatu() {
                         </div>
                     </div>
 
-                   
+
                     <div className="w-full lg:w-1/3 px-4">
                         <div className="sticky top-4">
                             <EventCard
@@ -203,8 +214,18 @@ function TxapelketaEditatu() {
                                 price={formData.price || "0"}
                                 participants={0}
                                 maxParticipants={formData.maxParticipants || "0"}
-                                image={"https://via.placeholder.com/150?text=Irudi+faltan"}
+                                image={
+                                    locations.find(
+                                        (loc) => loc.id.toString() === formData.location
+                                    )?.img
+                                        ? `${ipBack}/${locations.find(
+                                            (loc) => loc.id.toString() === formData.location
+                                        )?.img
+                                        }`
+                                        : "https://via.placeholder.com/150?text=Irudi+faltan"
+                                }
                                 participantImages={[]}
+
                             />
                         </div>
                     </div>
