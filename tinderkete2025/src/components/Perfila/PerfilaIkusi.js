@@ -22,23 +22,9 @@ const Perfila = () => {
     hometown: "",
     telephone: "",
   });
+  const [img, setImg] = useState();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [imageFile, setImageFile] = useState(null);
-
-  // useEffect(() => {
-  //   console.log("userId recibido:", userId);
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
-  //       setUser(response.data.data);
-  //     } catch (error) {
-  //       console.error("Error al obtener los datos del usuario:", error);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, [userId]);
 
   useEffect(() => {
     console.log("userId recibido:", userId);
@@ -46,20 +32,29 @@ const Perfila = () => {
       try {
         const response = await axios.get(`${ipBack}/api/getUser/${userId}`);
         const userData = response.data.data;
-  
+
         if (userData.birth_date) {
-          userData.birth_date = userData.birth_date.split("T")[0]; 
+          userData.birth_date = userData.birth_date.split("T")[0];
         }
-  
-        setUser(userData);
+
+        setUser({
+          img: "",
+          name: userData.name,
+          surname: userData.surname,
+          email: userData.email,
+          birth_date: userData.birth_date,
+          hometown: userData.hometown,
+          telephone: userData.telephone,
+        });
+        setImg(userData.img);
       } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
       }
     };
-  
+
     fetchUser();
   }, [userId]);
-  
+
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -82,9 +77,9 @@ const Perfila = () => {
     formData.append("name", user.name);
     formData.append("surname", user.surname);
     formData.append("email", user.email);
-    formData.append("hometown", user.hometown);
+    formData.append("hometown", user.hometown?.trim() ? user.hometown : ""); 
     formData.append("birth_date", user.birth_date);
-    formData.append("telephone", user.telephone);
+    formData.append("telephone", user.telephone?.trim() ? user.telephone : ""); 
     if (user.img) {
       formData.append("img", user.img);
     }
@@ -98,7 +93,7 @@ const Perfila = () => {
       setUser(response.data.data);  // Aquí actualizas el estado con la respuesta de la API
       alert('Profila ongi aldatu da');
       window.location.reload();
-      
+
     } catch (error) {
       console.error(t("perfila.errore1"), error.response?.data || error.message);
       alert(`${t("perfila.errore2")} ${error.response?.data?.message || error.message}`);
@@ -128,7 +123,7 @@ const Perfila = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
           <div className="w-full sm:w-3/4">
-            <PerfilaCard img={`${ipBack}/${user.img}`} onImageChange={handleImageChange} />
+            <PerfilaCard img={`${ipBack}/${img}`} onImageChange={handleImageChange} />
           </div>
 
           <div className="w-full sm:w-3/4">

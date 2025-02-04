@@ -71,9 +71,9 @@ function ErabiltzaileaEditatu() {
     formDataToSend.append("name", formData.name);
     formDataToSend.append("surname", formData.surname);
     formDataToSend.append("email", formData.email);
-    formDataToSend.append("hometown", formData.hometown);
-    formDataToSend.append("telephone", formData.telephone);
+    formDataToSend.append("hometown", formData.hometown?.trim() ? formData.hometown : ""); 
     formDataToSend.append("birth_date", formData.birth_date);
+    formDataToSend.append("telephone", formData.telephone?.trim() ? formData.telephone : ""); 
     formDataToSend.append("admin", formData.admin ? 1 : 0);
     formDataToSend.append("aktibatua", formData.aktibatua ? 1 : 0);
     if (formData.img) {
