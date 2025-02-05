@@ -75,7 +75,10 @@ const ErabiltzaileakAdmin = () => {
     <div className="bg-gray-100 min-h-screen">
       <NavbarAdmin />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">Erabiltzaileak</h1>
+      <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-blue-600">Erabiltzaileak kudeatu</h1>
+                    <p className="text-xl mt-2 text-gray-600">Gune honetan erabiltzaileak editatu, ezabatu edo sortu ditzakezu.</p>
+                </div>
         <div>
           <button
             onClick={handleSortu}

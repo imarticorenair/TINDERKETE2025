@@ -80,8 +80,9 @@ const Estatistikak = () => {
     <div className="flex flex-col min-h-screen">
       <NavbarAdmin />
       <div className="container mx-auto p-8">
-        <h2 className="text-2xl font-bold mb-4">Txapelketen ospearen estatistikak</h2>
-        
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-blue-600">Txapelketen ospearen estatistikak</h1>
+        </div>
         {loading ? (
           <p>Estatistikak kargatzen...</p>
         ) : (
