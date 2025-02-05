@@ -166,7 +166,14 @@ function ErreserbakForm() {
                   className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
                 >
                   {t('erreserbak.submit')}
-                </button>
+                </button>                
+                <button
+                type="button"
+                className="w-full text-blue-500 py-2 rounded-md hover:bg-blue-100 transition duration-200"
+                onClick={() => navigate('/airearenKalitatea')}
+              >
+                Airearen kalitatea ikuskatu
+              </button>
               </form>
               {error && <p style={{ color: "red" }}>Error: {error}</p>}
 

@@ -121,14 +121,14 @@ const Perfila = () => {
           <p className="text-xl mt-2 text-gray-600">{t('profila.header2')}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
           <div className="w-full sm:w-3/4">
             <PerfilaCard img={`${ipBack}/${img}`} onImageChange={handleImageChange} />
           </div>
 
           <div className="w-full sm:w-3/4">
             {isEditing ? (
-              <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md border border-gray-200 space-y-4">
+              <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md border border-gray-200 space-y-4 flex-wrap">
                 <div>
                   <label htmlFor="name" className="block font-bold text-gray-700">{t('profila.izena')}</label>
                   <input

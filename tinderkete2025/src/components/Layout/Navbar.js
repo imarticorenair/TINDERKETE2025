@@ -137,7 +137,7 @@ function Navbar() {
                   className="mx-auto mb-2 w-18 h-18 object-contain rounded-full"
                 />
                 <h3 className="border border-gray-200 p-2 rounded-full bg-gray-50 text-gray-700">
-                  {`${nombre} ${apellido}`} 
+                  {`${formData.name}`} 
                 </h3>
               </p>
 
@@ -283,15 +283,6 @@ function Navbar() {
                   {t("nav.nav7")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/airearenKalitatea")}`}>
-                <Link
-                  className="nav-link text-white py-2 px-4 hover:bg-gray-700 rounded-md"
-                  to="/airearenKalitatea"
-                  onClick={closeMenu}
-                >
-                  {t("nav.nav8")}
-                </Link>
-              </li>
               <li>
                 <div className="text-center my-4 items-center">
                   <select
@@ -369,22 +360,13 @@ function Navbar() {
                   {t("nav.nav7")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/airearenKalitatea")}`}>
-                <Link
-                  className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/airearenKalitatea"
-                  onClick={closeMenu}
-                >
-                  {t("nav.nav8")}
-                </Link>
-              </li>
               <li>
                 <button
                   className=""
                   onClick={toggleSidebar} 
                 >
                   <img
-                    src={formData.img ? `${ipBack}${formData.img}` : logoImage}
+                    src={formData.img ? `${ipBack}/${formData.img}` : logoImage}
                     alt="Perfil"
                     className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
                   />
