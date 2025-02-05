@@ -1,39 +1,40 @@
 // TODO: dokumentaziyuan konponente bakoitzak zer itten dun azaldu
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import Register from './Erregistratu';
-import ErabiltzaileakAdmin from './ErabiltzaileakAdmin';
-import ErabiltzaileaSortu from './ErabiltzaileaSortu';
-import ErabiltzaileakEditatu from './ErabiltzaileakEditatu';
-import ErreserbakForm from './ErreserbakForm';
+import Login from './Auth/Login';
+import Register from './Auth/Erregistratu';
+import ErabiltzaileakAdmin from './Admin/ErabiltzaileakAdmin';
+import ErabiltzaileaSortu from './Admin/ErabiltzaileaSortu';
+import ErabiltzaileakEditatu from './Admin/ErabiltzaileakEditatu';
+import ErreserbakForm from './Erreserbak/ErreserbakForm';
 import TestPage from './TestPage'; 
-import Txapelketak from './Txapelketak'; 
-import Produktuak from './Produktuak';
+import Txapelketak from './Txapelketa/Txapelketak'; 
+import Produktuak from './Produktuak/Produktuak';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import Hasiera from './Hasiera';
-import PartidoakCard from './PartidoakCard'; 
-import PerfilaIkusi from './PerfilaIkusi'; 
-import Kontaktu from './Kontaktuacomp';
-import MapaLista from './MapaLista';
-import TxapelketaSortu from './TxapelketaSortu';
-import TxapelketakAdmin from './TxapelketakAdmin';
-import TxapelketaEditatu from './TxapelketaEditatu';
-import Txapelketakkudeatu from './TxapelketakKudeatu';
-import NavbarAdmin from './NavbarAdmin';
-import HasieraAdmin from './HasieraAdmin';
-import MapaListaSortu from './MapaListaSortu';
-import MapaKudeatu from "./MapaKudeatu";
-import MapaEditatu from "./MapaEditatu";
-import AirearenKalitatea from "./AirearenKalitatea";
+import Hasiera from './Gutaz/Hasiera';
+import PartidoakCard from './Partidoak/PartidoakCard'; 
+import PerfilaIkusi from './Perfila/PerfilaIkusi'; 
+import Kontaktu from './Kontaktua/Kontaktuacomp';
+import MapaLista from './Mapak/MapaLista';
+import TxapelketaSortu from './Admin/TxapelketaSortu';
+import TxapelketakAdmin from './Admin/TxapelketakAdmin';
+import TxapelketaEditatu from './Admin/TxapelketaEditatu';
+import Txapelketakkudeatu from './Admin/TxapelketakKudeatu';
+import NavbarAdmin from './Admin/NavbarAdmin';
+import HasieraAdmin from './Admin/HasieraAdmin';
+import MapaListaSortu from './Admin/MapaListaSortu';
+import MapaKudeatu from "./Admin/MapaKudeatu";
+import MapaEditatu from "./Admin/MapaEditatu";
+import AirearenKalitatea from "./Airea/AirearenKalitatea";
+import Estatistikak from "./Admin/Estatistikak";
 
 
 
 function App() {
-  // Verifica si es la primera vez que se abre la página
+  
   if (!localStorage.getItem('firstVisit')) {
-    // Elimina los ítems y marca que ya se abrió
+    
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('email');
     localStorage.setItem('firstVisit', 'true');
@@ -41,7 +42,6 @@ function App() {
 
   return (
     <Router>
-      {/* Rutas */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -67,6 +67,7 @@ function App() {
         <Route path="/mapakudeatu" element={<MapaKudeatu />} /> 
         <Route path="/mapaeditatu/:id" element={<MapaEditatu />} /> 
         <Route path="/airearenKalitatea" element={<AirearenKalitatea />} /> 
+        <Route path="/Estatistikak" element={<Estatistikak />} /> 
       </Routes>
     </Router>
   );

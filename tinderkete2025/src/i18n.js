@@ -21,7 +21,7 @@ i18n
           translation: {
             "erreserbak": {
               "header": "Reservation",
-              "description": "You can make private or public matches in the reservation area!",
+              "description": "You can book trinquets or frontons in the reservation area!",
               "sportType": "Sport Type",
               "playerCount": "Player Count",
               "location": "Location",
@@ -35,6 +35,7 @@ i18n
               "notLoggedInMessage" : "Not logged in? Check in now!",
               "price": "Price",
               "noReservations": "No reservations",
+              "itzuli": "Go back"
             },
             "login":{
               "password" : "Password",
@@ -47,7 +48,11 @@ i18n
               "emailInvalid" : "You must enter an '@' sign at the email address.",
               "loginTitle": "Login",
               "loginButton": "Enter",
-              "accountNotActivated": "The user does not exist"
+              "accountNotActivated": "The user does not exist",
+              "passwordRequired":"Password is required",
+              "invalidCredentials": "Invalid credentials",
+              "somethingWentWrong": "Something went wrong",
+
               
             },
             "footer":{
@@ -90,8 +95,8 @@ i18n
                 "fetch_data" : "Send"      
             },
             "partidak": {
-              "header": "Public and private matches",
-              "description": "Choose if you want to join a private or public match.",
+              "header": "Matches",
+              "description": "Choose which match you want to register for.",
               "public": "Public",
               "private": "Private",
               "frontoia":"Frontons",
@@ -172,7 +177,11 @@ i18n
               "bidali" : "Register",
               "kontua" : "Have an account?",
               "pasahitzaBaieztatu1": "Confirm password",
-              "pasahitzaBaieztatu2": "Confirm password"
+              "pasahitzaBaieztatu2": "Confirm password",
+              "pasahitzaGaizki":"Passwords do not match",
+              "adinezNagusi":"The user must be of legal age",
+              "erabilOngi":"User successfully created",
+              "datuGaizki":"Some data was entered incorrectly",
             },
             "txapelketa1": {
               "title" : "Fronton tournament!",
@@ -209,16 +218,25 @@ i18n
               "header" : "Application Management Control Panel",
             },
             "mapakSortu": {
-              "header" : "Map Creation Area",
-              "subHeader" : "In this area you can create maps of frontons and Trinquets.",
-              "izena" : "Name",
-              "mota" : "Type",
+              "header" : "Mapak kudeatzeko gunea",
+              "subHeader" : "Gune honetan Frontoi eta Trinketeen mapak sor eta kudeatu ditzakezu.",
+              "izena" : "Izena",
+              "mota" : "Mota",
               "iframe" : "Iframe",
               "url" : "URL",
-              "bidali" : "Submit"
+              "bidali" : "Bidali"
             },
             "perfila": {
-              "errorea" : "Error editing profile data"
+              "errorea" : "Error editing profile data",
+              "argazkia" :"Change profile picture",
+              "editatu": "Edit profile",
+              "1": "First names",
+              "2": "Date of Birth",
+              "3": "Town",
+              "4": "Phone",
+              "aktualizatu": "Profile updated successfully",
+              "errore1": "An error occurred while updating data:",
+              "errore2": "Error updating:",
             }
           }
         },
@@ -226,7 +244,7 @@ i18n
           translation: {
             "erreserbak": {
               "header": "Erreserbak",
-              "description": "Erreserbak egiteko gunean partida pribatuak edo publikoak egin ditzakezu!",
+              "description": "Erreserbak egiteko gunean trinkete edo frontoiak erreserba ditzazkezu!",
               "sportType": "Zelai mota",
               "playerCount": "Jokalari kopurua",
               "location": "Kokalekua",
@@ -240,6 +258,7 @@ i18n
               "notLoggedInMessage" : "Ez zaude logeatuta? Logeatu orain!",
               "price": "Prezioa",
               "noReservations": "Ez duzu erreserbarik",
+              "itzuli": "Itzuli"
 
             },
             "login":{
@@ -255,6 +274,9 @@ i18n
               "loginTitle": "Login",
               "loginButton": "Sartu",
               "accountNotActivated": "Erabiltzailea ez da existitzen",
+              "passwordRequired":"Pasahitza derrigorrezkoa da",
+              "invalidCredentials": "Datuak gaizki sartu dira",
+              "somethingWentWrong":"Errorea gertatu da",
               
             },
             "footer":{
@@ -298,8 +320,8 @@ i18n
                   
             },
             "partidak": {
-              "header": "Partida publiko eta pribatuak",
-              "description": "Aukeratu partida pribatu edo publiko batean izena eman nahi duzun.",
+              "header": "Partidak",
+              "description": "Aukeratu zein partidatan izena eman nahi duzun.",
               "public": "Publikoak",
               "private": "Pribatuak",
               "frontoia":"Frontoia",
@@ -380,7 +402,11 @@ i18n
               "bidali" : "Erregistratu",
               "kontua" : "Kontu bat baduzu?",
               "pasahitzaBaieztatu1": "Sartu berriro pasahitza",
-              "pasahitzaBaieztatu2": "Baieztatu pasahitza"
+              "pasahitzaBaieztatu2": "Baieztatu pasahitza",
+              "pasahitzaGaizki":"Pasahitzak ez dira bat etorri",
+              "adinezNagusi":"Erabiltzailea adinez nagusia izan behar da",
+              "erabilOngi":"Erabiltzailea ongi sortu da",
+              "datuGaizki":"Daturenbat gaizki sartu da",
             },
             "txapelketa1": {
               "title" : "Frontoi Txapelketa!",
@@ -424,7 +450,16 @@ i18n
               "bidali" : "Bidali"
             },
             "perfila": {
-              "errorea" : "Errore bat gertatu da profilaren datuak editatzean"
+              "errorea" : "Errore bat gertatu da profilaren datuak editatzean",
+              "argazkia": "Argazkia aldatu",
+              "editatu": "Profila editatu",
+              "1": "Izen abizenak",
+              "2": "Jaiotze data",
+              "3": "Jaioterria",
+              "4": "Telefonoa",
+              "aktualizatu": "Profila behar bezala eguneratu da",
+              "errore1": "Errore bat gertatu da datuak eguneratzean:",
+              "errore2": "Errorea eguneratzean:",
             }
           }
         }
