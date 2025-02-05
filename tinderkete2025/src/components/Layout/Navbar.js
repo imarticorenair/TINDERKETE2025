@@ -185,7 +185,7 @@ function Navbar() {
 
       
       <nav className="bg-gray-800 text-white shadow-lg">
-        <div className="container mx-auto flex justify-center items-center p-4">
+        <div className="container mx-auto flex flex-wrap justify-center items-center p-4">
          
           <Link className="flex items-center" to="/">
             <img
@@ -323,7 +323,7 @@ function Navbar() {
                   {t("nav.nav1")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/perfila")}`}>
+              <li className={`nav-item ${getActiveClass("/erreserbak")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
                   to="/erreserbak"
@@ -332,7 +332,7 @@ function Navbar() {
                   {t("nav.nav2")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/chat")}`}>
+              <li className={`nav-item ${getActiveClass("/txapelketak")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
                   to="/txapelketak"
