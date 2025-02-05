@@ -76,11 +76,11 @@ function PartidoakCard() {
           <p className="text-xl mt-2 text-gray-600">{t('partidak.description')}</p>
         </div>
 
-        <div className="container mx-auto flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+        <div className="container mx-auto flex flex-wrap md:grid lg:grid-cols-3 md:grid-cols-2 lg:mx-0 gap-6 px-4">
           {reservations.map((reservation, index) => (
             <div
               key={index}
-              className="bg-white shadow-md rounded-lg p-4 border border-gray-200"
+              className="bg-white shadow-md rounded-lg p-4 border border-gray-200 mx-auto"
             >
               <div className="flex justify-between items-center border-b pb-2">
                 <p className="text-sm text-gray-500">

@@ -149,7 +149,7 @@ function Navbar() {
               >
                 <div className="flex justify-start items-center">
                   <img
-                    src={`${ipBack}/` + formData.img}
+                    src={logotxuri}
                     className="w-8 h-8 mr-2" />
                   <h4 className="mt-2">{t("nav.sidebar1")}</h4>
                 </div>
@@ -185,7 +185,7 @@ function Navbar() {
 
       
       <nav className="bg-gray-800 text-white shadow-lg">
-        <div className="container mx-auto flex  justify-center items-center p-4">
+        <div className="container mx-auto flex justify-center items-center p-4">
          
           <Link className="flex items-center" to="/">
             <img
@@ -326,7 +326,7 @@ function Navbar() {
               <li className={`nav-item ${getActiveClass("/perfila")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/perfila"
+                  to="/erreserbak"
                   onClick={closeMenu}
                 >
                   {t("nav.nav2")}
@@ -335,7 +335,7 @@ function Navbar() {
               <li className={`nav-item ${getActiveClass("/chat")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/chat"
+                  to="/txapelketak"
                   onClick={closeMenu}
                 >
                   {t("nav.nav3")}
@@ -359,15 +359,7 @@ function Navbar() {
                   {t("nav.nav5")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/produktuak")}`}>
-                <Link
-                  className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/produktuak"
-                  onClick={closeMenu}
-                >
-                  {t("nav.nav6")}
-                </Link>
-              </li>
+            
               <li className={`nav-item ${getActiveClass("/kontaktua")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"

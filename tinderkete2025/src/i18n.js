@@ -153,7 +153,7 @@ i18n
               "pelotak" : "Frontenis Balls"
             },
             "txapelketa": {
-              "header" : "Frontons and Trinquets",
+              "header" : "Tournaments!",
               "header2" : "Take part in the most fun tournaments in the country!",
             },
             "eventcard": {
@@ -378,7 +378,7 @@ i18n
               "pelotak" : "Fronteniseko pelotak",
             },
             "txapelketa":{
-              "header" : "Frontoiak eta Trinketeak",
+              "header" : "Txapelketak!",
               "header2" : "Herrialdeko txapelketa diebrtigarrienetan parte hartu!"
             },
             "eventcard": {
