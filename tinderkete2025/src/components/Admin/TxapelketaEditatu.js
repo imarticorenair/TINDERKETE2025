@@ -134,7 +134,7 @@ function TxapelketaEditatu() {
                                         <option value="">{"---"}</option>{" "}
                                         {locations.map((location) => (
                                             <option key={location.id} value={location.id}>
-                                                {location.name}
+                                                {location.name} - {location.type}
                                             </option>
                                         ))}
                                     </select>
