@@ -101,6 +101,7 @@ function ErreserbakForm() {
      
       setError(error.response?.data?.message || "Errorea datuak APIra bidaltzean.");
       console.error("Error:", error.response?.data || error.message);
+      
     }
   };
 
@@ -168,7 +169,7 @@ function ErreserbakForm() {
                   {t('erreserbak.submit')}
                 </button>
               </form>
-              {error && <p style={{ color: "red" }}>Error: {error}</p>}
+              
 
               {showLoginMessage && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">

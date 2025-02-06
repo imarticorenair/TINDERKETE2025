@@ -72,6 +72,16 @@ function Navbar() {
   );
 
   useEffect(() => {
+    setSidebarOpen(false);
+ }, [location.pathname]);
+
+ useEffect(() => {
+  setMenuOpen(false);
+}, [location.pathname]);
+
+ 
+
+  useEffect(() => {
     i18n.changeLanguage(activeLanguage); 
     localStorage.setItem("language", activeLanguage); 
 
@@ -117,10 +127,12 @@ function Navbar() {
     <div className="sticky top-0 z-50 shadow-lg">
       
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 ${sidebarOpen ? "block" : "hidden"
-          }`}
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
+          sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
         onClick={toggleSidebar}
       ></div>
+
       <div
         className={`fixed z-50 top-0 left-0 w-64 bg-gray-800 text-white h-full transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform`}
@@ -323,19 +335,19 @@ function Navbar() {
                   {t("nav.nav1")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/perfila")}`}>
+              <li className={`nav-item ${getActiveClass("/erreserbak")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/perfila"
+                  to="/erreserbak"
                   onClick={closeMenu}
                 >
                   {t("nav.nav2")}
                 </Link>
               </li>
-              <li className={`nav-item ${getActiveClass("/chat")}`}>
+              <li className={`nav-item ${getActiveClass("/txapelketak")}`}>
                 <Link
                   className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/chat"
+                  to="/txapelketak"
                   onClick={closeMenu}
                 >
                   {t("nav.nav3")}
@@ -357,15 +369,6 @@ function Navbar() {
                   onClick={closeMenu}
                 >
                   {t("nav.nav5")}
-                </Link>
-              </li>
-              <li className={`nav-item ${getActiveClass("/produktuak")}`}>
-                <Link
-                  className="nav-link text-white p-2 hover:bg-gray-700 rounded-md"
-                  to="/produktuak"
-                  onClick={closeMenu}
-                >
-                  {t("nav.nav6")}
                 </Link>
               </li>
               <li className={`nav-item ${getActiveClass("/kontaktua")}`}>
@@ -392,7 +395,7 @@ function Navbar() {
                   onClick={toggleSidebar} 
                 >
                   <img
-                    src={formData.img ? `${ipBack}${formData.img}` : logoImage}
+                    src={formData.img ? `${ipBack}/${formData.img}` : logoImage}
                     alt="Perfil"
                     className="w-12 h-12 rounded-full bg-amber-500 p-1 object-contain"
                   />
